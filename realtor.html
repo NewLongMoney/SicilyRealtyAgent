@@ -1,1 +1,400 @@
+import React, { useEffect, useState } from 'react'
+
+// RealEstateKenya - Hybrid Theme Single-file React component (upgraded)
+// Tailwind-first layout (assumes Tailwind available in project)
+// Features added: animations, WhatsApp integration, daily updates carousel,
+// backend-ready data arrays for listings & reviews, extended praise/story, legal T&C + refund/disclosure,
+// SEO meta + JSON-LD structured data for listings.
+
+const logoDark = '/mnt/data/ecdef2b9-ac53-4885-a9cb-a25160f54f99.png' // light-blue logo on white
+const logoLight = '/mnt/data/8f73f041-625f-42d4-a83f-408ae74edab7.png' // light-blue logo on black
+
+// --- Sample data (move to backend or CMS in production) ---
+const sampleListings = [
+  {
+    id: 'L001',
+    title: '3-Bedroom House in Syokimau',
+    location: 'Syokimau, Nairobi',
+    priceKES: 8500000,
+    beds: 3,
+    baths: 2,
+    type: 'House',
+    image: null,
+    description: 'Family home in a quiet gated community with easy access to amenities.'
+  },
+  {
+    id: 'L002',
+    title: 'Modern Apartment in Westlands',
+    location: 'Westlands, Nairobi',
+    priceKES: 12000000,
+    beds: 2,
+    baths: 2,
+    type: 'Apartment',
+    image: null,
+    description: 'Stylish apartment close to shopping and transport.'
+  },
+  {
+    id: 'L003',
+    title: 'Plot for Sale in Ruai',
+    location: 'Ruai, Nairobi',
+    priceKES: 1500000,
+    beds: 0,
+    baths: 0,
+    type: 'Land',
+    image: null,
+    description: 'Corner plot suitable for residential development.'
+  }
+]
+
+const sampleReviews = [
+  { id: 'R1', author: 'Alice M.', text: 'Sicily made the entire process so smooth. She listened and delivered beyond my expectations.', rating: 5 },
+  { id: 'R2', author: 'James K.', text: 'Professional, kind, and extremely knowledgeable. Highly recommended.', rating: 5 },
+  { id: 'R3', author: 'Mercy O.', text: 'She truly cares about her clients. Found us the perfect home within budget.', rating: 5 }
+]
+
+// Daily highlights for the carousel
+const dailyHighlights = [
+  { id: 'D1', title: 'Today\'s Featured Deal: Syokimau Home', summary: '3 bed, gated community — special viewing this week.' },
+  { id: 'D2', title: 'New This Week: Westlands Apartment', summary: 'Modern finishes and prime location.' },
+  { id: 'D3', title: 'Investment Plot: Ruai', summary: 'Affordable plot ideal for development.' }
+]
+
+// Utility: format currency KES
+function formatKES(n) {
+  return 'KES ' + n.toLocaleString('en-KE')
+}
+
+export default function RealEstateKenyaHomepage() {
+  const [activeHighlight, setActiveHighlight] = useState(0)
+  const [animate, setAnimate] = useState(false)
+
+  useEffect(() => {
+    // start simple entrance animation
+    setAnimate(true)
+
+    // Auto-rotate daily highlights
+    const t = setInterval(() => {
+      setActiveHighlight((s) => (s + 1) % dailyHighlights.length)
+    }, 4500)
+    return () => clearInterval(t)
+  }, [])
+
+  // JSON-LD structured data for the first listing (example)
+  const jsonLd = {
+    "@context": "https://schema.org",
+    "@type": "RealEstateListing",
+    "headline": sampleListings[0].title,
+    "description": sampleListings[0].description,
+    "address": {
+      "@type": "PostalAddress",
+      "addressLocality": sampleListings[0].location,
+      "addressCountry": "KE"
+    },
+    "price": sampleListings[0].priceKES,
+    "priceCurrency": "KES",
+    "numberOfRooms": sampleListings[0].beds
+  }
+
+  return (
+    <div className="min-h-screen font-inter text-gray-900">
+      {/* SEO meta tags (place inside your app head or use react-helmet in production) */}
+      <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd) }} />
+      <meta name="description" content="Find verified listings in Kenya with Realtor Sicily — modern search, trusted guidance, and transparent pricing." />
+      <meta property="og:title" content="Realtor Sicily — Real Estate Kenya" />
+      <meta property="og:description" content="Verified listings, local market expertise, and personalized consultations." />
+
+      {/* Floating WhatsApp button */}
+      <a
+        href={`https://wa.me/254700000000?text=${encodeURIComponent('Hello Sicily, I\'m interested in a property listed on your site.')}`}
+        target="_blank"
+        rel="noreferrer"
+        aria-label="Message Sicily on WhatsApp"
+        className="fixed right-6 bottom-6 z-50 shadow-lg rounded-full bg-[#25D366] p-4 flex items-center justify-center"
+      >
+        <svg xmlns="http://www.w3.org/2000/svg" className="h-6 w-6 text-white" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+          <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M2.003 13.002A11.96 11.96 0 0112 2c6.627 0 12 5.373 12 12 0 2.53-.77 4.876-2.09 6.856L22 22l-3.142-.824A11.962 11.962 0 0112 24C5.373 24 0 18.627 0 12c0-1.856.444-3.61 1.224-5.172L2.003 13z" />
+        </svg>
+      </a>
+
+      {/* HERO - Dark Luxury */}
+      <header className={`relative bg-black text-white transition-all duration-700 ${animate ? 'opacity-100 translate-y-0' : 'opacity-0 -translate-y-6'}`}>
+        <div className="max-w-7xl mx-auto px-6 py-8 flex items-center justify-between">
+          <div className="flex items-center gap-4">
+            <img src={logoLight} alt="Real Estate Kenya - Realtor Sicily" className="h-14 w-auto"/>
+            <span className="hidden md:inline-block text-sm tracking-widest">REAL ESTATE KENYA</span>
+          </div>
+
+          <nav className="hidden md:flex items-center gap-6 text-sm">
+            <a className="hover:underline" href="#search">Search</a>
+            <a className="hover:underline" href="#listings">Listings</a>
+            <a className="hover:underline" href="#about">About</a>
+            <a className="hover:underline" href="#contact">Contact</a>
+            <button className="ml-2 px-4 py-2 rounded-md bg-white text-black font-semibold">Book Consultation</button>
+          </nav>
+          <div className="md:hidden">
+            <button aria-label="open menu" className="p-2 border rounded border-white/20">☰</button>
+          </div>
+        </div>
+
+        <div className="max-w-6xl mx-auto px-6 pb-12">
+          <div className="grid grid-cols-1 md:grid-cols-2 gap-8 items-center">
+            <div className="py-6">
+              <h1 className="text-4xl md:text-5xl font-bold leading-tight">Find Your Ideal Home in Kenya</h1>
+              <p className="mt-4 max-w-xl text-gray-200">Trusted real estate services with modern search, verified listings, and expert guidance from Realtor Sicily.</p>
+
+              <div className="mt-6 flex gap-4">
+                <a href="#listings" className="px-6 py-3 rounded-md bg-[#8BD3F7] text-black font-semibold">View Listings</a>
+                <a href="#contact" className="px-6 py-3 rounded-md border border-white text-white">Contact Realtor Sicily</a>
+              </div>
+
+              <div className="mt-6 text-sm text-gray-300">1000+ properties listed · 98% client satisfaction · Local market experts</div>
+            </div>
+
+            <div className="py-6">
+              {/* Stylized hero card / map stub */}
+              <div className="rounded-2xl overflow-hidden shadow-2xl" style={{background:'linear-gradient(180deg,#062026, #001)'}}>
+                <div className="h-72 flex items-center justify-center">
+                  <div className="text-center text-white/90">
+                    <div className="text-sm uppercase tracking-wider">Interactive map</div>
+                    <div className="mt-4 text-2xl font-semibold">Map & live property search preview</div>
+                    <div className="mt-4 text-sm">(Map component / Mapbox or Google Maps can be embedded here)</div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </header>
+
+      {/* INNER PAGES: Clean + Bright */}
+      <main className="bg-white -mt-12 relative z-10">
+        <section id="search" className="max-w-6xl mx-auto px-6 py-10">
+          <div className="bg-white shadow rounded-xl p-6 -mt-8">
+            <h2 className="text-xl font-semibold">Quick property search</h2>
+            <p className="text-sm text-gray-600 mt-1">Find properties by location, price, or type.</p>
+
+            <form className="mt-4 grid grid-cols-1 md:grid-cols-4 gap-3" onSubmit={(e)=>e.preventDefault()}>
+              <input className="col-span-1 md:col-span-2 p-3 border rounded" placeholder="Search by city or neighborhood" />
+              <select className="p-3 border rounded">
+                <option>All types</option>
+                <option>House</option>
+                <option>Apartment</option>
+                <option>Land</option>
+              </select>
+              <button className="p-3 bg-[#5CB9DD] rounded text-black font-semibold">Search</button>
+            </form>
+
+            {/* Daily highlights carousel */}
+            <div className="mt-6">
+              <div className="rounded-lg p-4 bg-gray-50 flex items-center justify-between">
+                <div>
+                  <div className="text-sm text-gray-500">Highlight</div>
+                  <div className="font-semibold mt-1">{dailyHighlights[activeHighlight].title}</div>
+                  <div className="text-sm text-gray-600">{dailyHighlights[activeHighlight].summary}</div>
+                </div>
+                <div className="text-sm text-gray-500">Auto-rotating</div>
+              </div>
+            </div>
+
+          </div>
+        </section>
+
+        <section id="listings" className="max-w-6xl mx-auto px-6 py-12">
+          <div className="flex items-center justify-between">
+            <div>
+              <h3 className="text-2xl font-semibold">Featured listings</h3>
+              <p className="text-sm text-gray-600 mt-1">Top picks for buyers and investors</p>
+            </div>
+            <div className="text-sm text-gray-500">Showing {sampleListings.length} results</div>
+          </div>
+
+          <div className="mt-6 grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
+            {sampleListings.map(listing => (
+              <article key={listing.id} className="bg-white border rounded-lg overflow-hidden shadow-sm transform hover:-translate-y-1 transition-all duration-200">
+                <div className="h-44 bg-gray-200 flex items-center justify-center">{listing.image ? <img src={listing.image} alt={listing.title} className="object-cover h-full w-full" /> : 'Image'}</div>
+                <div className="p-4">
+                  <div className="text-sm text-gray-500">{listing.location} · {listing.beds} bed · {listing.baths} bath</div>
+                  <div className="mt-2 font-semibold text-lg">{formatKES(listing.priceKES)}</div>
+                  <p className="text-sm text-gray-600 mt-2">{listing.description}</p>
+
+                  <div className="mt-4 flex items-center justify-between">
+                    <a className="text-sm font-medium text-[#8BD3F7]" href={`#listing-${listing.id}`}>View details</a>
+                    <div className="flex gap-2">
+                      <a href={`https://wa.me/254700000000?text=${encodeURIComponent(`Hi Sicily, I'm interested in ${listing.title} (${listing.id})`)}`} className="px-3 py-2 text-sm rounded bg-[#8BD3F7]">WhatsApp</a>
+                      <button className="px-3 py-2 text-sm rounded border">Schedule</button>
+                    </div>
+                  </div>
+                </div>
+              </article>
+            ))}
+          </div>
+        </section>
+
+        <section id="about" className="bg-[#F5F5F5] py-12">
+          <div className="max-w-6xl mx-auto px-6 grid grid-cols-1 md:grid-cols-3 gap-6 items-center">
+            <div className="md:col-span-2">
+              <h3 className="text-2xl font-semibold">About Realtor Sicily</h3>
+              <p className="mt-3 text-gray-700">We combine local expertise, verified listings, and a modern approach to property search. Our goal is to make the buying and selling process simple and transparent.</p>
+
+              <ul className="mt-4 space-y-2 text-gray-700">
+                <li>• Personalized consultations</li>
+                <li>• Verified listings and market reports</li>
+                <li>• Dedicated after-sales support</li>
+              </ul>
+
+              {/* Story / timeline */}
+              <div className="mt-6 bg-white p-4 rounded-lg shadow">
+                <h4 className="font-semibold">Sicily's Story</h4>
+                <p className="text-sm text-gray-700 mt-2">Starting as a community-focused agent, Sicily built trust by prioritizing clients' needs. Over the years she has closed hundreds of transactions and supported buyers and sellers through clear advice, negotiation skills, and a caring approach.</p>
+                <ol className="mt-3 text-sm text-gray-600 list-decimal list-inside">
+                  <li>Year 1: Launched local agency and focused on first-time buyers</li>
+                  <li>Year 3: Expanded to serve investors and commercial clients</li>
+                  <li>Year 5: Established a dedicated client support and after-sales service</li>
+                </ol>
+              </div>
+            </div>
+
+            <div className="flex justify-center">
+              <div className="w-56 h-56 bg-white rounded-xl shadow flex items-center justify-center">Realtor Photo</div>
+            </div>
+          </div>
+        </section>
+
+        <section id="reviews" className="py-12 bg-white">
+          <div className="max-w-6xl mx-auto px-6">
+            <h3 className="text-2xl font-semibold text-center">What Clients Say About Sicily</h3>
+            <p className="text-sm text-gray-600 text-center mt-1">Real feedback from happy homeowners and investors</p>
+
+            <div className="mt-6 grid md:grid-cols-3 gap-6">
+              {sampleReviews.map(r => (
+                <blockquote key={r.id} className="bg-gray-50 p-6 rounded-lg shadow">
+                  <div className="text-gray-700 italic">“{r.text}”</div>
+                  <div className="mt-4 font-semibold">— {r.author}</div>
+                </blockquote>
+              ))}
+            </div>
+          </div>
+        </section>
+
+        <section id="services" className="max-w-6xl mx-auto px-6 py-12">
+          <h3 className="text-2xl font-semibold">Services</h3>
+          <div className="mt-6 grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6">
+            {['Buy','Sell','Rent','Invest'].map(s => (
+              <div key={s} className="bg-white p-6 rounded-lg shadow-sm text-center">
+                <div className="h-12 w-12 mx-auto rounded-full flex items-center justify-center text-[#8BD3F7]">🏠</div>
+                <h4 className="mt-3 font-semibold">{s}</h4>
+                <p className="mt-2 text-sm text-gray-600">Expert guidance for {s.toLowerCase()}ers</p>
+              </div>
+            ))}
+          </div>
+        </section>
+
+        <section id="blog" className="bg-white py-12">
+          <div className="max-w-6xl mx-auto px-6">
+            <h3 className="text-2xl font-semibold">Market insights</h3>
+            <p className="text-sm text-gray-600 mt-1">Latest news and neighborhood guides</p>
+
+            <div className="mt-6 grid grid-cols-1 md:grid-cols-3 gap-6">
+              {Array.from({length:3}).map((_,i)=> (
+                <article key={i} className="border rounded p-4">
+                  <div className="h-36 bg-gray-100">Blog image</div>
+                  <h4 className="mt-3 font-semibold">How to pick the right neighborhood</h4>
+                  <p className="text-sm text-gray-600 mt-2">Quick summary of the post...</p>
+                </article>
+              ))}
+            </div>
+          </div>
+        </section>
+
+        <section id="contact" className="bg-[#F5F5F5] py-12">
+          <div className="max-w-6xl mx-auto px-6 grid grid-cols-1 md:grid-cols-2 gap-6">
+            <div>
+              <h3 className="text-2xl font-semibold">Contact</h3>
+              <p className="text-sm text-gray-700 mt-2">Reach out to schedule a viewing or ask questions.</p>
+
+              <div className="mt-6">
+                <form className="space-y-3" onSubmit={(e)=>{e.preventDefault(); alert('Message sent (demo)')}}>
+                  <input className="w-full p-3 border rounded" placeholder="Name" />
+                  <input className="w-full p-3 border rounded" placeholder="Phone or email" />
+                  <textarea className="w-full p-3 border rounded" placeholder="Message" rows={4}></textarea>
+                  <div className="flex items-center gap-3">
+                    <button className="px-6 py-3 bg-[#8BD3F7] rounded text-black font-semibold">Send message</button>
+                    <a href={`https://wa.me/254700000000?text=${encodeURIComponent('Hello Sicily, I\'d like to schedule a viewing')}`} target="_blank" rel="noreferrer" className="px-6 py-3 border rounded">Message on WhatsApp</a>
+                  </div>
+                </form>
+              </div>
+            </div>
+
+            <div>
+              <div className="h-72 bg-white rounded-lg shadow flex items-center justify-center">Map embed placeholder</div>
+              <div className="mt-4 text-sm text-gray-700">Office: Nairobi · Phone: +254 700 000000</div>
+            </div>
+          </div>
+        </section>
+
+        {/* Terms, Refund, Disclosure */}
+        <section className="py-16 bg-gray-50" id="terms">
+          <div className="max-w-4xl mx-auto px-6">
+            <h2 className="text-2xl font-bold mb-4">Terms & Conditions</h2>
+            <p className="text-gray-700 mb-3">1. All property prices are indicative and subject to change based on market conditions and availability.</p>
+            <p className="text-gray-700 mb-3">2. Buyers and renters are expected to perform their own due diligence; Sicily Real Estate provides guidance but not legal representation unless explicitly agreed.</p>
+            <p className="text-gray-700 mb-3">3. Scheduling property visits: clients must provide accurate contact details and book visits at least 24 hours in advance.</p>
+            <p className="text-gray-700 mb-3">4. Deposits and payments: any deposit paid to reserve a property will be handled per a written reservation agreement; refunds and cancellations are handled case-by-case per the reservation terms below.</p>
+
+            <h3 className="text-lg font-semibold mt-6">Refund & Reservation Policy</h3>
+            <p className="text-gray-700 mb-3">• Reservation deposits are generally refundable if cancellation is made within 48 hours and no third-party costs have been incurred.</p>
+            <p className="text-gray-700 mb-3">• Non-refundable situations include instances where legal/title searches or third-party fees have already been performed on behalf of the client.</p>
+
+            <h3 className="text-lg font-semibold mt-6">Disclosure</h3>
+            <p className="text-gray-700">Sicily Real Estate discloses any known material facts about a property. Agents will not knowingly misrepresent facts about a listing. Clients should verify key facts (measurements, ownership, encumbrances) with relevant authorities.</p>
+          </div>
+        </section>
+
+        <section className="py-12 bg-white" id="policies">
+          <div className="max-w-4xl mx-auto px-6">
+            <h3 className="text-xl font-bold mb-3">Privacy Policy</h3>
+            <p className="text-gray-700 mb-2">We collect personal information (name, contact, messaging content) only to facilitate property enquiries, viewings, and transactions.</p>
+            <p className="text-gray-700 mb-2">We do not sell personal information. With consent, we may use client contact information for property alerts and market updates. Clients may opt out at any time.</p>
+            <p className="text-gray-700">By interacting with this site you accept these policies. For full legal terms contact Sicily Real Estate.</p>
+          </div>
+        </section>
+
+        {/* Footer praise + social proof */}
+        <section className="py-12 bg-white">
+          <div className="max-w-6xl mx-auto px-6 text-center">
+            <h3 className="text-2xl font-semibold">Trusted by homeowners across Kenya</h3>
+            <p className="text-sm text-gray-600 mt-2">Sicily has been praised for honesty, persistence, and client-first service—qualities that turned clients into long-term relationships.</p>
+            <div className="mt-6 flex items-center justify-center gap-4">
+              {sampleReviews.map(r => (
+                <div key={r.id} className="text-sm text-gray-700">“{r.text.split(' ').slice(0,8).join(' ')}…” — {r.author}</div>
+              ))}
+            </div>
+          </div>
+        </section>
+
+      </main>
+
+      <footer className="bg-black text-white py-8">
+        <div className="max-w-6xl mx-auto px-6 flex flex-col md:flex-row justify-between items-center gap-6">
+          <div className="flex items-center gap-4">
+            <img src={logoLight} alt="logo" className="h-10" />
+            <div className="text-sm">Realtor Sicily · Real Estate Kenya</div>
+          </div>
+
+          <div className="text-sm text-gray-300">© {new Date().getFullYear()} Realtor Sicily. All rights reserved.</div>
+        </div>
+      </footer>
+    </div>
+  )
+}
+
+/*
+Developer notes & next steps:
+- This file is intentionally self-contained for prototyping. For production:
+  • Move sampleListings, sampleReviews, and dailyHighlights into a backend (Headless CMS / Firebase / Supabase).
+  • Replace meta tags with react-helmet or Next.js Head for proper SEO in the <head>.
+  • Replace map placeholders with Mapbox/Google Maps components and secure API keys.
+  • Hook up WhatsApp number and office phone to real contacts.
+  • Add server-side rendering for SEO and structured data if using Next.js.
+*/
 
