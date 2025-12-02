@@ -1,0 +1,5 @@
+<!-- in <head> -->
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<style>
+  /* paste the @font-face rules here (adjust paths) */
+</style>
