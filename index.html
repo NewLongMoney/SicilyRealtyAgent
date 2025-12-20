@@ -1,428 +1,720 @@
-<html lang="en"><head>
-  <meta charset="utf-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1">
-  <title>REAL ESTATE KENYA — REALTOR SICILY</title>
-  <meta name="description" content="Elegant homes curated by Realtor Sicily across Kenya. Modern listings, tailored tours, and trusted guidance.">
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+  <!-- SEO -->
+  <title>Realtor Sicily | Luxury Homes in Kenya - Nairobi, Kiambu, Diani</title>
+  <meta name="description"
+    content="Experience elegant home buying with Realtor Sicily. Luxury properties in Nairobi, Kiambu, Runda & Diani Beach. 150+ properties sold, 7+ years of excellence.">
+
+  <!-- Fonts -->
   <link rel="preconnect" href="https://fonts.googleapis.com">
-  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@600;700&amp;family=Inter:wght@400;500;600&amp;display=swap" rel="stylesheet">
-  <style>
-    :root{
-      --bg:#0a0b0d;
-      --panel:#111317;
-      --panel-2:#0d1014;
-      --text:#eef1f6;
-      --muted:#b8c0ce;
-      --brand:#53a8ff; /* logo blue */
-      --gold:#c9a46c;  /* subtle luxury accent */
-      --border:#1a1f27;
-      --success:#35c28d;
-    }
-    *{box-sizing:border-box}
-    html,body{margin:0;background:var(--bg);color:var(--text);font-family:Inter,system-ui,-apple-system,Segoe UI,Roboto,Helvetica,Arial,sans-serif;line-height:1.6}
-    a{color:var(--brand);text-decoration:none}
-    img{max-width:100%;display:block}
-    .container{max-width:1200px;margin:0 auto;padding:0 24px}
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link
+    href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@400;500;600;700&family=Outfit:wght@300;400;500;600;700&display=swap"
+    rel="stylesheet">
 
-    /* Header */
-    header{
-      position:sticky;top:0;z-index:50;
-      background:rgba(13,16,20,.85);backdrop-filter:blur(10px);
-      border-bottom:1px solid var(--border);
-    }
-    .nav{display:flex;align-items:center;justify-content:space-between;padding:12px 0}
-    .brand{display:flex;align-items:center;gap:14px}
-    .brand h1{
-      margin:0;font-family:'Playfair Display',serif;font-weight:700;line-height:1.1;
-      font-size:18px;letter-spacing:.4px
-    }
-    .subtitle{color:var(--muted);font-size:12px}
-    .logo-dark{height:40px;width:auto}
-    .nav-links{display:flex;gap:20px}
-    .nav-links a{color:var(--muted);font-weight:600}
-    .cta{display:flex;gap:10px}
-    .btn{
-      padding:10px 14px;border-radius:12px;border:1px solid var(--border);
-      background:var(--panel);color:var(--text);font-weight:700
-    }
-    .btn-primary{
-      background:var(--brand);color:#07111b;border-color:#2d6fb1
-    }
-    .btn-outline{background:transparent;color:var(--text)}
+  <link rel="stylesheet" href="styles.css">
+</head>
 
-    /* Hero */
-    .hero{border-bottom:1px solid var(--border)}
-    .hero-grid{display:grid;grid-template-columns:1.05fr .95fr;gap:28px;padding:38px 0}
-    @media (max-width:980px){.hero-grid{grid-template-columns:1fr}}
-    .hero h2{
-      font-family:'Playfair Display',serif;
-      font-size:clamp(28px,4.8vw,52px);line-height:1.1;margin:10px 0 16px
-    }
-    .tag{
-      display:inline-block;padding:6px 10px;border-radius:999px;font-size:12px;
-      border:1px solid var(--border);color:#9bc5ff;background:rgba(83,168,255,.08)
-    }
-    .hero-figure{
-      position:relative;border-radius:18px;overflow:hidden;background:var(--panel-2);
-      border:1px solid var(--border)
-    }
-    .hero-figure img{width:100%;height:100%;object-fit:cover;aspect-ratio:4/3;filter:saturate(105%) contrast(105%)}
-    .hero-logo{
-      position:absolute;top:12px;left:12px;background:rgba(10,11,13,.6);
-      border:1px solid var(--border);border-radius:12px;padding:8px
-    }
-    .hero-caption{
-      position:absolute;bottom:12px;left:12px;right:12px;background:rgba(17,19,23,.75);
-      border:1px solid var(--border);border-radius:12px;padding:10px 12px;color:var(--muted);font-size:14px
-    }
+<body>
+  <!-- ==================== HEADER ==================== -->
+  <header id="header">
+    <div class="container">
+      <nav class="navbar">
+        <a href="#" class="brand">
+          <div class="logo">
+            <span class="logo-text">S</span>
+            <div class="logo-ring"></div>
+          </div>
+          <div class="brand-text">
+            <span class="brand-name">Sicily</span>
+            <span class="brand-tagline">Luxury Real Estate</span>
+          </div>
+        </a>
 
-    /* Highlights */
-    .highlights{display:grid;grid-template-columns:repeat(3,1fr);gap:16px;margin:18px 0 32px}
-    @media (max-width:900px){.highlights{grid-template-columns:1fr}}
-    .highlight{background:var(--panel);border:1px solid var(--border);border-radius:14px;padding:16px}
-    .highlight h4{margin:6px 0 4px;font-weight:800}
+        <ul class="nav-links">
+          <li><a href="#properties">Properties</a></li>
+          <li><a href="#about">About</a></li>
+          <li><a href="#reviews">Reviews</a></li>
+          <li><a href="#contact">Contact</a></li>
+        </ul>
 
-    /* Sections */
-    section{padding:44px 0}
-    .section-title{
-      display:flex;align-items:baseline;justify-content:space-between;margin-bottom:16px;
-      border-bottom:1px solid var(--border);padding-bottom:10px
-    }
-    .section-title h3{
-      margin:0;font-family:'Playfair Display',serif;font-size:clamp(22px,3.8vw,34px)
-    }
-    .chip{
-      display:inline-block;padding:6px 10px;border-radius:999px;font-size:12px;
-      border:1px solid var(--border);color:var(--muted)
-    }
-
-    /* Cards */
-    .cards{display:grid;grid-template-columns:repeat(3,1fr);gap:18px}
-    @media (max-width:1100px){.cards{grid-template-columns:repeat(2,1fr)}}
-    @media (max-width:720px){.cards{grid-template-columns:1fr}}
-    .card{background:var(--panel);border:1px solid var(--border);border-radius:16px;overflow:hidden;display:flex;flex-direction:column}
-    .card img{width:100%;height:220px;object-fit:cover;background:#0b0e12}
-    .card-body{padding:14px;display:grid;gap:8px}
-    .price{font-weight:800;color:var(--gold)}
-    .meta{color:var(--muted);font-size:14px}
-    .card-actions{display:flex;gap:10px;margin-top:6px}
-
-    /* About */
-    .about-grid{display:grid;grid-template-columns:.35fr .65fr;gap:18px}
-    @media (max-width:900px){.about-grid{grid-template-columns:1fr}}
-    .prose{background:var(--panel);border:1px solid var(--border);border-radius:16px;padding:16px}
-
-    /* Testimonials */
-    .testimonials{display:grid;grid-template-columns:repeat(2,1fr);gap:18px}
-    @media (max-width:900px){.testimonials{grid-template-columns:1fr}}
-    .quote{background:var(--panel);border:1px solid var(--border);border-radius:14px;padding:16px;color:var(--muted)}
-    .quote strong{color:var(--text)}
-
-    /* Contact */
-    .contact{display:grid;grid-template-columns:.6fr .4fr;gap:18px}
-    @media (max-width:900px){.contact{grid-template-columns:1fr}}
-    .contact-card{background:var(--panel);border:1px solid var(--border);border-radius:14px;padding:16px}
-    .contact-grid{display:grid;grid-template-columns:repeat(2,1fr);gap:12px;margin-top:14px}
-    .input, textarea, select{
-      width:100%;background:#0d1218;border:1px solid var(--border);color:var(--text);
-      border-radius:10px;padding:10px 12px;font:inherit
-    }
-    textarea{min-height:110px;resize:vertical}
-    .legal{color:var(--muted);font-size:12px;margin-top:8px}
-
-    /* Footer */
-    footer{border-top:1px solid var(--border);padding:20px 0;color:var(--muted)}
-    .foot{display:flex;justify-content:space-between;gap:16px;flex-wrap:wrap}
-    .footer-logos{display:flex;gap:12px;align-items:center}
-    .logo-light{height:28px}
-  </style>
-<link id="all-fonts-link-font-geist" rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Geist:wght@300;400;500;600;700&amp;display=swap"><style id="all-fonts-style-font-geist">.font-geist { font-family: 'Geist', sans-serif !important; }</style><link id="all-fonts-link-font-roboto" rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Roboto:wght@300;400;500;600;700&amp;display=swap"><style id="all-fonts-style-font-roboto">.font-roboto { font-family: 'Roboto', sans-serif !important; }</style><link id="all-fonts-link-font-montserrat" rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Montserrat:wght@300;400;500;600;700&amp;display=swap"><style id="all-fonts-style-font-montserrat">.font-montserrat { font-family: 'Montserrat', sans-serif !important; }</style><link id="all-fonts-link-font-poppins" rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&amp;display=swap"><style id="all-fonts-style-font-poppins">.font-poppins { font-family: 'Poppins', sans-serif !important; }</style><link id="all-fonts-link-font-playfair" rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;500;600;700;900&amp;display=swap"><style id="all-fonts-style-font-playfair">.font-playfair { font-family: 'Playfair Display', serif !important; }</style><link id="all-fonts-link-font-instrument-serif" rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Instrument+Serif:wght@400;500;600;700&amp;display=swap"><style id="all-fonts-style-font-instrument-serif">.font-instrument-serif { font-family: 'Instrument Serif', serif !important; }</style><link id="all-fonts-link-font-merriweather" rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Merriweather:wght@300;400;700;900&amp;display=swap"><style id="all-fonts-style-font-merriweather">.font-merriweather { font-family: 'Merriweather', serif !important; }</style><link id="all-fonts-link-font-bricolage" rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:wght@300;400;500;600;700&amp;display=swap"><style id="all-fonts-style-font-bricolage">.font-bricolage { font-family: 'Bricolage Grotesque', sans-serif !important; }</style><link id="all-fonts-link-font-jakarta" rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@300;400;500;600;700;800&amp;display=swap"><style id="all-fonts-style-font-jakarta">.font-jakarta { font-family: 'Plus Jakarta Sans', sans-serif !important; }</style><link id="all-fonts-link-font-manrope" rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Manrope:wght@300;400;500;600;700;800&amp;display=swap"><style id="all-fonts-style-font-manrope">.font-manrope { font-family: 'Manrope', sans-serif !important; }</style><link id="all-fonts-link-font-space-grotesk" rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@300;400;500;600;700&amp;display=swap"><style id="all-fonts-style-font-space-grotesk">.font-space-grotesk { font-family: 'Space Grotesk', sans-serif !important; }</style><link id="all-fonts-link-font-work-sans" rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Work+Sans:wght@300;400;500;600;700;800&amp;display=swap"><style id="all-fonts-style-font-work-sans">.font-work-sans { font-family: 'Work Sans', sans-serif !important; }</style><link id="all-fonts-link-font-pt-serif" rel="stylesheet" href="https://fonts.googleapis.com/css2?family=PT+Serif:wght@400;700&amp;display=swap"><style id="all-fonts-style-font-pt-serif">.font-pt-serif { font-family: 'PT Serif', serif !important; }</style><link id="all-fonts-link-font-geist-mono" rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Geist+Mono:wght@300;400;500;600;700&amp;display=swap"><style id="all-fonts-style-font-geist-mono">.font-geist-mono { font-family: 'Geist Mono', monospace !important; }</style><link id="all-fonts-link-font-space-mono" rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Space+Mono:wght@400;700&amp;display=swap"><style id="all-fonts-style-font-space-mono">.font-space-mono { font-family: 'Space Mono', monospace !important; }</style><link id="all-fonts-link-font-quicksand" rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Quicksand:wght@300;400;500;600;700&amp;display=swap"><style id="all-fonts-style-font-quicksand">.font-quicksand { font-family: 'Quicksand', sans-serif !important; }</style><link id="all-fonts-link-font-nunito" rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Nunito:wght@300;400;500;600;700;800&amp;display=swap"><style id="all-fonts-style-font-nunito">.font-nunito { font-family: 'Nunito', sans-serif !important; }</style></head>
-<body class="">
-  <!-- Header -->
-  <header class="">
-    <div class="container nav">
-      <div class="brand">
-        <!-- Dark-theme logo (light text on dark) -->
-        <img src="https://hoirqrkdgbmvpwutwuwj.supabase.co/storage/v1/object/public/assets/assets/0d7870d1-fef4-4d6c-9aab-247ac8aff218_320w.png" alt="REAL ESTATE KENYA — REALTOR SICILY logo" class="logo-dark bg-center object-cover">
-        <div class="">
-          <h1 class="">REAL ESTATE KENYA</h1>
-          <div class="subtitle">REALTOR SICILY • Elegant homes, tailored guidance</div>
+        <div class="nav-cta">
+          <a href="tel:+254705924255" class="btn btn-ghost"><span>📞</span> Call Now</a>
+          <a href="https://wa.me/254705924255" target="_blank" rel="noopener" class="btn btn-primary">
+            <svg class="whatsapp-icon" viewBox="0 0 24 24" width="18" height="18">
+              <path fill="currentColor"
+                d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347z" />
+            </svg>
+            WhatsApp
+          </a>
         </div>
-      </div>
-      <nav class="nav-links">
-        <a href="#listings">Listings</a>
-        <a href="#about">About</a>
-        <a href="#testimonials">Praise</a>
-        <a href="#contact">Contact</a>
+
+        <button class="mobile-toggle" id="mobileToggle" aria-label="Menu">
+          <span></span><span></span><span></span>
+        </button>
       </nav>
-      <div class="cta">
-        <a class="btn btn-outline" href="tel:+254705924255">Call</a>
-        <a class="btn btn-primary" href="https://wa.me/254705924255" target="_blank" rel="noopener">WhatsApp</a>
-      </div>
     </div>
   </header>
 
-  <!-- Hero -->
-  <section class="hero">
-    <div class="container hero-grid">
-      <div class="">
-        <span class="tag">AI‑enhanced property matching</span>
-        <h2 class="">Grace, expertise, and a personal touch—experience real estate with Sicily.</h2>
-        <p class="meta">From serene Kiambu retreats to signature Nairobi residences, Sicily curates homes that fit your life with taste and precision. You’ll feel guided, respected, and genuinely understood—every step, every viewing, every signature.</p>
-        <div style="margin-top:16px;display:flex;gap:10px" class="">
-          <a class="btn btn-primary" href="#listings">Explore listings</a>
-          <a class="btn" href="#contact">Book a private tour</a>
-        </div>
-
-        <div class="highlights">
-          <div class="highlight">
-            <h4 class="">Tailored discovery</h4>
-            <p class="meta">Your needs, refined into options that truly fit—no noise, just quality.</p>
-          </div>
-          <div class="highlight">
-            <h4 class="">Trusted negotiation</h4>
-            <p class="meta">Transparent strategy and calm execution to protect your interests.</p>
-          </div>
-          <div class="highlight">
-            <h4 class="">Seamless closing</h4>
-            <p class="meta">Coordination across all parties—clean paperwork, clear timelines.</p>
-          </div>
-        </div>
+  <!-- Mobile Menu -->
+  <div class="mobile-overlay" id="mobileOverlay"></div>
+  <aside class="mobile-menu" id="mobileMenu">
+    <div class="mobile-menu-header">
+      <div class="logo"><span class="logo-text">S</span>
+        <div class="logo-ring"></div>
       </div>
-
-      <figure class="hero-figure">
-        <!-- Replace with Sicily’s portrait or signature property -->
-        <img src="https://hoirqrkdgbmvpwutwuwj.supabase.co/storage/v1/object/public/assets/assets/376d81e1-02be-46f3-8407-3e4b91b49178_1600w.png" alt="Elegant living space" class="bg-center object-cover">
-        <div class="hero-logo">
-          <!-- Light background logo for overlay panels if you prefer -->
-          <img src="https://hoirqrkdgbmvpwutwuwj.supabase.co/storage/v1/object/public/assets/assets/530a6850-f662-492b-b650-2b4eefa6be08_320w.png" alt="REAL ESTATE KENYA — REALTOR SICILY logo (light background)" style="height:28px" class="object-cover bg-center">
-        </div>
-        <figcaption class="hero-caption">“Sicily turned a complex journey into a graceful experience.”</figcaption>
-      </figure>
+      <span>Sicily</span>
     </div>
-  </section>
+    <nav class="mobile-nav">
+      <a href="#properties">Properties</a>
+      <a href="#about">About Sicily</a>
+      <a href="#reviews">Client Reviews</a>
+      <a href="#contact">Get in Touch</a>
+    </nav>
+    <div class="mobile-menu-cta">
+      <a href="https://wa.me/254705924255" target="_blank" rel="noopener" class="btn btn-primary btn-block">
+        💬 Chat on WhatsApp
+      </a>
+      <a href="tel:+254705924255" class="btn btn-outline btn-block">📞 Call Sicily</a>
+    </div>
+  </aside>
 
-  <!-- Listings -->
-  <section id="listings" class="">
+  <!-- ==================== HERO ==================== -->
+  <section class="hero" id="hero">
+    <div class="hero-bg">
+      <img src="images/hero.png" alt="Luxury living room" loading="eager">
+      <div class="hero-overlay"></div>
+      <div class="hero-glow"></div>
+    </div>
+
     <div class="container">
-      <div class="section-title">
-        <h3>Featured listings</h3>
-        <div class="chip">Updated weekly</div>
+      <div class="hero-content">
+        <div class="hero-badge">
+          <div class="badge-dot"></div>
+          <span>Trusted by 150+ Happy Homeowners</span>
+        </div>
+
+        <h1 class="hero-title">
+          Find Your <span class="text-gradient">Perfect Home</span><br>
+          in Kenya
+        </h1>
+
+        <p class="hero-subtitle">
+          Experience the joy of finding your dream home with personalized guidance,
+          elegant curation, and a seamless journey from viewing to keys in hand.
+        </p>
+
+        <div class="hero-cta">
+          <a href="#properties" class="btn btn-primary btn-xl">
+            <span>Explore Properties</span>
+            <svg width="20" height="20" fill="none" stroke="currentColor" stroke-width="2">
+              <path d="M5 12h14M12 5l7 7-7 7" />
+            </svg>
+          </a>
+          <a href="#contact" class="btn btn-glass btn-xl">Book a Viewing</a>
+        </div>
+
+        <div class="hero-trust">
+          <div class="trust-avatars">
+            <div class="avatar" style="background: linear-gradient(135deg, #e8b4bc, #d4a5ae);">J</div>
+            <div class="avatar" style="background: linear-gradient(135deg, #b4d4e8, #a5c4d4);">M</div>
+            <div class="avatar" style="background: linear-gradient(135deg, #d4e8b4, #c4d4a5);">P</div>
+            <div class="avatar" style="background: linear-gradient(135deg, #e8d4b4, #d4c4a5);">G</div>
+          </div>
+          <div class="trust-text">
+            <div class="trust-stars">★★★★★</div>
+            <span>Rated 5.0 by our clients</span>
+          </div>
+        </div>
       </div>
 
-      <div class="cards">
-        <!-- Listing 1 -->
-        <article class="card">
-          <img src="https://images.unsplash.com/photo-1505691938895-1758d7feb511?q=80&amp;w=1600" alt="Modern townhome exterior">
-          <div class="card-body">
-            <div style="display:flex;justify-content:space-between;align-items:center">
-              <strong>Kiambu Ridge Townhome</strong>
-              <span class="price">KES 18,500,000</span>
-            </div>
-            <div class="meta">3 Bed • 2.5 Bath • 1,850 sq ft • Gated community • Private garden</div>
-            <div class="meta">Juja, Kiambu County</div>
-            <div class="card-actions">
-              <a class="btn btn-outline" href="#contact">Request viewing</a>
-              <a class="btn btn-primary" href="https://wa.me/254705924255?text=Hi%20Sicily%2C%20I%27m%20interested%20in%20Kiambu%20Ridge%20Townhome">WhatsApp Sicily</a>
-            </div>
+      <div class="hero-stats">
+        <div class="stat-card">
+          <span class="stat-icon">🏠</span>
+          <div class="stat-info">
+            <span class="stat-value">150+</span>
+            <span class="stat-label">Homes Sold</span>
           </div>
-        </article>
+        </div>
+        <div class="stat-card">
+          <span class="stat-icon">💝</span>
+          <div class="stat-info">
+            <span class="stat-value">98%</span>
+            <span class="stat-label">Happy Clients</span>
+          </div>
+        </div>
+        <div class="stat-card">
+          <span class="stat-icon">⏱️</span>
+          <div class="stat-info">
+            <span class="stat-value">24h</span>
+            <span class="stat-label">Response</span>
+          </div>
+        </div>
+      </div>
+    </div>
 
-        <!-- Listing 2 -->
-        <article class="card">
-          <img src="https://images.unsplash.com/photo-1494526585095-c41746248156?q=80&amp;w=1600" alt="Contemporary apartment interior" class="">
-          <div class="card-body">
-            <div style="display:flex;justify-content:space-between;align-items:center">
-              <strong>Thika Greens View Apartment</strong>
-              <span class="price">KES 9,200,000</span>
-            </div>
-            <div class="meta">2 Bed • 2 Bath • 1,120 sq ft • Balcony • Covered parking</div>
-            <div class="meta">Thika Road corridor</div>
-            <div class="card-actions">
-              <a class="btn btn-outline" href="#contact">Request viewing</a>
-              <a class="btn btn-primary" href="https://wa.me/254705924255?text=Hi%20Sicily%2C%20I%27m%20interested%20in%20Thika%20Greens%20View%20Apartment">WhatsApp Sicily</a>
-            </div>
-          </div>
-        </article>
-
-        <!-- Listing 3 -->
-        <article class="card">
-          <img src="https://images.unsplash.com/photo-1502005229762-cf1b2c0b0dff?q=80&amp;w=1600" alt="Luxury villa with pool" class="">
-          <div class="card-body">
-            <div style="display:flex;justify-content:space-between;align-items:center" class="">
-              <strong class="">Runda Serenity Villa</strong>
-              <span class="price">KES 75,000,000</span>
-            </div>
-            <div class="meta">5 Bed • 5.5 Bath • 5,400 sq ft • Pool • DSQ • Mature gardens</div>
-            <div class="meta">Runda, Nairobi</div>
-            <div class="card-actions">
-              <a class="btn btn-outline" href="#contact">Private tour</a>
-              <a class="btn btn-primary" href="https://wa.me/254705924255?text=Hi%20Sicily%2C%20I%27d%20like%20a%20private%20tour%20of%20Runda%20Serenity%20Villa">WhatsApp Sicily</a>
-            </div>
-          </div>
-        </article>
-
-        <!-- Listing 4 -->
-        <article class="card">
-          <img src="https://images.unsplash.com/photo-1580587771525-78b9dba3b914?q=80&amp;w=1600" alt="Minimalist studio" class="">
-          <div class="card-body">
-            <div style="display:flex;justify-content:space-between;align-items:center" class="">
-              <strong>Westlands Skyline Studio</strong>
-              <span class="price">KES 6,800,000</span>
-            </div>
-            <div class="meta">1 Bed • 1 Bath • 560 sq ft • City views • Gym access</div>
-            <div class="meta">Westlands, Nairobi</div>
-            <div class="card-actions">
-              <a class="btn btn-outline" href="#contact">Request details</a>
-              <a class="btn btn-primary" href="https://wa.me/254705924255?text=Hi%20Sicily%2C%20tell%20me%20more%20about%20Westlands%20Skyline%20Studio">WhatsApp Sicily</a>
-            </div>
-          </div>
-        </article>
-
-        <!-- Listing 5 -->
-        <article class="card">
-          <img src="https://images.unsplash.com/photo-1464146072230-91cabc968266?q=80&amp;w=1600" alt="Country house">
-          <div class="card-body">
-            <div style="display:flex;justify-content:space-between;align-items:center">
-              <strong>Limuru Country Haven</strong>
-              <span class="price">KES 22,900,000</span>
-            </div>
-            <div class="meta">4 Bed • 3 Bath • 2,600 sq ft • Acre plot • Fireplace</div>
-            <div class="meta">Limuru, Kiambu</div>
-            <div class="card-actions">
-              <a class="btn btn-outline" href="#contact">Schedule visit</a>
-              <a class="btn btn-primary" href="https://wa.me/254705924255?text=Hi%20Sicily%2C%20I%27m%20keen%20on%20Limuru%20Country%20Haven">WhatsApp Sicily</a>
-            </div>
-          </div>
-        </article>
-
-        <!-- Listing 6 -->
-        <article class="card">
-          <img src="https://images.unsplash.com/photo-1449844908441-8829872d2607?q=80&amp;w=1600" alt="Beach house" class="">
-          <div class="card-body">
-            <div style="display:flex;justify-content:space-between;align-items:center">
-              <strong>Diani Breeze Retreat</strong>
-              <span class="price">KES 48,000,000</span>
-            </div>
-            <div class="meta">4 Bed • 4 Bath • 3,200 sq ft • Beach access • Rooftop terrace</div>
-            <div class="meta">Diani Beach, Kwale</div>
-            <div class="card-actions">
-              <a class="btn btn-outline" href="#contact">Book a tour</a>
-              <a class="btn btn-primary" href="https://wa.me/254705924255?text=Hi%20Sicily%2C%20please%20book%20a%20tour%20for%20Diani%20Breeze%20Retreat">WhatsApp Sicily</a>
-            </div>
-          </div>
-        </article>
+    <div class="scroll-hint">
+      <span>Scroll</span>
+      <div class="scroll-line">
+        <div class="scroll-dot"></div>
       </div>
     </div>
   </section>
 
-  <!-- About -->
-  <section id="about" class="">
+  <!-- ==================== SEARCH ==================== -->
+  <section class="search-section">
     <div class="container">
-      <div class="section-title">
-        <h3>About Sicily</h3>
-        <div class="chip">Client‑first, detail‑driven</div>
-      </div>
-      <div class="about-grid">
-        <div class="card">
-          <!-- Replace with Sicily’s portrait -->
-          <img src="https://images.unsplash.com/photo-1544005313-94ddf0286df2?q=80&amp;w=1200" alt="Portrait placeholder of Realtor Sicily" class="">
+      <div class="search-card">
+        <div class="search-header">
+          <h2>Find Your Dream Home</h2>
+          <p>Let us match you with the perfect property</p>
         </div>
-        <div class="prose">
-          <p class="">Sicily is praised for her calm confidence, tasteful curation, and unshakeable integrity. She listens deeply, advises clearly, and makes complex decisions feel simple. Clients trust her because she earns it—consistently.</p>
-          <p class="">Whether you’re buying your first home or upgrading to a signature address, expect discretion, transparency, and an experience that respects your time and your standards.</p>
-          <div style="display:flex;gap:10px;margin-top:8px" class="">
-            <a class="btn btn-primary" href="tel:+254705924255">Call Sicily</a>
-            <a class="btn" href="https://wa.me/254705924255" target="_blank" rel="noopener">Message on WhatsApp</a>
+        <form class="search-form" id="searchForm">
+          <div class="search-field">
+            <label for="location">📍 Location</label>
+            <select id="location" class="input">
+              <option value="">All Areas</option>
+              <option>Nairobi - Westlands</option>
+              <option>Nairobi - Runda</option>
+              <option>Nairobi - Karen</option>
+              <option>Kiambu</option>
+              <option>Thika Road</option>
+              <option>Diani Beach</option>
+            </select>
           </div>
-        </div>
-      </div>
-    </div>
-  </section>
-
-  <!-- Testimonials -->
-  <section id="testimonials" class="">
-    <div class="container">
-      <div class="section-title">
-        <h3>Client praise</h3>
-        <div class="chip">Real words, real wins</div>
-      </div>
-      <div class="testimonials">
-        <div class="quote">
-          <p><strong>“Refined taste and flawless follow‑through.”</strong> Sicily understood our vision and protected our budget. We closed ahead of schedule without compromising on quality.</p>
-        </div>
-        <div class="quote">
-          <p class=""><strong class="">“We felt guided, never pressured.”</strong> Every viewing was purposeful. Sicily’s diligence spared us headaches we didn’t even know to expect.</p>
-        </div>
-      </div>
-    </div>
-  </section>
-
-  <!-- Contact -->
-  <section class="" id="contact">
-    <div class="container contact">
-      <div class="contact-card">
-        <h3 style="font-family:'Playfair Display',serif;margin:0 0 8px">Contact Sicily</h3>
-        <p class="meta">Calls &amp; WhatsApp: <a href="tel:+254705924255" class="">0705 924 255</a> • <a href="https://wa.me/254705924255" target="_blank" rel="noopener" class="">wa.me/254705924255</a></p>
-
-        <form action="#" method="post" onsubmit="alert('Thank you! Sicily will reach out shortly.'); return false;" class="">
-          <div class="contact-grid">
-            <div class="">
-              <label for="name" class="meta">Your name</label>
-              <input class="input" type="text" placeholder="e.g., Briver" required="" id="name">
-            </div>
-            <div class="">
-              <label for="phone" class="meta">Phone</label>
-              <input id="phone" class="input" type="tel" placeholder="+254..." required="">
-            </div>
-            <div class="">
-              <label for="email" class="meta">Email</label>
-              <input id="email" class="input" type="email" placeholder="you@example.com">
-            </div>
-            <div class="">
-              <label for="interest" class="meta">What are you looking for?</label>
-              <select class="input" required="" id="interest">
-                <option value="">Select an option</option>
-                <option>Buy a home</option>
-                <option>Sell a home</option>
-                <option>Rent</option>
-                <option>Investment</option>
-                <option>Private tour</option>
-              </select>
-            </div>
+          <div class="search-field">
+            <label for="price">💰 Budget</label>
+            <select id="price" class="input">
+              <option value="">Any Price</option>
+              <option>Under KES 10M</option>
+              <option>KES 10M - 25M</option>
+              <option>KES 25M - 50M</option>
+              <option>Above KES 50M</option>
+            </select>
           </div>
-          <div style="margin-top:12px" class="">
-            <label for="message" class="meta">Message</label>
-            <textarea id="message" placeholder="Share your goals, budget range, preferred locations..." class=""></textarea>
+          <div class="search-field">
+            <label for="type">🏡 Type</label>
+            <select id="type" class="input">
+              <option value="">All Types</option>
+              <option>Apartment</option>
+              <option>Townhouse</option>
+              <option>Villa</option>
+              <option>Penthouse</option>
+            </select>
           </div>
-          <div style="margin-top:12px;display:flex;gap:10px" class="">
-            <button class="btn btn-primary" type="submit">Request callback</button>
-            <a class="btn" href="https://wa.me/254705924255?text=Hi%20Sicily%2C%20I%27d%20like%20to%20chat%20about%20a%20property." target="_blank" rel="noopener">Chat on WhatsApp</a>
-          </div>
-          <p class="legal">By submitting, you consent to be contacted regarding your inquiry.</p>
+          <button type="button" class="btn btn-accent btn-search" onclick="handleSearch()">
+            <svg width="20" height="20" fill="none" stroke="currentColor" stroke-width="2">
+              <circle cx="11" cy="11" r="8" />
+              <path d="M21 21l-4.35-4.35" />
+            </svg>
+            Search
+          </button>
         </form>
       </div>
+    </div>
+  </section>
 
-      <div class="contact-card bg-center bg-[url(https://hoirqrkdgbmvpwutwuwj.supabase.co/storage/v1/object/public/assets/assets/530a6850-f662-492b-b650-2b4eefa6be08_1600w.png)] bg-cover">
-        <h4 style="margin-top:0" class="">Office hours</h4>
-        <p class="meta">Mon–Sat: 9:00–18:00 • Sunday by appointment</p>
-        <h4 class="">Service areas</h4>
-        <p class="meta">Juja • Thika Road • Kiambu • Westlands • Runda • Limuru • Coastal select</p>
-        <h4 class="">Realtor- Sicily</h4>
-        <div class="footer-logos">
-          <!-- Light background logo variant -->
-          <img src="https://hoirqrkdgbmvpwutwuwj.supabase.co/storage/v1/object/public/assets/assets/530a6850-f662-492b-b650-2b4eefa6be08_320w.png" alt="REAL ESTATE KENYA — REALTOR SICILY logo (light)" class="logo-light bg-center bg-stone-900 object-cover">
+  <!-- ==================== PROPERTIES ==================== -->
+  <section class="section" id="properties">
+    <div class="container">
+      <header class="section-header">
+        <div class="section-intro">
+          <span class="section-badge">✨ Featured Collection</span>
+          <h2 class="section-title">Handpicked Luxury Homes</h2>
+          <p class="section-desc">Each property is personally curated by Sicily for quality, location, and value.</p>
+        </div>
+      </header>
+
+      <div class="property-grid">
+        <!-- Property 1 -->
+        <article class="property-card">
+          <div class="property-image">
+            <span class="property-badge badge-new">✨ New Listing</span>
+            <img src="images/villa.png" alt="Runda Serenity Villa" loading="lazy">
+            <div class="property-overlay">
+              <a href="https://wa.me/254705924255?text=Hi%20Sicily%2C%20I%27m%20interested%20in%20Runda%20Serenity%20Villa"
+                target="_blank" class="btn btn-white">Quick Inquiry</a>
+            </div>
+          </div>
+          <div class="property-body">
+            <div class="property-location">📍 Runda, Nairobi</div>
+            <h3 class="property-title">Runda Serenity Villa</h3>
+            <p class="property-features">5 Bed • 5.5 Bath • 5,400 sqft • Pool</p>
+            <div class="property-footer">
+              <span class="property-price">KES 75M</span>
+              <a href="https://wa.me/254705924255?text=Hi%20Sicily%2C%20I%27d%20love%20to%20view%20the%20Runda%20Serenity%20Villa"
+                target="_blank" class="btn btn-primary btn-sm">View Property</a>
+            </div>
+          </div>
+        </article>
+
+        <!-- Property 2 -->
+        <article class="property-card">
+          <div class="property-image">
+            <span class="property-badge badge-hot">🔥 Hot Deal</span>
+            <img src="images/kitchen.png" alt="Thika Greens Apartment" loading="lazy">
+            <div class="property-overlay">
+              <a href="https://wa.me/254705924255?text=Hi%20Sicily%2C%20I%27m%20interested%20in%20Thika%20Greens%20Apartment"
+                target="_blank" class="btn btn-white">Quick Inquiry</a>
+            </div>
+          </div>
+          <div class="property-body">
+            <div class="property-location">📍 Thika Road Corridor</div>
+            <h3 class="property-title">Thika Greens Apartment</h3>
+            <p class="property-features">2 Bed • 2 Bath • 1,120 sqft • Balcony</p>
+            <div class="property-footer">
+              <span class="property-price">KES 9.2M</span>
+              <a href="https://wa.me/254705924255?text=Hi%20Sicily%2C%20I%27d%20love%20to%20view%20Thika%20Greens%20Apartment"
+                target="_blank" class="btn btn-primary btn-sm">View Property</a>
+            </div>
+          </div>
+        </article>
+
+        <!-- Property 3 -->
+        <article class="property-card">
+          <div class="property-image">
+            <span class="property-badge badge-exclusive">💎 Exclusive</span>
+            <img src="images/beach.png" alt="Diani Breeze Retreat" loading="lazy">
+            <div class="property-overlay">
+              <a href="https://wa.me/254705924255?text=Hi%20Sicily%2C%20I%27m%20interested%20in%20Diani%20Breeze%20Retreat"
+                target="_blank" class="btn btn-white">Quick Inquiry</a>
+            </div>
+          </div>
+          <div class="property-body">
+            <div class="property-location">📍 Diani Beach, Kwale</div>
+            <h3 class="property-title">Diani Breeze Retreat</h3>
+            <p class="property-features">4 Bed • 4 Bath • Beach Access • Terrace</p>
+            <div class="property-footer">
+              <span class="property-price">KES 48M</span>
+              <a href="https://wa.me/254705924255?text=Hi%20Sicily%2C%20I%27d%20love%20to%20view%20Diani%20Breeze%20Retreat"
+                target="_blank" class="btn btn-primary btn-sm">View Property</a>
+            </div>
+          </div>
+        </article>
+
+        <!-- Property 4 -->
+        <article class="property-card">
+          <div class="property-image">
+            <img src="images/bedroom.png" alt="Westlands Skyline Studio" loading="lazy">
+            <div class="property-overlay">
+              <a href="https://wa.me/254705924255?text=Hi%20Sicily%2C%20I%27m%20interested%20in%20Westlands%20Skyline%20Studio"
+                target="_blank" class="btn btn-white">Quick Inquiry</a>
+            </div>
+          </div>
+          <div class="property-body">
+            <div class="property-location">📍 Westlands, Nairobi</div>
+            <h3 class="property-title">Westlands Skyline Studio</h3>
+            <p class="property-features">1 Bed • 1 Bath • City Views • Gym</p>
+            <div class="property-footer">
+              <span class="property-price">KES 6.8M</span>
+              <a href="https://wa.me/254705924255?text=Hi%20Sicily%2C%20I%27d%20love%20to%20view%20Westlands%20Skyline%20Studio"
+                target="_blank" class="btn btn-primary btn-sm">View Property</a>
+            </div>
+          </div>
+        </article>
+      </div>
+
+      <div class="section-cta">
+        <a href="https://wa.me/254705924255?text=Hi%20Sicily%2C%20I%27d%20like%20to%20see%20more%20properties"
+          target="_blank" class="btn btn-outline btn-lg">
+          View All Properties →
+        </a>
+      </div>
+    </div>
+  </section>
+
+  <!-- ==================== WHY SICILY ==================== -->
+  <section class="section section-rose" id="why">
+    <div class="container">
+      <header class="section-header section-header-center">
+        <span class="section-badge">💝 Why Choose Sicily</span>
+        <h2 class="section-title">A Different Kind of Experience</h2>
+      </header>
+
+      <div class="features-grid">
+        <div class="feature-card">
+          <div class="feature-icon">🎯</div>
+          <h3>Personalized Matching</h3>
+          <p>I take time to understand your lifestyle, needs, and dreams to find homes that truly fit you.</p>
+        </div>
+        <div class="feature-card">
+          <div class="feature-icon">🤝</div>
+          <h3>Trusted Negotiation</h3>
+          <p>Transparent strategy and calm execution to protect your interests and get the best value.</p>
+        </div>
+        <div class="feature-card">
+          <div class="feature-icon">✨</div>
+          <h3>Seamless Journey</h3>
+          <p>From first viewing to keys in hand — I handle everything so you can focus on your excitement.</p>
+        </div>
+        <div class="feature-card">
+          <div class="feature-icon">💬</div>
+          <h3>Always Available</h3>
+          <p>Questions at 9pm? No problem. I'm here whenever you need guidance or reassurance.</p>
         </div>
       </div>
     </div>
   </section>
 
-  <!-- Footer -->
-  <footer class="">
-    <div class="container foot">
-      <div>© <script>document.write(new Date().getFullYear())</script>202520252025202520252025202520252025202520252025202520252025202520252025 REAL ESTATE KENYA — REALTOR SICILY. All rights reserved.</div>
-      <div>Elegant homes, tailored guidance.</div>
+  <!-- ==================== ABOUT ==================== -->
+  <section class="section" id="about">
+    <div class="container">
+      <div class="about-grid">
+        <div class="about-image-wrapper">
+          <div class="about-image">
+            <img src="images/realtor.png" alt="Realtor Sicily" loading="lazy">
+          </div>
+          <div class="about-badge">
+            <span class="about-badge-icon">🏆</span>
+            <span>7+ Years Excellence</span>
+          </div>
+        </div>
+
+        <div class="about-content">
+          <span class="section-badge">👋 Meet Your Realtor</span>
+          <h2 class="section-title">Hi, I'm Sicily</h2>
+
+          <p class="about-lead">I believe finding your home should be an exciting journey, not a stressful one.</p>
+
+          <p>With over 7 years in Kenya's luxury real estate market, I've helped 150+ families find their perfect homes.
+            My approach is simple: I listen, I understand, and I deliver — with grace and integrity.</p>
+
+          <p>Whether you're a first-time buyer or upgrading to your dream address, I'll guide you every step with
+            transparency, patience, and a genuine care for your happiness.</p>
+
+          <div class="about-stats">
+            <div class="about-stat">
+              <span class="about-stat-value">150+</span>
+              <span class="about-stat-label">Happy Families</span>
+            </div>
+            <div class="about-stat">
+              <span class="about-stat-value">98%</span>
+              <span class="about-stat-label">Success Rate</span>
+            </div>
+            <div class="about-stat">
+              <span class="about-stat-value">5.0</span>
+              <span class="about-stat-label">Client Rating</span>
+            </div>
+          </div>
+
+          <div class="about-cta">
+            <a href="https://wa.me/254705924255?text=Hi%20Sicily%2C%20I%27d%20love%20to%20work%20with%20you!"
+              target="_blank" class="btn btn-primary btn-lg">
+              💬 Let's Chat on WhatsApp
+            </a>
+            <a href="tel:+254705924255" class="btn btn-ghost btn-lg">📞 Call Me</a>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ==================== TESTIMONIALS ==================== -->
+  <section class="section section-alt" id="reviews">
+    <div class="container">
+      <header class="section-header section-header-center">
+        <span class="section-badge">💕 Client Love</span>
+        <h2 class="section-title">Words from Happy Homeowners</h2>
+      </header>
+
+      <div class="testimonials-grid">
+        <article class="testimonial-card">
+          <div class="testimonial-header">
+            <div class="testimonial-avatar" style="background: linear-gradient(135deg, #e8b4bc, #d4a5ae);">J</div>
+            <div class="testimonial-author">
+              <strong>James & Mary W.</strong>
+              <span>Runda Homeowners</span>
+            </div>
+          </div>
+          <div class="testimonial-rating">★★★★★</div>
+          <blockquote>"Sicily understood our vision and protected our budget. We closed ahead of schedule without
+            compromising on quality. She made our dream home a reality!"</blockquote>
+        </article>
+
+        <article class="testimonial-card featured">
+          <div class="testimonial-header">
+            <div class="testimonial-avatar" style="background: linear-gradient(135deg, #b4d4e8, #a5c4d4);">P</div>
+            <div class="testimonial-author">
+              <strong>Peter O.</strong>
+              <span>First-time Buyer</span>
+            </div>
+          </div>
+          <div class="testimonial-rating">★★★★★</div>
+          <blockquote>"As a first-time buyer, I was nervous. Sicily held my hand through every step. Every viewing was
+            purposeful, and her patience was incredible. I couldn't have done it without her!"</blockquote>
+        </article>
+
+        <article class="testimonial-card">
+          <div class="testimonial-header">
+            <div class="testimonial-avatar" style="background: linear-gradient(135deg, #d4e8b4, #c4d4a5);">G</div>
+            <div class="testimonial-author">
+              <strong>Grace M.</strong>
+              <span>Property Investor</span>
+            </div>
+          </div>
+          <div class="testimonial-rating">★★★★★</div>
+          <blockquote>"Professional, responsive, and genuinely caring. Sicily made our investment property purchase
+            absolutely seamless. Highly recommend her to anyone!"</blockquote>
+        </article>
+      </div>
+    </div>
+  </section>
+
+  <!-- ==================== CTA BANNER ==================== -->
+  <section class="cta-banner">
+    <div class="container">
+      <div class="cta-content">
+        <h2>Ready to Find Your Dream Home?</h2>
+        <p>Let's start your journey together. I'm just a message away.</p>
+        <div class="cta-buttons">
+          <a href="https://wa.me/254705924255?text=Hi%20Sicily%2C%20I%27m%20ready%20to%20find%20my%20dream%20home!"
+            target="_blank" class="btn btn-white btn-xl">
+            💬 Chat on WhatsApp
+          </a>
+          <a href="tel:+254705924255" class="btn btn-glass btn-xl">📞 Call Now</a>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ==================== CONTACT ==================== -->
+  <section class="section" id="contact">
+    <div class="container">
+      <div class="contact-grid">
+        <div class="contact-form-card">
+          <div class="contact-header">
+            <h2>Get in Touch</h2>
+            <p>Fill out the form and I'll get back to you within 24 hours.</p>
+          </div>
+
+          <form id="contactForm" onsubmit="handleContact(event)">
+            <div class="form-row">
+              <div class="form-group">
+                <label for="name">Your Name</label>
+                <input type="text" id="name" class="input" placeholder="e.g., Jane Wanjiku" required>
+              </div>
+              <div class="form-group">
+                <label for="phone">Phone Number</label>
+                <input type="tel" id="phone" class="input" placeholder="+254 7XX XXX XXX" required>
+              </div>
+            </div>
+
+            <div class="form-group">
+              <label for="email">Email (Optional)</label>
+              <input type="email" id="email" class="input" placeholder="jane@email.com">
+            </div>
+
+            <div class="form-group">
+              <label for="interest">What are you looking for?</label>
+              <select id="interest" class="input" required>
+                <option value="">Select an option...</option>
+                <option value="buy">I want to buy a home</option>
+                <option value="sell">I want to sell my property</option>
+                <option value="invest">I'm looking to invest</option>
+                <option value="rent">I need a rental</option>
+                <option value="tour">I'd like a private tour</option>
+              </select>
+            </div>
+
+            <div class="form-group">
+              <label for="message">Tell me about your dream home</label>
+              <textarea id="message" class="input" rows="4"
+                placeholder="Location preference, budget, number of bedrooms, special requirements..."></textarea>
+            </div>
+
+            <button type="submit" class="btn btn-primary btn-block btn-lg">Send Message ✨</button>
+
+            <p class="form-note">Or reach me directly on <a href="https://wa.me/254705924255"
+                target="_blank">WhatsApp</a></p>
+          </form>
+        </div>
+
+        <aside class="contact-sidebar">
+          <div class="contact-card">
+            <div class="contact-card-icon">💬</div>
+            <h3>WhatsApp</h3>
+            <p>Fastest way to reach me</p>
+            <a href="https://wa.me/254705924255" target="_blank" class="btn btn-primary btn-block">Chat Now</a>
+          </div>
+
+          <div class="contact-card">
+            <div class="contact-card-icon">📞</div>
+            <h3>Call Me</h3>
+            <p>0705 924 255</p>
+            <a href="tel:+254705924255" class="btn btn-outline btn-block">Call Now</a>
+          </div>
+
+          <div class="contact-card">
+            <div class="contact-card-icon">📍</div>
+            <h3>Service Areas</h3>
+            <p>Nairobi • Kiambu • Thika<br>Westlands • Runda • Diani</p>
+          </div>
+
+          <div class="contact-card">
+            <div class="contact-card-icon">🕐</div>
+            <h3>Hours</h3>
+            <p>Mon-Sat: 9AM - 6PM<br>Sunday: By Appointment</p>
+          </div>
+        </aside>
+      </div>
+    </div>
+  </section>
+
+  <!-- ==================== FOOTER ==================== -->
+  <footer class="footer">
+    <div class="container">
+      <div class="footer-content">
+        <div class="footer-brand">
+          <div class="logo logo-sm"><span class="logo-text">S</span>
+            <div class="logo-ring"></div>
+          </div>
+          <div>
+            <span class="footer-name">Realtor Sicily</span>
+            <span class="footer-tagline">Luxury Real Estate Kenya</span>
+          </div>
+        </div>
+
+        <nav class="footer-nav">
+          <a href="#properties">Properties</a>
+          <a href="#about">About</a>
+          <a href="#reviews">Reviews</a>
+          <a href="#contact">Contact</a>
+        </nav>
+
+        <div class="footer-social">
+          <a href="https://wa.me/254705924255" target="_blank" aria-label="WhatsApp" class="social-link">💬</a>
+          <a href="tel:+254705924255" aria-label="Phone" class="social-link">📞</a>
+        </div>
+      </div>
+
+      <div class="footer-bottom">
+        <p>© <span id="year"></span> Realtor Sicily. Crafted with 💝 for elegant home seekers.</p>
+      </div>
     </div>
   </footer>
 
+  <!-- ==================== FLOATING WHATSAPP ==================== -->
+  <a href="https://wa.me/254705924255?text=Hi%20Sicily%2C%20I%20found%20you%20online%20and%20I%27m%20interested%20in%20your%20properties!"
+    class="whatsapp-float" target="_blank" rel="noopener" aria-label="Chat on WhatsApp">
+    <div class="whatsapp-pulse"></div>
+    <svg viewBox="0 0 24 24">
+      <path
+        d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z" />
+    </svg>
+    <span class="whatsapp-label">Chat with Sicily</span>
+  </a>
 
-</body></html>
+  <!-- ==================== SCRIPTS ==================== -->
+  <script>
+    document.addEventListener('DOMContentLoaded', function () {
+      initHeader();
+      initMobileMenu();
+      initScrollAnimations();
+      initPropertyCards();
+      document.getElementById('year').textContent = new Date().getFullYear();
+    });
+
+    function initHeader() {
+      const header = document.getElementById('header');
+      let lastScroll = 0;
+
+      window.addEventListener('scroll', function () {
+        const currentScroll = window.scrollY;
+        header.classList.toggle('scrolled', currentScroll > 50);
+        header.classList.toggle('hidden', currentScroll > lastScroll && currentScroll > 200);
+        lastScroll = currentScroll;
+      }, { passive: true });
+    }
+
+    function initMobileMenu() {
+      const toggle = document.getElementById('mobileToggle');
+      const menu = document.getElementById('mobileMenu');
+      const overlay = document.getElementById('mobileOverlay');
+
+      function closeMenu() {
+        toggle.classList.remove('active');
+        menu.classList.remove('active');
+        overlay.classList.remove('active');
+        document.body.style.overflow = '';
+      }
+
+      toggle.addEventListener('click', function () {
+        const isOpen = menu.classList.contains('active');
+        if (isOpen) {
+          closeMenu();
+        } else {
+          toggle.classList.add('active');
+          menu.classList.add('active');
+          overlay.classList.add('active');
+          document.body.style.overflow = 'hidden';
+        }
+      });
+
+      overlay.addEventListener('click', closeMenu);
+      menu.querySelectorAll('a').forEach(a => a.addEventListener('click', closeMenu));
+    }
+
+    function initScrollAnimations() {
+      const elements = document.querySelectorAll('.property-card, .testimonial-card, .feature-card, .about-content, .contact-form-card');
+
+      const observer = new IntersectionObserver((entries) => {
+        entries.forEach((entry, index) => {
+          if (entry.isIntersecting) {
+            setTimeout(() => {
+              entry.target.classList.add('visible');
+            }, index * 100);
+          }
+        });
+      }, { threshold: 0.1, rootMargin: '-50px' });
+
+      elements.forEach(el => observer.observe(el));
+    }
+
+    function initPropertyCards() {
+      document.querySelectorAll('.property-card').forEach(card => {
+        card.addEventListener('mouseenter', function () {
+          this.querySelector('.property-overlay').style.opacity = '1';
+        });
+        card.addEventListener('mouseleave', function () {
+          this.querySelector('.property-overlay').style.opacity = '0';
+        });
+      });
+    }
+
+    function handleSearch() {
+      const location = document.getElementById('location').value;
+      const price = document.getElementById('price').value;
+      const type = document.getElementById('type').value;
+
+      let message = "Hi Sicily! I'm looking for a property";
+      if (location) message += ` in ${location}`;
+      if (price) message += `, budget ${price}`;
+      if (type) message += `, property type: ${type}`;
+      message += ". Can you help me find the perfect home?";
+
+      window.open(`https://wa.me/254705924255?text=${encodeURIComponent(message)}`, '_blank');
+    }
+
+    function handleContact(event) {
+      event.preventDefault();
+      const name = document.getElementById('name').value;
+      const phone = document.getElementById('phone').value;
+      const interest = document.getElementById('interest').value;
+      const message = document.getElementById('message').value;
+
+      let waMessage = `Hi Sicily! I'm ${name} (${phone}). I'm interested in: ${interest}.`;
+      if (message) waMessage += ` Additional info: ${message}`;
+
+      window.open(`https://wa.me/254705924255?text=${encodeURIComponent(waMessage)}`, '_blank');
+
+      alert('Thank you, ' + name + '! Redirecting you to WhatsApp to connect with Sicily directly.');
+    }
+  </script>
+</body>
+
+</html>
