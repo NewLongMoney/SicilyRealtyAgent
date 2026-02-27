@@ -11,10 +11,10 @@
   --bg: #040814;
   --bg-alt: #070e1f;
 
-  /* Shadcn Glass Surfaces */
-  --surface: rgba(10, 20, 40, 0.4);
-  --surface-light: rgba(10, 20, 40, 0.6);
-  --border: rgba(255, 255, 255, 0.1);
+  /* Liquid Glass Surfaces */
+  --surface: rgba(10, 20, 40, 0.25);
+  --surface-light: rgba(10, 20, 40, 0.4);
+  --border: rgba(255, 255, 255, 0.08);
 
   /* Text - High Contrast White & Muted Blue-Greys */
   --text: #ffffff;
@@ -736,15 +736,28 @@ textarea.input {
   color: var(--text);
 }
 
-.brand:hover {
-  color: var(--text);
+.brand-text {
+  display: flex;
+  flex-direction: column;
 }
 
-.brand-logo {
-  height: 42px;
-  width: auto;
-  border-radius: 8px;
-  object-fit: contain;
+.brand-text span:first-child {
+  font-family: var(--font-heading);
+  font-size: 28px;
+  font-weight: 500;
+  letter-spacing: 0.02em;
+  background: var(--text-gradient);
+  -webkit-background-clip: text;
+  background-clip: text;
+  -webkit-text-fill-color: transparent;
+  line-height: 1.1;
+}
+
+.brand-tagline {
+  font-size: 10px;
+  letter-spacing: 2px;
+  color: var(--text-muted);
+  text-transform: uppercase;
 }
 
 .footer-logo {
@@ -1161,14 +1174,33 @@ textarea.input {
   margin-top: -60px;
 }
 
+.hero-search-container {
+  background: var(--surface);
+  backdrop-filter: blur(24px) saturate(180%);
+  -webkit-backdrop-filter: blur(24px) saturate(180%);
+  border: 1px solid var(--border);
+  box-shadow:
+    0 8px 32px 0 rgba(0, 0, 0, 0.3),
+    inset 0 1px 0 rgba(255, 255, 255, 0.15),
+    inset 0 -1px 0 rgba(255, 255, 255, 0.02),
+    inset 0 0 30px rgba(201, 148, 62, 0.03);
+  border-radius: var(--radius-lg);
+  padding: var(--space-md);
+  margin: 0 auto;
+}
+
 .search-card {
   background: var(--surface);
-  backdrop-filter: blur(16px);
-  -webkit-backdrop-filter: blur(16px);
+  backdrop-filter: blur(24px) saturate(180%);
+  -webkit-backdrop-filter: blur(24px) saturate(180%);
   border: 1px solid var(--border);
   border-radius: var(--radius-xl);
   padding: var(--space-xl);
-  box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.05);
+  box-shadow:
+    0 8px 32px 0 rgba(0, 0, 0, 0.3),
+    inset 0 1px 0 rgba(255, 255, 255, 0.15),
+    inset 0 -1px 0 rgba(255, 255, 255, 0.02),
+    inset 0 0 30px rgba(201, 148, 62, 0.03);
 }
 
 .search-header {
@@ -1238,8 +1270,8 @@ textarea.input {
 
 .property-card {
   background: var(--surface);
-  backdrop-filter: blur(12px);
-  -webkit-backdrop-filter: blur(12px);
+  backdrop-filter: blur(24px) saturate(180%);
+  -webkit-backdrop-filter: blur(24px) saturate(180%);
   border: 1px solid var(--border);
   border-radius: var(--radius-xl);
   /* Increased border-radius for smooth nice corners */
@@ -1247,7 +1279,11 @@ textarea.input {
   transition: all var(--transition);
   display: flex;
   flex-direction: column;
-  box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.05);
+  box-shadow:
+    0 8px 32px 0 rgba(0, 0, 0, 0.3),
+    inset 0 1px 0 rgba(255, 255, 255, 0.15),
+    inset 0 -1px 0 rgba(255, 255, 255, 0.02),
+    inset 0 0 30px rgba(201, 148, 62, 0.03);
 }
 
 .property-card:hover {
@@ -1380,12 +1416,16 @@ textarea.input {
   text-align: center;
   padding: var(--space-xl);
   background: var(--surface);
-  backdrop-filter: blur(12px);
-  -webkit-backdrop-filter: blur(12px);
+  backdrop-filter: blur(24px) saturate(180%);
+  -webkit-backdrop-filter: blur(24px) saturate(180%);
   border: 1px solid var(--border);
   border-radius: var(--radius-lg);
   transition: all var(--transition);
-  box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.05);
+  box-shadow:
+    0 8px 32px 0 rgba(0, 0, 0, 0.3),
+    inset 0 1px 0 rgba(255, 255, 255, 0.15),
+    inset 0 -1px 0 rgba(255, 255, 255, 0.02),
+    inset 0 0 30px rgba(201, 148, 62, 0.03);
 }
 
 .feature-card:hover {
@@ -1730,15 +1770,24 @@ textarea.input {
 
 .contact-card {
   background: var(--surface);
+  backdrop-filter: blur(24px) saturate(180%);
+  -webkit-backdrop-filter: blur(24px) saturate(180%);
   border: 1px solid var(--border);
   border-radius: var(--radius-lg);
   padding: var(--space-lg);
   text-align: center;
   transition: all 0.3s;
+  box-shadow:
+    0 8px 32px 0 rgba(0, 0, 0, 0.3),
+    inset 0 1px 0 rgba(255, 255, 255, 0.15),
+    inset 0 -1px 0 rgba(255, 255, 255, 0.02),
+    inset 0 0 30px rgba(201, 148, 62, 0.03);
 }
 
 .contact-card:hover {
-  border-color: var(--rose);
+  transform: translateY(-5px);
+  border-color: rgba(201, 148, 62, 0.4);
+  background: rgba(201, 148, 62, 0.05);
 }
 
 .contact-card-icon {
