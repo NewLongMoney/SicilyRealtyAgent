@@ -1947,6 +1947,14 @@ textarea.input {
   transform: translateY(-3px);
 }
 
+.footer-logo {
+  height: 48px;
+  width: auto;
+  object-fit: contain;
+  border-radius: 8px;
+  margin-bottom: 12px;
+}
+
 .footer-bottom {
   text-align: center;
 }
