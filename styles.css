@@ -262,6 +262,11 @@ body {
   font-weight: 700;
   letter-spacing: 0.05em;
   color: #4c82e6;
+  max-width: 100%;
+  /* Prevent mobile overflow */
+  white-space: normal;
+  /* Allow wrapping */
+  text-align: left;
 }
 
 .badge-icon {
@@ -1019,9 +1024,20 @@ textarea.input {
   animation: fadeUp 1s var(--ease-out);
 }
 
+.hero-massive-logo {
+  display: block;
+  margin: 0 auto var(--space-xl);
+  width: 100%;
+  max-width: 480px;
+  height: auto;
+  filter: drop-shadow(0px 10px 20px rgba(0, 0, 0, 0.8));
+  animation: fadeUp 1s var(--ease-out) both;
+}
+
 .hero-title {
   font-family: var(--font-heading);
-  font-size: clamp(42px, 5.5vw, 68px);
+  font-size: clamp(32px, 6vw, 68px);
+  /* Lower bottom bound from 42px to 32px to fix mobile wrap */
   font-weight: 500;
   line-height: 1.1;
   letter-spacing: -0.01em;
@@ -1225,7 +1241,8 @@ textarea.input {
   backdrop-filter: blur(12px);
   -webkit-backdrop-filter: blur(12px);
   border: 1px solid var(--border);
-  border-radius: var(--radius-lg);
+  border-radius: var(--radius-xl);
+  /* Increased border-radius for smooth nice corners */
   overflow: hidden;
   transition: all var(--transition);
   display: flex;
@@ -1328,12 +1345,16 @@ textarea.input {
 
 .property-price {
   font-family: var(--font-heading);
-  font-size: 22px;
-  font-weight: 700;
-  background: var(--gradient-gold);
+  font-size: 26px;
+  /* Increased from 22px to stand out more */
+  font-weight: 800;
+  /* Increased weight */
+  background: var(--text-gradient);
+  /* Rich gold gradient */
   -webkit-background-clip: text;
   background-clip: text;
   -webkit-text-fill-color: transparent;
+  display: inline-block;
 }
 
 /* ==================== FEATURES ==================== */
@@ -1380,8 +1401,13 @@ textarea.input {
 
 .feature-card h3 {
   font-family: var(--font-heading);
-  font-size: 20px;
+  font-size: clamp(16px, 4vw, 20px);
+  /* Responsive sizing */
   margin-bottom: 10px;
+  word-wrap: break-word;
+  /* Fix long word overflow */
+  hyphens: auto;
+  /* Enable hyphenation on mobile */
 }
 
 .feature-card p {
@@ -1656,6 +1682,13 @@ textarea.input {
 }
 
 /* ==================== CONTACT ==================== */
+.contact {
+  position: relative;
+  background: linear-gradient(rgba(4, 8, 20, 0.88), rgba(4, 8, 20, 0.96)), url('../images/bedroom.png') center/cover no-repeat;
+  padding: 100px 0;
+  border-top: 1px solid var(--border);
+}
+
 .contact-grid {
   display: grid;
   grid-template-columns: 1.3fr 0.7fr;
