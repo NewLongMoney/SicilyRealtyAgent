@@ -7,9 +7,13 @@
   --bg: #040814;
   /* Deep Midnight Blue from Screenshot */
   --bg-alt: #070e1f;
-  --surface: rgba(13, 22, 45, 0.7);
-  /* Translucent Navy for Blocks */
-  --surface-light: rgba(20, 35, 70, 0.5);
+  /* Midnight Collection Palette - Shadcn Match */
+  --bg: #040814;
+  --bg-alt: #070e1f;
+
+  /* Shadcn Glass Surfaces */
+  --surface: rgba(10, 20, 40, 0.4);
+  --surface-light: rgba(10, 20, 40, 0.6);
   --border: rgba(255, 255, 255, 0.1);
 
   /* Text - High Contrast White & Muted Blue-Greys */
@@ -1143,10 +1147,12 @@ textarea.input {
 
 .search-card {
   background: var(--surface);
+  backdrop-filter: blur(16px);
+  -webkit-backdrop-filter: blur(16px);
   border: 1px solid var(--border);
   border-radius: var(--radius-xl);
   padding: var(--space-xl);
-  box-shadow: var(--shadow-medium);
+  box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.05);
 }
 
 .search-header {
@@ -1216,16 +1222,22 @@ textarea.input {
 
 .property-card {
   background: var(--surface);
+  backdrop-filter: blur(12px);
+  -webkit-backdrop-filter: blur(12px);
   border: 1px solid var(--border);
-  border-radius: var(--radius-xl);
+  border-radius: var(--radius-lg);
   overflow: hidden;
-  transition: all 0.5s var(--ease-out);
+  transition: all var(--transition);
+  display: flex;
+  flex-direction: column;
+  box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.05);
 }
 
 .property-card:hover {
-  transform: translateY(-12px);
-  border-color: var(--rose);
-  box-shadow: var(--shadow-rose);
+  transform: translateY(-8px);
+  border-color: rgba(201, 148, 62, 0.3);
+  /* Subtle gold hover */
+  box-shadow: 0 10px 40px -10px rgba(0, 0, 0, 0.8), inset 0 1px 0 rgba(255, 255, 255, 0.1);
 }
 
 .property-image {
@@ -1347,15 +1359,18 @@ textarea.input {
   text-align: center;
   padding: var(--space-xl);
   background: var(--surface);
+  backdrop-filter: blur(12px);
+  -webkit-backdrop-filter: blur(12px);
   border: 1px solid var(--border);
-  border-radius: var(--radius-xl);
-  transition: all 0.4s;
+  border-radius: var(--radius-lg);
+  transition: all var(--transition);
+  box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.05);
 }
 
 .feature-card:hover {
-  border-color: var(--rose);
   transform: translateY(-8px);
-  box-shadow: var(--shadow-rose);
+  border-color: rgba(201, 148, 62, 0.4);
+  background: rgba(201, 148, 62, 0.05);
 }
 
 .feature-icon {
@@ -1484,20 +1499,46 @@ textarea.input {
 
 .testimonial-card {
   background: var(--surface);
+  backdrop-filter: blur(12px);
+  -webkit-backdrop-filter: blur(12px);
   border: 1px solid var(--border);
-  border-radius: var(--radius-xl);
+  border-radius: var(--radius-lg);
   padding: var(--space-xl);
-  transition: all 0.4s;
+  transition: all var(--transition);
+  box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.05);
 }
 
 .testimonial-card:hover {
-  border-color: var(--rose);
   transform: translateY(-8px);
+  border-color: rgba(201, 148, 62, 0.3);
+  box-shadow: 0 10px 40px -10px rgba(0, 0, 0, 0.8), inset 0 1px 0 rgba(255, 255, 255, 0.1);
 }
 
 .testimonial-card.featured {
-  border-color: var(--gold);
-  background: linear-gradient(135deg, var(--surface), rgba(201, 148, 62, 0.05));
+  background: var(--text-gradient);
+  /* Prominent Gold Gradient Background */
+  border-color: transparent;
+  transform: scale(1.02);
+  box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.2), 0 20px 50px -10px rgba(0, 0, 0, 0.6);
+  color: #070e1f;
+  /* High contrast text */
+}
+
+.testimonial-card.featured .testimonial-name {
+  color: #040814;
+}
+
+.testimonial-card.featured .testimonial-role {
+  color: rgba(7, 14, 31, 0.7);
+}
+
+.testimonial-card.featured .testimonial-quote {
+  color: #070e1f;
+}
+
+.testimonial-card.featured .quote-icon {
+  fill: #040814;
+  opacity: 0.1;
 }
 
 .testimonial-header {
@@ -1544,36 +1585,74 @@ textarea.input {
 }
 
 /* ==================== CTA BANNER ==================== */
+.cta {
+  padding: 100px 0;
+}
+
 .cta-banner {
-  background: linear-gradient(135deg, rgba(201, 148, 62, 0.08), rgba(107, 159, 255, 0.08));
-  border-top: 1px solid var(--border);
-  border-bottom: 1px solid var(--border);
-  padding: var(--space-3xl) 0;
-}
-
-.cta-content {
+  background: var(--text-gradient);
+  /* Prominent Gold Gradient Background */
+  border-radius: var(--radius-xl);
+  padding: var(--space-3xl);
   text-align: center;
+  position: relative;
+  overflow: hidden;
+  box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.2);
+}
+
+.cta-banner::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background: url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" width="100" height="100" opacity="0.05"><circle cx="50" cy="50" r="40" fill="none" stroke="%23ffffff" stroke-width="2"/></svg>') center/100px 100px;
+  opacity: 0.1;
+  pointer-events: none;
+}
+
+.cta-banner h2 {
+  font-size: clamp(32px, 4vw, 48px);
+  margin-bottom: var(--space-md);
+  color: #070e1f;
+  /* Dark Navy for High Contrast against Gold */
+  background: none;
+  -webkit-text-fill-color: #070e1f;
+}
+
+.cta-banner p {
+  color: rgba(7, 14, 31, 0.8);
+  font-size: 18px;
   max-width: 600px;
-  margin: 0 auto;
-}
-
-.cta-content h2 {
-  font-family: var(--font-heading);
-  font-size: clamp(28px, 4vw, 42px);
-  margin-bottom: 12px;
-}
-
-.cta-content p {
-  color: var(--text-muted);
-  font-size: 17px;
-  margin-bottom: var(--space-xl);
+  margin: 0 auto var(--space-xl);
 }
 
 .cta-buttons {
+  position: relative;
+  z-index: 10;
   display: flex;
   justify-content: center;
   gap: 16px;
   flex-wrap: wrap;
+}
+
+.btn-white {
+  background: #070e1f;
+  color: var(--primary);
+  border: none;
+}
+
+.btn-white:hover {
+  background: #040814;
+}
+
+.btn-glass {
+  background: rgba(7, 14, 31, 0.1);
+  color: #070e1f;
+  border: 1px solid rgba(7, 14, 31, 0.2);
+  backdrop-filter: blur(10px);
+}
+
+.btn-glass:hover {
+  background: rgba(7, 14, 31, 0.2);
 }
 
 /* ==================== CONTACT ==================== */
