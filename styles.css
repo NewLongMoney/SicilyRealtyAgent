@@ -2208,3 +2208,41 @@ textarea.input {
 .about-stat-value[data-count] {
   font-variant-numeric: tabular-nums;
 }
+
+/* ==================== HERO MOBILE OPTIMIZATION (PHASE 12) ==================== */
+@media (max-width: 600px) {
+  .hero {
+    min-height: auto;
+    padding: 120px 0 60px;
+    /* Tighter padding to fit screen */
+  }
+
+  .hero-massive-logo {
+    max-width: 260px;
+    /* Scale down logo significantly */
+    margin-bottom: 16px;
+  }
+
+  .hero-label-badge {
+    margin-bottom: 16px;
+    font-size: 10px;
+    padding: 4px 10px 4px 4px;
+  }
+
+  .hero-title {
+    font-size: clamp(24px, 7vw, 32px);
+    /* Force smaller text bounds */
+    line-height: 1.1;
+    margin-bottom: 12px;
+  }
+
+  .hero-subtitle {
+    font-size: 14px;
+    margin-bottom: 24px;
+    line-height: 1.5;
+  }
+
+  .hero-search-container {
+    padding: 12px;
+  }
+}
