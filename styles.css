@@ -181,7 +181,14 @@ body {
   padding: 12px 20px;
   border-right: 1px solid rgba(255, 255, 255, 0.08);
   text-align: left;
+  transition: background 0.3s, border-color 0.3s;
 }
+
+.search-segment:hover,
+.search-segment:focus-within {
+  background: rgba(255, 255, 255, 0.03);
+}
+
 
 .search-segment:last-of-type,
 .price-segment {
@@ -197,6 +204,12 @@ body {
   margin-bottom: 6px;
 }
 
+.segment-wrapper {
+  position: relative;
+  display: flex;
+  align-items: center;
+}
+
 .segment-input {
   background: transparent;
   border: none;
@@ -208,7 +221,25 @@ body {
   width: 100%;
   cursor: pointer;
   appearance: none;
+  padding-right: 20px;
+  /* Space for chevron */
+  position: relative;
+  z-index: 2;
 }
+
+.chevron-gold {
+  position: absolute;
+  right: 0;
+  color: var(--gold);
+  pointer-events: none;
+  transition: transform 0.3s;
+  z-index: 1;
+}
+
+.search-segment:focus-within .chevron-gold {
+  transform: rotate(180deg);
+}
+
 
 .btn-search {
   background: var(--primary);
@@ -270,6 +301,7 @@ body {
   font-weight: 600;
   outline: none;
   width: 100%;
+  padding-right: 20px;
 }
 
 .price-input::placeholder {
