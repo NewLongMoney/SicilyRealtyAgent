@@ -227,6 +227,14 @@ body {
   z-index: 2;
 }
 
+.segment-input option {
+  background-color: #0b1a33;
+  /* Deep midnight for readability */
+  color: var(--text);
+  padding: 10px;
+}
+
+
 .chevron-gold {
   position: absolute;
   right: 0;
@@ -1933,8 +1941,14 @@ textarea.input {
 .footer-name {
   display: block;
   font-family: var(--font-heading);
-  font-size: 20px;
-  font-weight: 600;
+  font-size: 24px;
+  font-weight: 700;
+  font-style: italic;
+  background: var(--text-gradient);
+  -webkit-background-clip: text;
+  background-clip: text;
+  -webkit-text-fill-color: transparent;
+  margin-bottom: 2px;
 }
 
 .footer-tagline {
