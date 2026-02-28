@@ -185,8 +185,8 @@
   <!-- ==================== HERO ==================== -->
   <section class="hero" id="hero">
     <div class="hero-bg">
-      <video autoplay muted loop playsinline poster="images/hero.png" class="hero-video">
-        <source src="images/hero video.mp4" type="video/mp4">
+      <video autoplay muted loop playsinline poster="images/hero.png" class="hero-video" id="heroVideo">
+        <source src="images/hero-video.mp4" type="video/mp4">
         Your browser does not support the video tag.
       </video>
       <div class="hero-overlay"></div>
@@ -789,6 +789,8 @@
     /* ---- Header ---- */
     function initHeader() {
       const header = document.getElementById('header');
+      const video = document.getElementById('heroVideo');
+
       let lastScroll = 0;
       window.addEventListener('scroll', function () {
         const s = window.scrollY;
@@ -796,6 +798,18 @@
         header.classList.toggle('hidden', s > lastScroll && s > 200);
         lastScroll = s;
       }, { passive: true });
+
+      // Robust Video Playback Enforcement
+      if (video) {
+        const attemptPlay = () => {
+          video.play().catch(err => {
+            console.log("Autoplay prevented, retrying on interaction...");
+            document.addEventListener('click', () => video.play(), { once: true });
+            document.addEventListener('touchstart', () => video.play(), { once: true });
+          });
+        };
+        attemptPlay();
+      }
     }
 
     /* ---- Mobile Menu ---- */
