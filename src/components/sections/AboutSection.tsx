@@ -3,9 +3,9 @@ import Link from 'next/link'
 import { WHATSAPP_BASE, PHONE } from '@/lib/data'
 
 const STATS = [
-  { num: '150+', label: 'Acquisitions Closed' },
-  { num: '98%',  label: 'Come Back Rate' },
-  { num: '5.0',  label: 'Verified Rating' },
+  { num: '100+', label: 'Homes Placed' },
+  { num: 'KES 7M', label: 'Transacted Value' },
+  { num: '150+', label: 'Happy Clients' },
 ]
 
 export function AboutSection() {

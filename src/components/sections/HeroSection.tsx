@@ -201,7 +201,7 @@ export function HeroSection() {
           {[
             { num: '100+', label: 'Homes Placed', icon: Home },
             { num: 'KES 7M', label: 'Transacted Value', icon: TrendingUp },
-            { num: '400+', label: 'Happy Clients', icon: '⭐' },
+            { num: '150+', label: 'Happy Clients', icon: '⭐' },
           ].map(stat => (
             <div key={stat.label} className="text-center group transition-all duration-300 hover:scale-105">
               <div className="flex justify-center mb-2">
