@@ -32,19 +32,45 @@ export function AboutSection() {
             </Link>
           </div>
 
-          {/* Advisor image */}
-          <div className="relative p-6 md:p-7">
-            <Image
-              src="/images/realtor.png"
-              alt="Sicily, Principal Real Estate Advisor"
-              width={500}
-              height={625}
-              className="relative z-10 w-full rounded-lg object-cover object-top aspect-[4/5]"
-            />
-            {/* Inner frame */}
-            <div className="absolute inset-3 border border-gold/40 rounded-xl pointer-events-none z-0" />
-            {/* Outer frame */}
-            <div className="absolute inset-0 border border-gold/15 rounded-2xl pointer-events-none z-0" />
+          {/* Credential cards */}
+          <div className="relative hidden md:flex flex-col justify-center gap-6">
+            {/* Decorative year watermark */}
+            <div className="absolute top-0 right-0 font-display text-[10rem] leading-none text-gold/[0.04] select-none pointer-events-none">
+              2022
+            </div>
+
+            {[
+              {
+                num: '150+',
+                label: 'Acquisitions Closed',
+                desc: "Verified transactions across Nairobi's prime residential corridors"
+              },
+              {
+                num: 'KES 2.5B',
+                label: 'Total Value Transacted',
+                desc: 'Across residential, off-plan, and investment properties'
+              },
+              {
+                num: '5.0',
+                label: 'Verified Client Rating',
+                desc: 'Average rating across all completed client engagements'
+              },
+            ].map(item => (
+              <div
+                key={item.label}
+                className="card-dark rounded-2xl p-6 border border-gold/15 hover:border-gold/30 transition-colors duration-250"
+              >
+                <span className="block font-display text-[2.2rem] gold-text-v font-bold leading-none mb-2">
+                  {item.num}
+                </span>
+                <p className="text-[0.76rem] tracking-[0.1em] uppercase text-gold/70 font-semibold mb-1.5">
+                  {item.label}
+                </p>
+                <p className="text-[0.82rem] text-sicily-body/65 leading-[1.6]">
+                  {item.desc}
+                </p>
+              </div>
+            ))}
           </div>
         </div>
 

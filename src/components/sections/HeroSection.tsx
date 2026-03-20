@@ -1,7 +1,7 @@
 'use client'
 
 import { useState, useEffect, useRef } from 'react'
-import { ChevronRight, Search, MapPin, Home, TrendingUp } from 'lucide-react'
+import { ChevronRight, Search, MapPin, Home, TrendingUp, Star } from 'lucide-react'
 import { cn } from '@/lib/utils'
 
 const VIDEOS = [
@@ -201,7 +201,7 @@ export function HeroSection() {
           {[
             { num: '100+', label: 'Homes Placed', icon: Home },
             { num: 'KES 7M', label: 'Transacted Value', icon: TrendingUp },
-            { num: '150+', label: 'Happy Clients', icon: '⭐' },
+            { num: '150+', label: 'Happy Clients', icon: Star },
           ].map(stat => (
             <div key={stat.label} className="text-center group transition-all duration-300 hover:scale-105">
               <div className="flex justify-center mb-2">

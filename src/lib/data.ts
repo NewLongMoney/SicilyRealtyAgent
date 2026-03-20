@@ -135,8 +135,8 @@ export const PROPERTIES: Property[] = [
 ]
 
 export const BEST_SELLERS: Property[] = [
+  PROPERTIES.find(p => p.id === 'montbleu')!,
   PROPERTIES.find(p => p.id === 'golden-mansion')!,
-  PROPERTIES.find(p => p.id === 'project-1050')!,
   PROPERTIES.find(p => p.id === 'ivy-park')!,
 ]
 

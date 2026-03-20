@@ -14,25 +14,12 @@ export function TestimonialsSection({ testimonials }: Props) {
           subtitle="We do not chase reviews. These came on their own."
         />
 
-        {/* Desktop 3-col grid */}
-        <div className="hidden md:grid grid-cols-3 gap-6 mt-14">
+        {/* Single responsive grid */}
+        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 mt-14">
           {testimonials.map(t => (
             <TestimonialCard key={t.id} testimonial={t} />
           ))}
         </div>
-
-        {/* Mobile scroll */}
-        <div className="md:hidden flex gap-4 overflow-x-auto pb-6 mt-10 -mx-6 px-6 snap-x snap-mandatory scrollbar-none">
-          {testimonials.map(t => (
-            <div key={t.id} className="snap-start flex-shrink-0 w-[300px]">
-              <TestimonialCard testimonial={t} />
-            </div>
-          ))}
-        </div>
-        <p className="md:hidden flex items-center gap-1.5 text-[0.65rem] tracking-[0.12em] uppercase text-gold/50 mt-1">
-          <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.5"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
-          Swipe for more
-        </p>
       </div>
     </section>
   )

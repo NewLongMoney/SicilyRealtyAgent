@@ -70,23 +70,6 @@ export function PropertyCard({ property, className }: PropertyCardProps) {
             {BADGE_LABELS[property.status]}
           </span>
         </div>
-
-        {/* Quick view overlay */}
-        <div className="absolute inset-0 bg-navy-deep/80 opacity-0 group-hover:opacity-100 transition-opacity duration-300 pointer-events-none flex items-center justify-center">
-          <div className="transform translate-y-4 group-hover:translate-y-0 transition-transform duration-300">
-            <div className="text-gold text-sm font-semibold mb-2">Quick View</div>
-            <div className="flex items-center gap-3 text-white/80 text-xs">
-              <span className="flex items-center gap-1">
-                <Home size={12} />
-                {property.bedrooms}
-              </span>
-              <span className="flex items-center gap-1">
-                <MapPin size={12} />
-                {property.area}
-              </span>
-            </div>
-          </div>
-        </div>
       </div>
 
       {/* Enhanced body content */}
@@ -112,11 +95,6 @@ export function PropertyCard({ property, className }: PropertyCardProps) {
           <p className="font-display text-[1.45rem] gold-text-v font-bold leading-none group-hover:scale-105 transition-transform duration-300">
             {property.price}
           </p>
-          <span className="text-[0.65rem] text-sicily-muted uppercase tracking-[0.1em]">
-            {property.category === 'signature' && 'Premium'}
-            {property.category === 'select' && 'Exclusive'}
-            {property.category === 'intelligent' && 'Smart'}
-          </span>
         </div>
         
         {/* Enhanced CTA button */}

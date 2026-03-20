@@ -49,25 +49,12 @@ export function PropertiesSection({ properties }: Props) {
           ))}
         </div>
 
-        {/* Grid — desktop 3-col, tablet 2-col, mobile horizontal scroll */}
-        <div className="hidden md:grid grid-cols-2 lg:grid-cols-3 gap-7">
+        {/* Single responsive grid */}
+        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
           {filtered.map(p => (
             <PropertyCard key={p.id} property={p} />
           ))}
         </div>
-
-        {/* Mobile horizontal scroll */}
-        <div className="md:hidden flex gap-4 overflow-x-auto pb-6 -mx-6 px-6 snap-x snap-mandatory scrollbar-none">
-          {filtered.map(p => (
-            <div key={p.id} className="snap-start flex-shrink-0 w-[280px]">
-              <PropertyCard property={p} />
-            </div>
-          ))}
-        </div>
-        <p className="md:hidden flex items-center gap-1.5 text-[0.65rem] tracking-[0.12em] uppercase text-gold/50 mt-1">
-          <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.5"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
-          Swipe to explore
-        </p>
       </div>
     </section>
   )
