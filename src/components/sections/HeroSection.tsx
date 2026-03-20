@@ -199,8 +199,8 @@ export function HeroSection() {
         {/* Enhanced stats with icons */}
         <div className="flex justify-center gap-8 md:gap-12 animate-fade-up opacity-0 [animation-delay:1s] [animation-fill-mode:forwards]">
           {[
-            { num: '150+', label: 'Homes Placed', icon: Home },
-            { num: 'KES 2.5B', label: 'Transacted Value', icon: TrendingUp },
+            { num: '100+', label: 'Homes Placed', icon: Home },
+            { num: 'KES 7M', label: 'Transacted Value', icon: TrendingUp },
             { num: '400+', label: 'Happy Clients', icon: '⭐' },
           ].map(stat => (
             <div key={stat.label} className="text-center group transition-all duration-300 hover:scale-105">
