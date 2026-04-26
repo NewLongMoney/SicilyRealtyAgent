@@ -476,8 +476,7 @@
             <p class="property-features">Kilimani Luxury • <span class="bedroom-count">2-3 Bedrooms</span> • Prime Units</p>
             <div class="property-footer">
               <span class="property-price">KES 9.2M</span>
-              <a href="https://wa.me/254799124122?text=Hi%2C%20I%27d%20love%20to%20view%20Amethyst%20Springs"
-                target="_blank" class="btn btn-primary btn-sm">View Property</a>
+              <a href="#" onclick="openModal('Amethyst Springs'); return false;" class="btn btn-primary btn-sm">View Property</a>
             </div>
           </div>
         </article>
@@ -1146,6 +1145,21 @@ Kilimani · Westlands · Kileleshwa · Lavington · Riverside</p>
       <div class="modal-body">
         <div class="modal-image">
           <img id="modalImage" src="" alt="" loading="lazy">
+          <!-- Navigation arrows -->
+          <button class="modal-nav modal-nav-prev" onclick="navigateModal(-1)">
+            <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+              <polyline points="15 18 9 12 15 6"></polyline>
+            </svg>
+          </button>
+          <button class="modal-nav modal-nav-next" onclick="navigateModal(1)">
+            <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+              <polyline points="9 18 15 12 9 6"></polyline>
+            </svg>
+          </button>
+          <!-- Image counter -->
+          <div class="modal-image-counter">
+            <span id="currentImage">1</span> / <span id="totalImages">7</span>
+          </div>
         </div>
         <div class="modal-info">
           <h3 id="modalTitle"></h3>
@@ -1210,6 +1224,8 @@ Kilimani · Westlands · Kileleshwa · Lavington · Riverside</p>
       const modalPrice = document.getElementById('modalPrice');
       const modalFeatures = document.getElementById('modalFeatures');
       const modalWaBtn = document.getElementById('modalWaBtn');
+      const currentImageSpan = document.getElementById('currentImage');
+      const totalImagesSpan = document.getElementById('totalImages');
       
       modalImage.src = property.images[0];
       modalTitle.textContent = property.title;
@@ -1219,8 +1235,24 @@ Kilimani · Westlands · Kileleshwa · Lavington · Riverside</p>
       modalFeatures.textContent = property.features;
       modalWaBtn.href = property.whatsapp;
       
+      // Update image counter
+      currentImageSpan.textContent = '1';
+      totalImagesSpan.textContent = property.images.length;
+      
       modal.style.display = 'block';
       document.body.style.overflow = 'hidden';
+    }
+
+    function navigateModal(direction) {
+      if (!currentProperty) return;
+      const property = propertyData[currentProperty];
+      const newIndex = currentImageIndex + direction;
+      
+      if (newIndex >= 0 && newIndex < property.images.length) {
+        currentImageIndex = newIndex;
+        document.getElementById('modalImage').src = property.images[currentImageIndex];
+        document.getElementById('currentImage').textContent = currentImageIndex + 1;
+      }
     }
 
     function closeModal() {
@@ -1248,9 +1280,11 @@ Kilimani · Westlands · Kileleshwa · Lavington · Riverside</p>
         if (event.key === 'ArrowLeft' && currentImageIndex > 0) {
           currentImageIndex--;
           document.getElementById('modalImage').src = property.images[currentImageIndex];
+          document.getElementById('currentImage').textContent = currentImageIndex + 1;
         } else if (event.key === 'ArrowRight' && currentImageIndex < property.images.length - 1) {
           currentImageIndex++;
           document.getElementById('modalImage').src = property.images[currentImageIndex];
+          document.getElementById('currentImage').textContent = currentImageIndex + 1;
         } else if (event.key === 'Escape') {
           closeModal();
         }

@@ -1804,6 +1804,52 @@ a:hover {
   height: 300px;
   object-fit: cover;
   border-radius: var(--radius-lg);
+  position: relative;
+  overflow: hidden;
+}
+
+.modal-nav {
+  position: absolute;
+  top: 50%;
+  transform: translateY(-50%);
+  background: rgba(7, 28, 47, 0.8);
+  color: var(--white);
+  border: none;
+  border-radius: 50%;
+  width: 40px;
+  height: 40px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  z-index: 10;
+}
+
+.modal-nav:hover {
+  background: rgba(229, 169, 60, 0.9);
+  transform: translateY(-50%) scale(1.1);
+}
+
+.modal-nav-prev {
+  left: var(--spacing-sm);
+}
+
+.modal-nav-next {
+  right: var(--spacing-sm);
+}
+
+.modal-image-counter {
+  position: absolute;
+  top: var(--spacing-sm);
+  right: var(--spacing-sm);
+  background: rgba(7, 28, 47, 0.8);
+  color: var(--white);
+  padding: var(--spacing-xs) var(--spacing-sm);
+  border-radius: var(--radius-md);
+  font-size: 0.875rem;
+  font-weight: var(--font-weight-medium);
+  z-index: 10;
 }
 
 .modal-info {
