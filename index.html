@@ -462,7 +462,7 @@
               style="display:block; width:100%; height:100%; cursor:pointer;">
               <span class="property-badge badge-new">New Listing</span>
               <span class="property-type-badge premium">Premium</span>
-              <img src="images/hero.png" alt="Amethyst Springs" loading="lazy" width="400" height="300">
+              <img src="images/Amethyst/Entrance.jpg" alt="Amethyst Springs" loading="lazy" width="400" height="300">
             </div>
           </div>
           <div class="property-body" style="background: transparent !important;">
@@ -1168,6 +1168,98 @@ Kilimani · Westlands · Kileleshwa · Lavington · Riverside</p>
   <!-- Scripts -->
   <script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
   <script src="dist/script.js" defer></script>
+  
+  <!-- Property Modal Script -->
+  <script>
+    // Property data with images
+    const propertyData = {
+      'Amethyst Springs': {
+        title: 'Amethyst Springs',
+        location: 'Kilimani',
+        price: 'KES 9.2M',
+        description: 'Experience luxury living at Amethyst Springs, where contemporary design meets sophisticated comfort. This premium development offers spacious 2-3 bedroom residences with world-class amenities in the heart of Kilimani.',
+        features: '2-3 Bedrooms • Premium Finishes • Rooftop Pool • Modern Design • Secure Gated Community',
+        whatsapp: 'https://wa.me/254799124122?text=Hi%2C%20I%27d%20love%20to%20view%20Amethyst%20Springs',
+        images: [
+          'images/Amethyst/Entrance.jpg',
+          'images/Amethyst/enhanced_Living_Room.png',
+          'images/Amethyst/Rooftop lounge.jpg',
+          'images/Amethyst/251030_FINAL-RoofPool02_EMETHYST_Night.jpg',
+          'images/Amethyst/250908_D02_Rooftop Bar_V1_Op1-EMETHYST.jpg',
+          'images/Amethyst/Arise.jpg',
+          'images/Amethyst/magnifics_upscale-x9U1wBGYcAYaScMX17LE-2_people_sitted_young_beautiful_black_woman_and_man_in_comfortable_light_clothing_sitted_on_the_sof_ih3v8goq5jvyp6i1af23_0.png'
+        ]
+      }
+    };
+
+    let currentImageIndex = 0;
+    let currentProperty = null;
+
+    function openModal(propertyName) {
+      currentProperty = propertyName;
+      currentImageIndex = 0;
+      const property = propertyData[propertyName];
+      
+      if (!property) return;
+      
+      const modal = document.getElementById('propertyModal');
+      const modalImage = document.getElementById('modalImage');
+      const modalTitle = document.getElementById('modalTitle');
+      const modalLocation = document.getElementById('modalLocation');
+      const modalDesc = document.getElementById('modalDesc');
+      const modalPrice = document.getElementById('modalPrice');
+      const modalFeatures = document.getElementById('modalFeatures');
+      const modalWaBtn = document.getElementById('modalWaBtn');
+      
+      modalImage.src = property.images[0];
+      modalTitle.textContent = property.title;
+      modalLocation.textContent = property.location;
+      modalDesc.textContent = property.description;
+      modalPrice.textContent = property.price;
+      modalFeatures.textContent = property.features;
+      modalWaBtn.href = property.whatsapp;
+      
+      modal.style.display = 'block';
+      document.body.style.overflow = 'hidden';
+    }
+
+    function closeModal() {
+      const modal = document.getElementById('propertyModal');
+      modal.style.display = 'none';
+      document.body.style.overflow = 'auto';
+    }
+
+    // Modal close button
+    document.querySelector('.modal-close').addEventListener('click', closeModal);
+
+    // Close modal when clicking outside
+    window.addEventListener('click', function(event) {
+      const modal = document.getElementById('propertyModal');
+      if (event.target === modal) {
+        closeModal();
+      }
+    });
+
+    // Image navigation with keyboard
+    document.addEventListener('keydown', function(event) {
+      const modal = document.getElementById('propertyModal');
+      if (modal.style.display === 'block' && currentProperty) {
+        const property = propertyData[currentProperty];
+        if (event.key === 'ArrowLeft' && currentImageIndex > 0) {
+          currentImageIndex--;
+          document.getElementById('modalImage').src = property.images[currentImageIndex];
+        } else if (event.key === 'ArrowRight' && currentImageIndex < property.images.length - 1) {
+          currentImageIndex++;
+          document.getElementById('modalImage').src = property.images[currentImageIndex];
+        } else if (event.key === 'Escape') {
+          closeModal();
+        }
+      }
+    });
+
+    // Make openModal globally available
+    window.openModal = openModal;
+  </script>
   
   <!-- AOS Initialization -->
   <script>AOS.init({ duration: 900, once: true, offset: 80 });</script>
