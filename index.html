@@ -582,14 +582,14 @@
           <img src="images/Golden mansion/07a1bb7a-1842-40b3-9d31-f80645f543ef.jpg" alt="Golden Mansion" loading="lazy" width="300" height="200">
           <h3>Golden Mansion – Exclusive Apartments</h3>
           <p>Premium residential offering in Westlands with sophisticated design and world-class facilities.</p>
-          <a href="https://wa.me/254799124122?text=Hi%2C%20I%27d%20love%20to%20view%20Golden%20Mansion" target="_blank" class="btn-link">Learn More →</a>
+          <a href="#" onclick="openModal('Golden Mansion'); return false;" class="btn-link">Learn More →</a>
         </div>
         
         <div class="best-seller-item">
           <img src="images/Project 1050/08b02ec9-15ba-4a5b-bcce-2b9d27445cda.jpg" alt="Project 1050" loading="lazy" width="300" height="200">
           <h3>Project 1050 – Luxury Architecture</h3>
           <p>Architectural masterpiece offering premium living spaces with cutting-edge design elements.</p>
-          <a href="https://wa.me/254799124122?text=Hi%2C%20I%27d%20love%20to%20view%20Project%201050" target="_blank" class="btn-link">Learn More →</a>
+          <a href="#" onclick="alert('Project 1050 gallery coming soon!'); return false;" class="btn-link">Learn More →</a>
         </div>
       </div>
     </div>
@@ -1367,6 +1367,13 @@ Kilimani · Westlands · Kileleshwa · Lavington · Riverside</p>
 
     // Make openModal globally available
     window.openModal = openModal;
+    
+    // Debug: Log when modal is called
+    window.debugModal = function(propertyName) {
+      console.log('Opening modal for:', propertyName);
+      console.log('Available properties:', Object.keys(propertyData));
+      openModal(propertyName);
+    };
   </script>
   
   <!-- AOS Initialization -->
