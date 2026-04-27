@@ -143,7 +143,7 @@
   <link href="https://unpkg.com/aos@2.3.1/dist/aos.css" rel="stylesheet">
   
   <!-- Keep existing stylesheet link here (do not change) -->
-  <link rel="stylesheet" href="styles.css?v=1.1">
+  <link rel="stylesheet" href="styles.css?v=1.2">
 </head>
 
 <body class="apple-glass-site">
@@ -1179,7 +1179,7 @@ Kilimani · Westlands · Kileleshwa · Lavington · Riverside</p>
 
   <!-- Scripts -->
   <script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
-  <script src="dist/script.js?v=1.1" defer></script>
+  <script src="dist/script.js?v=1.2" defer></script>
   
   <!-- Property Modal Script -->
   <script>
@@ -1384,6 +1384,33 @@ Kilimani · Westlands · Kileleshwa · Lavington · Riverside</p>
       console.log('Testing modal with Amethyst Springs...');
       openModal('Amethyst Springs');
     };
+    
+    // Add click event listeners to all modal buttons as backup
+    document.addEventListener('DOMContentLoaded', function() {
+      console.log('DOM loaded, adding backup click listeners...');
+      
+      const modalButtons = document.querySelectorAll('a[onclick*="openModal"]');
+      console.log('Found modal buttons:', modalButtons.length);
+      
+      modalButtons.forEach((button, index) => {
+        const propertyName = button.getAttribute('onclick').match(/openModal\('([^']+)'\)/);
+        if (propertyName) {
+          console.log(`Button ${index}: ${propertyName[1]}`);
+          
+          // Add backup click listener
+          button.addEventListener('click', function(e) {
+            console.log('Backup click handler triggered for:', propertyName[1]);
+            e.preventDefault();
+            e.stopPropagation();
+            if (window.openModal) {
+              window.openModal(propertyName[1]);
+            } else {
+              console.error('openModal function not found!');
+            }
+          });
+        }
+      });
+    });
   </script>
   
   <!-- AOS Initialization -->
