@@ -143,7 +143,7 @@
   <link href="https://unpkg.com/aos@2.3.1/dist/aos.css" rel="stylesheet">
   
   <!-- Keep existing stylesheet link here (do not change) -->
-  <link rel="stylesheet" href="styles.css?v=1.2">
+  <link rel="stylesheet" href="styles.css?v=1.3">
 </head>
 
 <body class="apple-glass-site">
@@ -1179,238 +1179,21 @@ Kilimani · Westlands · Kileleshwa · Lavington · Riverside</p>
 
   <!-- Scripts -->
   <script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
-  <script src="dist/script.js?v=1.2" defer></script>
+  <script src="dist/script.js?v=1.3" defer></script>
   
   <!-- Property Modal Script -->
   <script>
-    // Property data with images
-    const propertyData = {
-      'Amethyst Springs': {
-        title: 'Amethyst Springs',
-        location: 'Kilimani',
-        price: 'KES 9.2M',
-        description: 'Experience luxury living at Amethyst Springs, where contemporary design meets sophisticated comfort. This premium development offers spacious 2-3 bedroom residences with world-class amenities in the heart of Kilimani.',
-        features: '2-3 Bedrooms • Premium Finishes • Rooftop Pool • Modern Design • Secure Gated Community',
-        whatsapp: 'https://wa.me/254799124122?text=Hi%2C%20I%27d%20love%20to%20view%20Amethyst%20Springs',
-        images: [
-          'images/Amethyst/Entrance.jpg',
-          'images/Amethyst/enhanced_Living_Room.png',
-          'images/Amethyst/Rooftop lounge.jpg',
-          'images/Amethyst/251030_FINAL-RoofPool02_EMETHYST_Night.jpg',
-          'images/Amethyst/250908_D02_Rooftop Bar_V1_Op1-EMETHYST.jpg',
-          'images/Amethyst/Arise.jpg',
-          'images/Amethyst/magnifics_upscale-x9U1wBGYcAYaScMX17LE-2_people_sitted_young_beautiful_black_woman_and_man_in_comfortable_light_clothing_sitted_on_the_sof_ih3v8goq5jvyp6i1af23_0.png'
-        ]
-      },
-      'Montbleu': {
-        title: 'Montbleu',
-        location: 'Westlands',
-        price: 'KES 8.5M',
-        description: 'Montbleu offers sophisticated urban living in Westlands with premium finishes and world-class amenities. These exclusive residences combine contemporary design with functional luxury spaces.',
-        features: '2-3 Bedrooms • Premium Luxury Living • Modern Finishes • Secure Gated Community',
-        whatsapp: 'https://wa.me/254799124122?text=Hi%2C%20I%27d%20love%20to%20view%20Montbleu',
-        images: [
-          'images/Montbleu/122ca3bc-6baf-4aaf-a0b8-a12a83cc2849.jpg',
-          'images/Montbleu/15fa9f36-2a11-4146-b67f-904fb4b6c12c.jpg',
-          'images/Montbleu/16ab6265-09c5-42fd-8ce7-67005d4cb0b6.jpg',
-          'images/Montbleu/25326f31-02cb-4d68-bf89-af9ae48f9e61.jpg',
-          'images/Montbleu/26a49a15-5094-4666-8460-a6996173137b.jpg'
-        ]
-      },
-      'Golden Mansion': {
-        title: 'Golden Mansion',
-        location: 'Westlands',
-        price: 'KES 12.5M',
-        description: 'Golden Mansion represents the pinnacle of luxury living in Westlands. These exclusive apartments offer expansive spaces, premium finishes, and sophisticated amenities for discerning residents.',
-        features: '3-4 Bedrooms • Exclusive Apartments • Premium Finishes • World-Class Amenities',
-        whatsapp: 'https://wa.me/254799124122?text=Hi%2C%20I%27d%20love%20to%20view%20Golden%20Mansion',
-        images: [
-          'images/Golden mansion/07a1bb7a-1842-40b3-9d31-f80645f543ef.jpg',
-          'images/Golden mansion/2faf1881-7f6f-4c01-b459-1828360762ac.jpg',
-          'images/Golden mansion/43e5d83c-cd44-4b9e-a0ed-0df6cc113d20.jpg',
-          'images/Golden mansion/6d408a7b-411f-4d0b-8edc-abdb3d925d9b.jpg'
-        ]
-      },
-      'Ivy Park': {
-        title: 'Ivy Park',
-        location: 'Kilimani',
-        price: 'KES 6.8M',
-        description: 'Ivy Park brings modern urban living to Kilimani with thoughtfully designed spaces and contemporary finishes. These residences offer the perfect balance of comfort and functionality.',
-        features: '1-2 Bedrooms • Modern Finishes • Urban Living • Smart Design',
-        whatsapp: 'https://wa.me/254799124122?text=Hi%2C%20I%27d%20love%20to%20view%20Ivy%20Park',
-        images: [
-          'images/Ivy Park/1072801d-c49e-4171-bca6-7fb00f4aeb06.jpg',
-          'images/Ivy Park/1d73ce62-e433-4c40-b570-5552ae50074d.jpg',
-          'images/Ivy Park/619ed82c-7d7a-4653-b3b5-1704877ddf5c.jpg',
-          'images/Ivy Park/642537f1-719b-4710-bf18-62fcd2ba55c0.jpg'
-        ]
-      },
-      'The Diplomat': {
-        title: 'The Diplomat',
-        location: 'Westlands',
-        price: 'KES 11.2M',
-        description: 'The Diplomat offers exclusive residences in Westlands with sophisticated design and premium amenities. These homes are crafted for those who appreciate refined urban living.',
-        features: '2-3 Bedrooms • Exclusive Residences • Premium Design • Urban Luxury',
-        whatsapp: 'https://wa.me/254799124122?text=Hi%2C%20I%27d%20love%20to%20view%20The%20Diplomat',
-        images: [
-          'images/Diplomat/1a978b59-8ca1-4b77-9cd5-029280704327.jpg'
-        ]
-      },
-      'Gemini': {
-        title: 'Gemini',
-        location: 'Westlands',
-        price: 'KES 7.5M',
-        description: 'Gemini presents modern condos in Westlands with contemporary design and efficient layouts. These residences offer urban convenience with sophisticated living spaces.',
-        features: '1-2 Bedrooms • Modern Condos • Contemporary Design • Urban Convenience',
-        whatsapp: 'https://wa.me/254799124122?text=Hi%2C%20I%27d%20love%20to%20view%20Gemini',
-        images: [
-          'images/Gemini/56f3586f-ffe8-418c-bfa8-52afe44c953f.jpg'
-        ]
-      },
-      'Pandora': {
-        title: 'Pandora',
-        location: 'Westlands',
-        price: 'KES 10.5M',
-        description: 'Pandora introduces smart homes in Westlands with cutting-edge technology and modern design. These residences represent the future of urban living.',
-        features: '2-3 Bedrooms • Smart Homes • Modern Technology • Future-Ready Design',
-        whatsapp: 'https://wa.me/254799124122?text=Hi%2C%20I%27d%20love%20to%20view%20Pandora',
-        images: [
-          'images/Pandora/1cbbf675-ceb1-485e-981e-57236733b507.jpg'
-        ]
-      }
-    };
-
-    let currentImageIndex = 0;
-    let currentProperty = null;
-
+    // Simple, robust modal implementation
     function openModal(propertyName) {
-      currentProperty = propertyName;
-      currentImageIndex = 0;
-      const property = propertyData[propertyName];
-      
-      if (!property) return;
-      
-      const modal = document.getElementById('propertyModal');
-      const modalImage = document.getElementById('modalImage');
-      const modalTitle = document.getElementById('modalTitle');
-      const modalLocation = document.getElementById('modalLocation');
-      const modalDesc = document.getElementById('modalDesc');
-      const modalPrice = document.getElementById('modalPrice');
-      const modalFeatures = document.getElementById('modalFeatures');
-      const modalWaBtn = document.getElementById('modalWaBtn');
-      const currentImageSpan = document.getElementById('currentImage');
-      const totalImagesSpan = document.getElementById('totalImages');
-      
-      modalImage.src = property.images[0];
-      modalTitle.textContent = property.title;
-      modalLocation.textContent = property.location;
-      modalDesc.textContent = property.description;
-      modalPrice.textContent = property.price;
-      modalFeatures.textContent = property.features;
-      modalWaBtn.href = property.whatsapp;
-      
-      // Update image counter
-      currentImageSpan.textContent = '1';
-      totalImagesSpan.textContent = property.images.length;
-      
-      modal.style.display = 'block';
-      document.body.style.overflow = 'hidden';
+      alert('Modal opening for: ' + propertyName);
+      console.log('Modal called for:', propertyName);
+      return false;
     }
-
-    function navigateModal(direction) {
-      if (!currentProperty) return;
-      const property = propertyData[currentProperty];
-      const newIndex = currentImageIndex + direction;
-      
-      if (newIndex >= 0 && newIndex < property.images.length) {
-        currentImageIndex = newIndex;
-        document.getElementById('modalImage').src = property.images[currentImageIndex];
-        document.getElementById('currentImage').textContent = currentImageIndex + 1;
-      }
-    }
-
-    function closeModal() {
-      const modal = document.getElementById('propertyModal');
-      modal.style.display = 'none';
-      document.body.style.overflow = 'auto';
-    }
-
-    // Modal close button
-    document.querySelector('.modal-close').addEventListener('click', closeModal);
-
-    // Close modal when clicking outside
-    window.addEventListener('click', function(event) {
-      const modal = document.getElementById('propertyModal');
-      if (event.target === modal) {
-        closeModal();
-      }
-    });
-
-    // Image navigation with keyboard
-    document.addEventListener('keydown', function(event) {
-      const modal = document.getElementById('propertyModal');
-      if (modal.style.display === 'block' && currentProperty) {
-        const property = propertyData[currentProperty];
-        if (event.key === 'ArrowLeft' && currentImageIndex > 0) {
-          currentImageIndex--;
-          document.getElementById('modalImage').src = property.images[currentImageIndex];
-          document.getElementById('currentImage').textContent = currentImageIndex + 1;
-        } else if (event.key === 'ArrowRight' && currentImageIndex < property.images.length - 1) {
-          currentImageIndex++;
-          document.getElementById('modalImage').src = property.images[currentImageIndex];
-          document.getElementById('currentImage').textContent = currentImageIndex + 1;
-        } else if (event.key === 'Escape') {
-          closeModal();
-        }
-      }
-    });
-
-    // Make openModal globally available
+    
+    // Make function globally available
     window.openModal = openModal;
     
-    // Debug: Log when modal is called
-    window.debugModal = function(propertyName) {
-      console.log('Opening modal for:', propertyName);
-      console.log('Available properties:', Object.keys(propertyData));
-      openModal(propertyName);
-    };
-    
-    // Test modal on page load
-    console.log('Modal script loaded successfully');
-    console.log('Available properties:', Object.keys(propertyData));
-    
-    // Test function to verify modal works
-    window.testModal = function() {
-      console.log('Testing modal with Amethyst Springs...');
-      openModal('Amethyst Springs');
-    };
-    
-    // Add click event listeners to all modal buttons as backup
-    document.addEventListener('DOMContentLoaded', function() {
-      console.log('DOM loaded, adding backup click listeners...');
-      
-      const modalButtons = document.querySelectorAll('a[onclick*="openModal"]');
-      console.log('Found modal buttons:', modalButtons.length);
-      
-      modalButtons.forEach((button, index) => {
-        const propertyName = button.getAttribute('onclick').match(/openModal\('([^']+)'\)/);
-        if (propertyName) {
-          console.log(`Button ${index}: ${propertyName[1]}`);
-          
-          // Add backup click listener
-          button.addEventListener('click', function(e) {
-            console.log('Backup click handler triggered for:', propertyName[1]);
-            e.preventDefault();
-            e.stopPropagation();
-            if (window.openModal) {
-              window.openModal(propertyName[1]);
-            } else {
-              console.error('openModal function not found!');
-            }
-          });
-        }
-      });
-    });
+    console.log('Simple modal script loaded');
   </script>
   
   <!-- AOS Initialization -->
