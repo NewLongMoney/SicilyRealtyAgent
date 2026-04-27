@@ -1374,6 +1374,16 @@ Kilimani · Westlands · Kileleshwa · Lavington · Riverside</p>
       console.log('Available properties:', Object.keys(propertyData));
       openModal(propertyName);
     };
+    
+    // Test modal on page load
+    console.log('Modal script loaded successfully');
+    console.log('Available properties:', Object.keys(propertyData));
+    
+    // Test function to verify modal works
+    window.testModal = function() {
+      console.log('Testing modal with Amethyst Springs...');
+      openModal('Amethyst Springs');
+    };
   </script>
   
   <!-- AOS Initialization -->
