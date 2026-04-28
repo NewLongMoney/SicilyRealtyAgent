@@ -1,252 +1,154 @@
 'use client'
 
-import { useState, useEffect, useRef } from 'react'
+import Image from 'next/image'
+import Link from 'next/link'
+import { useState } from 'react'
+import { useRouter } from 'next/navigation'
 import { ChevronRight, Search, MapPin, Home, TrendingUp, Star } from 'lucide-react'
-import { cn } from '@/lib/utils'
-
-const VIDEOS = [
-  '/videos/Vid1.mp4',
-  '/videos/Vid2.mp4',
-  '/videos/Vid3.mp4',
-  '/videos/Vid4.mp4',
-]
 
 const SEARCH_OPTIONS = {
   location: ['All Areas','Kilimani','Westlands','Kileleshwa','Lavington','Riverside'],
-  type:     ['Any Type','Apartment','Penthouse','Villa','Smart Home'],
-  budget:   ['Any Budget','KES 6M – 10M','KES 10M – 15M','KES 15M+'],
-  intent:   ['Buy or Invest','Buy','Invest'],
+  category: ['Any Collection','Signature','Select','Intelligent'],
 }
 
 interface SearchState {
   location: string
-  type: string
-  budget: string
-  intent: string
+  category: string
 }
 
 export function HeroSection() {
-  const [activeVid, setActiveVid] = useState(0)
+  const router = useRouter()
   const [search, setSearch] = useState<SearchState>({
-    location: '', type: '', budget: '', intent: ''
+    location: '', category: ''
   })
-  const [mousePosition, setMousePosition] = useState({ x: 0, y: 0 })
-  const videoRefs = useRef<(HTMLVideoElement | null)[]>([])
-  const heroRef = useRef<HTMLDivElement>(null)
-
-  useEffect(() => {
-    const interval = setInterval(() => {
-      setActiveVid(prev => {
-        const next = (prev + 1) % VIDEOS.length
-        videoRefs.current[next]?.play().catch(() => {})
-        return next
-      })
-    }, 8000)
-    videoRefs.current[0]?.play().catch(() => {})
-    return () => clearInterval(interval)
-  }, [])
-
-  useEffect(() => {
-    const handleMouseMove = (e: MouseEvent) => {
-      if (!heroRef.current) return
-      const rect = heroRef.current.getBoundingClientRect()
-      setMousePosition({
-        x: ((e.clientX - rect.left) / rect.width - 0.5) * 20,
-        y: ((e.clientY - rect.top) / rect.height - 0.5) * 20
-      })
-    }
-    window.addEventListener('mousemove', handleMouseMove)
-    return () => window.removeEventListener('mousemove', handleMouseMove)
-  }, [])
 
   function handleSearch() {
     const params = new URLSearchParams()
     if (search.location && search.location !== 'All Areas')
       params.set('area', search.location.toLowerCase())
-    if (search.type && search.type !== 'Any Type')
-      params.set('type', search.type.toLowerCase())
-    window.location.href = `/properties?${params.toString()}` 
+    if (search.category && search.category !== 'Any Collection')
+      params.set('category', search.category.toLowerCase())
+    router.push(params.toString() ? `/properties?${params.toString()}#properties` : '/properties#properties')
   }
 
   return (
-    <section ref={heroRef} className="relative w-full h-screen min-h-[700px] flex items-end justify-center overflow-hidden">
-      {/* Videos with parallax effect */}
-      {VIDEOS.map((src, i) => (
-        <video
-          key={src}
-          ref={el => { videoRefs.current[i] = el }}
-          src={src}
-          muted
-          loop
-          playsInline
-          className={cn(
-            'absolute inset-0 w-full h-full object-cover transition-all duration-[2000ms] ease-out',
-            i === activeVid 
-              ? 'opacity-100 scale-105' 
-              : 'opacity-0 scale-100'
-          )}
-          style={{
-            transform: i === activeVid 
-              ? `translate(${mousePosition.x * 0.5}px, ${mousePosition.y * 0.5}px) scale(1.05)`
-              : `translate(${mousePosition.x * 0.3}px, ${mousePosition.y * 0.3}px) scale(1)`
-          }}
-        />
-      ))}
-
-      {/* Enhanced overlay with depth */}
-      <div className="absolute inset-0 bg-gradient-to-b from-navy-deep/20 via-navy-deep/60 to-navy-deep/95 z-[1]" />
-      <div className="absolute inset-0 bg-[radial-gradient(ellipse_at_50%_30%,rgba(18,62,99,0.2)_0%,transparent_70%)] z-[1]" />
-      <div className="absolute inset-0 bg-gradient-to-t from-black/30 to-transparent z-[1]" />
-
-      {/* Floating particles */}
-      <div className="absolute inset-0 z-[1] overflow-hidden">
-        {[...Array(20)].map((_, i) => (
-          <div
-            key={i}
-            className="absolute w-1 h-1 bg-gold/30 rounded-full animate-float-up"
-            style={{
-              left: `${Math.random() * 100}%`,
-              bottom: '-10px',
-              animationDelay: `${Math.random() * 8}s`,
-              animationDuration: `${8 + Math.random() * 4}s`
-            }}
-          />
-        ))}
-      </div>
+    <section className="relative min-h-[720px] md:min-h-[840px] flex items-end justify-center overflow-hidden">
+      <Image
+        src="/images/hero.png"
+        alt="Luxury apartment interior curated by Sicily Realty in Nairobi"
+        fill
+        priority
+        className="object-cover object-center"
+        sizes="100vw"
+      />
+      <div className="absolute inset-0 bg-gradient-to-b from-navy-deep/30 via-navy-deep/65 to-navy-deep/95 z-[1]" />
+      <div className="absolute inset-0 bg-[radial-gradient(circle_at_top,rgba(246,198,103,0.14),transparent_34%),radial-gradient(circle_at_70%_20%,rgba(18,62,99,0.28),transparent_35%)] z-[1]" />
 
       {/* Content */}
-      <div className="relative z-[2] w-full max-w-[960px] mx-auto px-6 md:px-12 pb-24 md:pb-20 text-center md:text-center">
+      <div className="relative z-[2] w-full max-w-[1180px] mx-auto px-6 md:px-8 pb-20 md:pb-24 pt-32 md:pt-44">
+        <div className="grid items-end gap-12 lg:grid-cols-[minmax(0,1fr)_320px]">
+          <div className="max-w-[760px]">
 
-        {/* Eyebrow with enhanced animation */}
-        <span className="block text-[0.65rem] tracking-[0.28em] uppercase text-gold font-semibold mb-5 animate-fade-up opacity-0 [animation-delay:0.2s] [animation-fill-mode:forwards]">
-          <span className="inline-flex items-center gap-2">
-            <span className="w-2 h-2 bg-gold rounded-full animate-pulse" />
-            Nairobi · Kenya · Est. 2022
-            <span className="w-2 h-2 bg-gold rounded-full animate-pulse" />
-          </span>
-        </span>
+            <span className="inline-flex items-center gap-2 rounded-full border border-gold/25 bg-navy-deep/45 px-4 py-2 text-[0.65rem] tracking-[0.24em] uppercase text-gold font-semibold mb-6 animate-fade-up opacity-0 [animation-delay:0.15s] [animation-fill-mode:forwards]">
+              <span className="w-2 h-2 bg-gold rounded-full" />
+              Nairobi Luxury Property Advisory
+            </span>
 
-        {/* Enhanced H1 with gradient text */}
-        <h1 className="font-display text-[clamp(2.4rem,6vw,5rem)] leading-[1.06] tracking-tight text-white mb-6 animate-fade-up opacity-0 [animation-delay:0.4s] [animation-fill-mode:forwards] text-left md:text-center">
-          <span className="block">
-            Luxury Apartments &amp;{' '}
-            <span className="gold-text">Homes</span>
-          </span>
-          <span className="block text-[clamp(2rem,5vw,4rem)] mt-2">
-            <span className="gold-text">For Sale in Nairobi,</span>{' '}
-            Kenya
-          </span>
-        </h1>
+            <h1 className="font-display text-[clamp(2.7rem,6vw,5.5rem)] leading-[1.02] tracking-tight text-white mb-6 animate-fade-up opacity-0 [animation-delay:0.3s] [animation-fill-mode:forwards]">
+              Luxury Apartments, Smart Homes, and Investment Residences in Nairobi
+            </h1>
 
-        {/* Sub with enhanced styling */}
-        <p className="hidden md:block text-sicily-body text-[1.05rem] leading-[1.7] max-w-[580px] mx-auto mb-12 animate-fade-up opacity-0 [animation-delay:0.6s] [animation-fill-mode:forwards]">
-          <span className="relative">
-            Private access to Nairobi&apos;s finest off-plan and ready developments —
-            handpicked, verified, and presented without compromise.
-            <span className="absolute bottom-0 left-0 w-full h-px bg-gold-gradient scale-x-0 group-hover:scale-x-100 transition-transform duration-500" />
-          </span>
-        </p>
+            <p className="text-sicily-body text-[1rem] md:text-[1.06rem] leading-[1.8] max-w-[640px] mb-8 animate-fade-up opacity-0 [animation-delay:0.45s] [animation-fill-mode:forwards]">
+              Sicily Realty curates verified opportunities in Kilimani, Westlands, Kileleshwa, Lavington, and Riverside for buyers who want clarity, quality, and a shortlist worth acting on.
+            </p>
 
-        {/* Mobile CTA with enhanced styling */}
-        <a
-          href="#properties"
-          className="md:hidden inline-flex items-center gap-2.5 bg-gold-gradient text-navy-deep font-bold text-sm tracking-wider uppercase px-7 py-4 rounded-full mb-10 shadow-xl transition-all duration-300 hover:scale-105 hover:shadow-gold/30 animate-fade-up opacity-0 [animation-delay:0.8s] [animation-fill-mode:forwards]"
-        >
-          Browse Properties
-          <ChevronRight size={16} className="animate-bounce" />
-        </a>
-
-        {/* Enhanced search bar */}
-        <div className="hidden md:flex items-center frosted border border-gold/30 rounded-2xl p-3 gap-0 max-w-[840px] mx-auto mb-14 animate-fade-up opacity-0 shadow-[0_20px_60px_rgba(3,8,16,0.6)] [animation-delay:0.8s] [animation-fill-mode:forwards] backdrop-blur-xl">
-          {(Object.entries(SEARCH_OPTIONS) as [keyof typeof SEARCH_OPTIONS, string[]][]).map(
-            ([key, options], i, arr) => (
-              <div key={key} className="flex-1 min-w-0 flex items-center group">
-                <div className="flex flex-col px-5 py-3 flex-1 min-w-0 transition-all duration-300 group-hover:bg-gold/5 rounded-lg">
-                  <label className="text-[0.58rem] tracking-[0.2em] uppercase text-gold font-bold mb-1 flex items-center gap-2">
-                    {key === 'location' && <MapPin size={10} />}
-                    {key === 'type' && <Home size={10} />}
-                    {key === 'budget' && <TrendingUp size={10} />}
-                    {key === 'intent' && <Search size={10} />}
-                    {key.charAt(0).toUpperCase() + key.slice(1)}
-                  </label>
-                  <select
-                    value={search[key]}
-                    onChange={e => setSearch(prev => ({ ...prev, [key]: e.target.value }))}
-                    className="bg-transparent border-none outline-none text-white text-[0.88rem] cursor-pointer appearance-none w-full transition-all duration-200 hover:text-gold-bright"
-                  >
-                    {options.map(opt => (
-                      <option key={opt} value={opt === options[0] ? '' : opt} className="bg-navy-mid text-white">
-                        {opt}
-                      </option>
-                    ))}
-                  </select>
-                </div>
-                {i < arr.length - 1 && (
-                  <div className="w-px h-10 bg-gold/20 flex-shrink-0 mx-2" />
-                )}
-              </div>
-            )
-          )}
-          <button
-            onClick={handleSearch}
-            className="flex-shrink-0 flex items-center gap-2 bg-gold-gradient text-navy-deep font-bold text-[0.85rem] tracking-wide px-8 py-4 rounded-xl ml-3 transition-all duration-300 hover:scale-105 hover:shadow-[0_8px_32px_rgba(229,169,60,0.4)] active:scale-95"
-          >
-            <Search size={16} />
-            Search Properties
-          </button>
-        </div>
-
-        {/* Enhanced stats with icons */}
-        <div className="flex justify-center gap-8 md:gap-12 animate-fade-up opacity-0 [animation-delay:1s] [animation-fill-mode:forwards]">
-          {[
-            { num: '100+', label: 'Homes Placed', icon: Home },
-            { num: 'KES 7M', label: 'Transacted Value', icon: TrendingUp },
-            { num: '150+', label: 'Happy Clients', icon: Star },
-          ].map(stat => (
-            <div key={stat.label} className="text-center group transition-all duration-300 hover:scale-105">
-              <div className="flex justify-center mb-2">
-                {typeof stat.icon === 'string' ? (
-                  <span className="text-2xl">{stat.icon}</span>
-                ) : (
-                  <stat.icon size={20} className="text-gold" />
-                )}
-              </div>
-              <span className="block font-display text-[2rem] md:text-[2.4rem] gold-text-v font-bold leading-none mb-1 group-hover:scale-110 transition-transform duration-300">
-                {stat.num}
-              </span>
-              <span className="block text-[0.6rem] md:text-[0.65rem] tracking-[0.16em] uppercase text-sicily-muted">
-                {stat.label}
-              </span>
+            <div className="flex flex-wrap gap-4 mb-10 animate-fade-up opacity-0 [animation-delay:0.6s] [animation-fill-mode:forwards]">
+              <Link
+                href="/properties#properties"
+                className="inline-flex items-center gap-2.5 bg-gold-gradient text-navy-deep font-bold text-sm tracking-wider uppercase px-7 py-4 rounded-full shadow-xl transition-all duration-300 hover:scale-[1.02] hover:shadow-gold/30"
+              >
+                Browse Properties
+                <ChevronRight size={16} />
+              </Link>
+              <Link
+                href="/#contact"
+                className="inline-flex items-center gap-2.5 border border-gold/30 text-gold font-semibold text-sm tracking-wider uppercase px-7 py-4 rounded-full bg-navy-deep/35 hover:bg-gold/10 transition-colors"
+              >
+                Book a Private Consultation
+              </Link>
             </div>
-          ))}
+
+            <div className="frosted border border-gold/20 rounded-2xl p-4 md:p-5 max-w-[880px] animate-fade-up opacity-0 shadow-[0_20px_60px_rgba(3,8,16,0.45)] [animation-delay:0.75s] [animation-fill-mode:forwards]">
+              <div className="grid gap-3 md:grid-cols-[1.3fr_1fr_auto] md:items-end">
+                {(Object.entries(SEARCH_OPTIONS) as [keyof typeof SEARCH_OPTIONS, string[]][]).map(
+                  ([key, options]) => (
+                    <div key={key} className="min-w-0">
+                      <label className="text-[0.58rem] tracking-[0.2em] uppercase text-gold font-bold mb-2 flex items-center gap-2">
+                        {key === 'location' && <MapPin size={10} />}
+                        {key === 'category' && <Home size={10} />}
+                        {key.charAt(0).toUpperCase() + key.slice(1)}
+                      </label>
+                      <select
+                        value={search[key]}
+                        onChange={e => setSearch(prev => ({ ...prev, [key]: e.target.value }))}
+                        className="w-full rounded-xl border border-gold/15 bg-navy-light/50 px-4 py-3 text-white text-[0.92rem] outline-none transition-colors hover:border-gold/35 focus:border-gold/45"
+                      >
+                        {options.map(opt => (
+                          <option key={opt} value={opt === options[0] ? '' : opt} className="bg-navy-mid text-white">
+                            {opt}
+                          </option>
+                        ))}
+                      </select>
+                    </div>
+                  )
+                )}
+                <button
+                  onClick={handleSearch}
+                  className="flex-shrink-0 inline-flex items-center justify-center gap-2 bg-gold-gradient text-navy-deep font-bold text-[0.85rem] tracking-wide px-8 py-4 rounded-xl transition-all duration-300 hover:scale-[1.02] hover:shadow-[0_8px_32px_rgba(229,169,60,0.25)] active:scale-[0.99]"
+                >
+                  <Search size={16} />
+                  Search Properties
+                </button>
+              </div>
+            </div>
+
+            <div className="flex flex-wrap gap-8 pt-10 animate-fade-up opacity-0 [animation-delay:0.9s] [animation-fill-mode:forwards]">
+              {[
+                { num: '150+', label: 'Successful Closings', icon: Home },
+                { num: 'KES 2.5B', label: 'Transaction Value Guided', icon: TrendingUp },
+                { num: '5.0', label: 'Client Rating', icon: Star },
+              ].map(stat => (
+                <div key={stat.label} className="min-w-[120px]">
+                  <div className="flex items-center gap-2 mb-2">
+                    <stat.icon size={16} className="text-gold" />
+                    <span className="text-[0.62rem] tracking-[0.16em] uppercase text-gold/75">
+                      {stat.label}
+                    </span>
+                  </div>
+                  <span className="block font-display text-[2rem] md:text-[2.5rem] gold-text-v font-bold leading-none">
+                    {stat.num}
+                  </span>
+                </div>
+              ))}
+            </div>
+          </div>
+
+          <aside className="hidden lg:block animate-fade-up opacity-0 [animation-delay:1.05s] [animation-fill-mode:forwards]">
+            <div className="card-dark rounded-3xl border border-gold/15 p-7 shadow-[0_18px_50px_rgba(3,8,16,0.45)]">
+              <p className="text-[0.65rem] tracking-[0.18em] uppercase text-gold font-semibold mb-3">
+                Why buyers choose Sicily
+              </p>
+              <h2 className="font-display text-[2rem] text-white leading-[1.15] mb-4">
+                Curated advice, not portal noise.
+              </h2>
+              <ul className="space-y-4 text-[0.92rem] text-sicily-body/85 leading-[1.7]">
+                <li>Verified listings only, across Nairobi&apos;s prime residential corridors.</li>
+                <li>Guidance for both homebuyers and investors who need sharper due diligence.</li>
+                <li>One advisor from shortlist to viewing to negotiation.</li>
+              </ul>
+            </div>
+          </aside>
         </div>
-      </div>
-
-      {/* Enhanced video dots */}
-      <div className="absolute bottom-9 left-1/2 -translate-x-1/2 z-[3] flex gap-3">
-        {VIDEOS.map((_, i) => (
-          <button
-            key={i}
-            onClick={() => {
-              setActiveVid(i)
-              videoRefs.current[i]?.play().catch(() => {})
-            }}
-            className={cn(
-              'h-2 rounded-full transition-all duration-500 hover:scale-125',
-              i === activeVid 
-                ? 'w-8 bg-gold shadow-gold/50 shadow-lg' 
-                : 'w-2 bg-gold/30 hover:bg-gold/50'
-            )}
-          />
-        ))}
-      </div>
-
-      {/* Enhanced scroll cue */}
-      <div className="absolute bottom-10 right-12 z-[3] hidden md:flex flex-col items-center gap-3 group cursor-pointer">
-        <div className="w-px h-16 bg-gradient-to-b from-gold to-transparent animate-scroll-pulse group-hover:from-gold-bright transition-all duration-300" />
-        <span className="text-[0.58rem] tracking-[0.22em] uppercase text-gold/70 [writing-mode:vertical-rl] group-hover:text-gold transition-colors duration-300">
-          Scroll
-        </span>
       </div>
     </section>
   )

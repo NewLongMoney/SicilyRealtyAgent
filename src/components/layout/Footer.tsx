@@ -54,7 +54,7 @@ export function Footer() {
           {/* Quick links */}
           <div>
             <h4 className="text-[0.68rem] tracking-[0.18em] uppercase text-gold/80 font-semibold mb-5">Quick Links</h4>
-            {['/', '/properties', '#about', '#insights', '#faq', '#contact'].map((href, i) => {
+            {['/', '/properties', '/#about', '/#insights', '/#faq', '/#contact'].map((href, i) => {
               const labels = ['Home','Properties','About Us','Insights','FAQ','Contact']
               return (
                 <Link key={href} href={href}

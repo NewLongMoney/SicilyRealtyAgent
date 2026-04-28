@@ -3,9 +3,9 @@ import Link from 'next/link'
 import { WHATSAPP_BASE, PHONE } from '@/lib/data'
 
 const STATS = [
-  { num: '100+', label: 'Homes Placed' },
-  { num: 'KES 7M', label: 'Transacted Value' },
-  { num: '150+', label: 'Happy Clients' },
+  { num: '150+', label: 'Closings Guided' },
+  { num: 'KES 2.5B', label: 'Value Advised' },
+  { num: '5.0', label: 'Client Rating' },
 ]
 
 export function AboutSection() {
@@ -27,7 +27,7 @@ export function AboutSection() {
               <p>Every engagement starts with a conversation, not a brochure. We map your financial position, timeline, and non-negotiables — then we source precisely. The result is a shortlist that fits, not a flood of options that don&apos;t.</p>
               <p>Our measure of success is simple: you close with confidence, on terms you understand, without surprises.</p>
             </div>
-            <Link href="#contact" className="inline-flex mt-8 text-[0.78rem] tracking-[0.1em] uppercase text-gold border border-gold/30 px-6 py-3 rounded-full hover:bg-gold-gradient hover:text-navy-deep hover:border-transparent transition-all duration-250 font-semibold">
+            <Link href="/#contact" className="inline-flex mt-8 text-[0.78rem] tracking-[0.1em] uppercase text-gold border border-gold/30 px-6 py-3 rounded-full hover:bg-gold-gradient hover:text-navy-deep hover:border-transparent transition-all duration-250 font-semibold">
               Start the Conversation
             </Link>
           </div>

@@ -5,17 +5,17 @@ import Link from 'next/link'
 import Image from 'next/image'
 import { Sheet, SheetContent, SheetTrigger } from '@/components/ui/sheet'
 import { Button } from '@/components/ui/button'
-import { Menu, X, Phone, MapPin, Home, Mail, Users, TrendingUp, HelpCircle } from 'lucide-react'
+import { Menu, Phone, MapPin, Home, Mail, Users, TrendingUp, HelpCircle } from 'lucide-react'
 import { PHONE, AREAS } from '@/lib/data'
 import { cn } from '@/lib/utils'
 
 const NAV_LINKS = [
   { href: '/', label: 'Home', icon: Home },
   { href: '/properties', label: 'Properties', icon: MapPin },
-  { href: '#about', label: 'About Us', icon: Users },
-  { href: '#insights', label: 'Insights', icon: TrendingUp },
-  { href: '#faq', label: 'FAQ', icon: HelpCircle },
-  { href: '#contact', label: 'Contact Us', icon: Mail },
+  { href: '/#about', label: 'About Us', icon: Users },
+  { href: '/#insights', label: 'Insights', icon: TrendingUp },
+  { href: '/#faq', label: 'FAQ', icon: HelpCircle },
+  { href: '/#contact', label: 'Contact Us', icon: Mail },
 ]
 
 export function Navbar() {
@@ -99,7 +99,7 @@ export function Navbar() {
               asChild
               className="bg-gold-gradient text-navy-deep font-bold text-[0.8rem] tracking-wider uppercase rounded-full px-6 shadow-lg hover:shadow-gold/40 transition-all duration-300 hover:scale-105 hover:-translate-y-px border-0"
             >
-              <Link href="#contact" className="flex items-center gap-2">
+              <Link href="/#contact" className="flex items-center gap-2">
                 Book a Viewing
                 <Phone size={14} />
               </Link>
@@ -160,7 +160,7 @@ export function Navbar() {
                     asChild
                     className="w-full bg-gold-gradient text-navy-deep font-bold text-[0.9rem] tracking-wider uppercase rounded-full py-3 shadow-lg hover:shadow-gold/40 transition-all duration-300 hover:scale-105 border-0"
                   >
-                    <Link href="#contact" onClick={() => setOpen(false)} className="flex items-center justify-center gap-2">
+                    <Link href="/#contact" onClick={() => setOpen(false)} className="flex items-center justify-center gap-2">
                       <Phone size={16} />
                       Book a Viewing
                     </Link>

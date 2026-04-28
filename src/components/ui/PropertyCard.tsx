@@ -1,10 +1,8 @@
 import Image from 'next/image'
 import Link from 'next/link'
-import { Badge } from '@/components/ui/badge'
 import { cn } from '@/lib/utils'
 import type { Property } from '@/lib/data'
-import { WHATSAPP_BASE } from '@/lib/data'
-import { Home, MapPin, Star, ArrowRight } from 'lucide-react'
+import { MapPin, Star, ArrowRight } from 'lucide-react'
 
 const BADGE_STYLES: Record<string, string> = {
   bestseller: 'bg-gold-gradient text-navy-deep font-bold shadow-gold/30 shadow-lg',
@@ -32,8 +30,6 @@ interface PropertyCardProps {
 }
 
 export function PropertyCard({ property, className }: PropertyCardProps) {
-  const waUrl = `${WHATSAPP_BASE}?text=${encodeURIComponent(property.whatsappText)}` 
-
   return (
     <div
       className={cn(
@@ -99,9 +95,7 @@ export function PropertyCard({ property, className }: PropertyCardProps) {
         
         {/* Enhanced CTA button */}
         <Link
-          href={waUrl}
-          target="_blank"
-          rel="noopener noreferrer"
+          href={`/properties?area=${property.area}&property=${property.id}#properties`}
           className={cn(
             'inline-flex items-center gap-2 text-[0.75rem] tracking-[0.08em] uppercase',
             'text-gold border border-gold/30 px-5 py-2.5 rounded-full',

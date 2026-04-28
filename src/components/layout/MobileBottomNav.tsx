@@ -14,8 +14,8 @@ export function MobileBottomNav() {
           label: 'Chat',
           isWa: true,
         },
-        { href: '#faq',   icon: <HelpCircle size={18} />, label: 'FAQ' },
-        { href: '#contact', icon: <Phone size={18} />, label: 'Contact' },
+        { href: '/#faq',   icon: <HelpCircle size={18} />, label: 'FAQ' },
+        { href: '/#contact', icon: <Phone size={18} />, label: 'Contact' },
       ].map((item, i) => (
         <Link
           key={i}

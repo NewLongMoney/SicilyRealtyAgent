@@ -13,7 +13,7 @@ export function InsightsSection({ articles }: Props) {
         <SectionHeading
           eyebrow="Market Intelligence"
           title="Intelligence, Not Noise"
-          subtitle="The Nairobi property market moves fast. Here is what is actually happening — and what it means for your next move."
+          subtitle="The Nairobi property market moves fast. These excerpts come from Sicily Realty's 2026 market brief so buyers and investors can move with current context, not speculation."
         />
 
         <div className="grid grid-cols-1 md:grid-cols-3 gap-6 mt-14">
@@ -54,7 +54,7 @@ export function InsightsSection({ articles }: Props) {
                 )}
 
                 <span className="text-gold text-[0.78rem] font-semibold tracking-[0.06em]">
-                  Read Analysis →
+                  Featured in the 2026 market brief
                 </span>
               </div>
             </article>

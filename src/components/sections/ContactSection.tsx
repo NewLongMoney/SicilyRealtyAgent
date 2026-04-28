@@ -6,7 +6,7 @@ import { Input } from '@/components/ui/input'
 import { Textarea } from '@/components/ui/textarea'
 import { SectionHeading } from '@/components/ui/SectionHeading'
 import { EMAIL, PHONE, WHATSAPP_BASE } from '@/lib/data'
-import { CheckCircle, Mail, MapPin, Phone } from 'lucide-react'
+import { Mail, MapPin, Phone } from 'lucide-react'
 
 type FormState = {
   name: string; phone: string; email: string
@@ -17,8 +17,6 @@ export function ContactSection() {
   const [form, setForm] = useState<FormState>({
     name: '', phone: '', email: '', intent: '', message: ''
   })
-  const [submitted, setSubmitted] = useState(false)
-  const [loading, setLoading] = useState(false)
 
   function handleChange(
     e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement | HTMLSelectElement>
@@ -26,13 +24,19 @@ export function ContactSection() {
     setForm(prev => ({ ...prev, [e.target.name]: e.target.value }))
   }
 
-  async function handleSubmit(e: React.FormEvent) {
+  function handleSubmit(e: React.FormEvent) {
     e.preventDefault()
     if (!form.name || !form.phone) return
-    setLoading(true)
-    await new Promise(r => setTimeout(r, 800))
-    setLoading(false)
-    setSubmitted(true)
+
+    const lines = [
+      `Hi Sicily, my name is ${form.name}.`,
+      `Phone: ${form.phone}`,
+      form.email ? `Email: ${form.email}` : '',
+      form.intent ? `What I am looking for: ${form.intent}` : '',
+      form.message ? `Additional requirements: ${form.message}` : '',
+    ].filter(Boolean)
+
+    window.open(`${WHATSAPP_BASE}?text=${encodeURIComponent(lines.join('\n'))}`, '_blank', 'noopener,noreferrer')
   }
 
   const inputClass = "bg-navy-light/30 border-gold/20 text-white placeholder:text-sicily-muted focus:border-gold/55 focus:bg-navy-light/45 rounded-lg h-12 text-[0.92rem] transition-colors"
@@ -44,71 +48,58 @@ export function ContactSection() {
         <SectionHeading
           eyebrow="Get in Touch"
           title="Let&apos;s Talk Property"
-          subtitle="Tell us what you're looking for. We'll come back with something worth your time — not a generic callback."
+          subtitle="Share your brief and we will open a prefilled WhatsApp conversation so your enquiry reaches Sicily Realty instantly and with full context."
         />
 
         <div className="grid grid-cols-1 md:grid-cols-[1.1fr_1fr] gap-16 mt-16 items-start">
 
           {/* Form */}
           <div className="card-dark rounded-2xl p-10 shadow-[0_20px_60px_rgba(3,8,16,0.5)]">
-            {submitted ? (
-              <div className="text-center py-12">
-                <div className="w-14 h-14 rounded-full bg-gold-gradient flex items-center justify-center mx-auto mb-5">
-                  <CheckCircle className="text-navy-deep" size={24} />
-                </div>
-                <h3 className="font-display text-xl text-white mb-3">Enquiry Received</h3>
-                <p className="text-sicily-body/80 text-sm leading-relaxed">
-                  We&apos;ll be in touch within 24 hours. For urgent enquiries,{' '}
-                  <a href={WHATSAPP_BASE} className="text-gold hover:text-gold-bright transition-colors">
-                    message us on WhatsApp
-                  </a>.
-                </p>
+            <form onSubmit={handleSubmit} className="space-y-5">
+              <div>
+                <label className={labelClass}>Full Name *</label>
+                <Input name="name" value={form.name} onChange={handleChange}
+                  placeholder="e.g. Jane Wanjiku" required className={inputClass} />
               </div>
-            ) : (
-              <form onSubmit={handleSubmit} className="space-y-5">
-                <div>
-                  <label className={labelClass}>Full Name *</label>
-                  <Input name="name" value={form.name} onChange={handleChange}
-                    placeholder="e.g. Jane Wanjiku" required className={inputClass} />
-                </div>
-                <div>
-                  <label className={labelClass}>Phone Number *</label>
-                  <Input name="phone" value={form.phone} onChange={handleChange}
-                    placeholder="+254 7XX XXX XXX" required className={inputClass} />
-                </div>
-                <div>
-                  <label className={labelClass}>Email (Optional)</label>
-                  <Input name="email" type="email" value={form.email} onChange={handleChange}
-                    placeholder="jane@email.com" className={inputClass} />
-                </div>
-                <div>
-                  <label className={labelClass}>What are you looking for?</label>
-                  <select
-                    name="intent" value={form.intent} onChange={handleChange}
-                    className={`${inputClass} w-full px-3 appearance-none bg-navy-light/30 border border-gold/20`}
-                  >
-                    <option value="">Select an option...</option>
-                    <option value="buy">I am ready to buy</option>
-                    <option value="sell">I have a property to sell</option>
-                    <option value="invest">I want my money working in property</option>
-                    <option value="rent">I am looking for a rental</option>
-                    <option value="viewing">I want a private viewing</option>
-                  </select>
-                </div>
-                <div>
-                  <label className={labelClass}>Additional Requirements</label>
-                  <Textarea name="message" value={form.message} onChange={handleChange}
-                    placeholder="Tell us more about what you're looking for..."
-                    className={`${inputClass} h-28 resize-none`} />
-                </div>
-                <Button
-                  type="submit" disabled={loading}
-                  className="w-full h-14 bg-gold-gradient text-navy-deep font-bold text-[0.88rem] tracking-[0.12em] uppercase rounded-lg shadow-[0_6px_20px_rgba(229,169,60,0.25)] hover:shadow-[0_10px_32px_rgba(229,169,60,0.4)] hover:-translate-y-px transition-all border-0"
+              <div>
+                <label className={labelClass}>Phone Number *</label>
+                <Input name="phone" value={form.phone} onChange={handleChange}
+                  placeholder="+254 7XX XXX XXX" required className={inputClass} />
+              </div>
+              <div>
+                <label className={labelClass}>Email (Optional)</label>
+                <Input name="email" type="email" value={form.email} onChange={handleChange}
+                  placeholder="jane@email.com" className={inputClass} />
+              </div>
+              <div>
+                <label className={labelClass}>What are you looking for?</label>
+                <select
+                  name="intent" value={form.intent} onChange={handleChange}
+                  className={`${inputClass} w-full px-3 appearance-none bg-navy-light/30 border border-gold/20`}
                 >
-                  {loading ? 'Sending...' : 'Send Enquiry'}
-                </Button>
-              </form>
-            )}
+                  <option value="">Select an option...</option>
+                  <option value="I am ready to buy">I am ready to buy</option>
+                  <option value="I want my money working in property">I want my money working in property</option>
+                  <option value="I want a private viewing">I want a private viewing</option>
+                  <option value="I am buying from abroad">I am buying from abroad</option>
+                </select>
+              </div>
+              <div>
+                <label className={labelClass}>Additional Requirements</label>
+                <Textarea name="message" value={form.message} onChange={handleChange}
+                  placeholder="Tell us more about your preferred area, budget, timeline, or unit type..."
+                  className={`${inputClass} h-28 resize-none`} />
+              </div>
+              <p className="text-[0.78rem] leading-[1.7] text-sicily-body/70">
+                This sends your brief to Sicily Realty through WhatsApp with your details prefilled so you can continue the conversation immediately.
+              </p>
+              <Button
+                type="submit"
+                className="w-full h-14 bg-gold-gradient text-navy-deep font-bold text-[0.88rem] tracking-[0.12em] uppercase rounded-lg shadow-[0_6px_20px_rgba(229,169,60,0.25)] hover:shadow-[0_10px_32px_rgba(229,169,60,0.4)] hover:-translate-y-px transition-all border-0"
+              >
+                Continue on WhatsApp
+              </Button>
+            </form>
           </div>
 
           {/* Contact info */}
