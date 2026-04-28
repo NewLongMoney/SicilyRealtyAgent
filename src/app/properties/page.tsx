@@ -33,6 +33,10 @@ type PropertiesPageProps = {
 
 export default async function PropertiesPage({ searchParams }: PropertiesPageProps) {
   const params = await searchParams
+  const requestedProperty = params?.property
+  const resolvedProperty = requestedProperty
+    ? PROPERTIES.find(p => p.id === requestedProperty)
+    : undefined
 
   return (
     <div className="min-h-screen bg-navy-deep pt-24 md:pt-32">
@@ -52,8 +56,8 @@ export default async function PropertiesPage({ searchParams }: PropertiesPagePro
         <PropertiesSection
           properties={PROPERTIES}
           initialCategory={params?.category}
-          initialArea={params?.area}
-          highlightedProperty={params?.property}
+          initialArea={resolvedProperty?.area ?? params?.area}
+          highlightedProperty={resolvedProperty?.id}
         />
       </div>
     </div>

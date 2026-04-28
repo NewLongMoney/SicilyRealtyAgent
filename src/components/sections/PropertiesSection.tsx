@@ -52,13 +52,20 @@ export function PropertiesSection({
   const active = normalizeFilter(initialCategory)
   const area = normalizeArea(initialArea)
 
+  const focusedProperty = useMemo(() => {
+    if (!highlightedProperty) return null
+    return properties.find(p => p.id === highlightedProperty) ?? null
+  }, [highlightedProperty, properties])
+
   const filtered = useMemo(() => {
+    if (focusedProperty) return [focusedProperty]
+
     return properties.filter(property => {
       const matchesCategory = active === 'all' || property.category === active
       const matchesArea = area === 'all' || property.area === area
       return matchesCategory && matchesArea
     })
-  }, [active, area, properties])
+  }, [active, area, focusedProperty, properties])
 
   function updateFilters(nextCategory?: string, nextArea?: string) {
     const safeCategory = normalizeFilter(nextCategory)
@@ -97,12 +104,12 @@ export function PropertiesSection({
             <p className="text-[0.72rem] tracking-[0.14em] uppercase text-sicily-body/70">
               {filtered.length} {filtered.length === 1 ? 'property' : 'properties'} available
             </p>
-            {(active !== 'all' || area !== 'all') && (
+            {(focusedProperty || active !== 'all' || area !== 'all') && (
               <Link
                 href="/properties#properties"
                 className="text-[0.72rem] tracking-[0.12em] uppercase text-gold hover:text-gold-bright transition-colors"
               >
-                Clear filters
+                {focusedProperty ? 'Back to all properties' : 'Clear filters'}
               </Link>
             )}
           </div>
@@ -114,10 +121,11 @@ export function PropertiesSection({
                 onClick={() => updateFilters(active, filter.value)}
                 className={cn(
                   'text-[0.72rem] tracking-[0.09em] uppercase px-4 py-2 rounded-full border transition-all duration-250',
-                  area === filter.value
+                  !focusedProperty && area === filter.value
                     ? 'bg-gold-gradient text-navy-deep border-transparent font-bold shadow-[0_4px_16px_rgba(229,169,60,0.2)]'
                     : 'border-gold/15 text-sicily-body hover:border-gold/45 hover:text-gold-bright'
                 )}
+                disabled={!!focusedProperty}
               >
                 {filter.label}
               </button>
@@ -133,10 +141,11 @@ export function PropertiesSection({
               onClick={() => updateFilters(f.value, area)}
               className={cn(
                 'text-[0.73rem] tracking-[0.1em] uppercase px-6 py-2.5 rounded-full border transition-all duration-250',
-                active === f.value
+                !focusedProperty && active === f.value
                   ? 'bg-gold-gradient text-navy-deep border-transparent font-bold shadow-[0_4px_16px_rgba(229,169,60,0.25)]'
                   : 'border-gold/20 text-sicily-body hover:border-gold/50 hover:text-gold-bright'
               )}
+              disabled={!!focusedProperty}
             >
               {f.label}
             </button>
