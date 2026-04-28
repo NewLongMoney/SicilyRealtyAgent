@@ -114,8 +114,8 @@ export function HeroSection() {
 
             <div className="flex flex-wrap gap-8 pt-10 animate-fade-up opacity-0 [animation-delay:0.9s] [animation-fill-mode:forwards]">
               {[
-                { num: '150+', label: 'Successful Closings', icon: Home },
-                { num: 'KES 2.5B', label: 'Transaction Value Guided', icon: TrendingUp },
+                { num: '28+', label: 'Successful Closings', icon: Home },
+                { num: 'KES 180M', label: 'Transaction Value Guided', icon: TrendingUp },
                 { num: '5.0', label: 'Client Rating', icon: Star },
               ].map(stat => (
                 <div key={stat.label} className="min-w-[120px]">

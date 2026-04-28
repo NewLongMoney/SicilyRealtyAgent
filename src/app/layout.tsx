@@ -1,25 +1,9 @@
 import type { Metadata } from 'next'
-import { Cormorant_Garamond, DM_Sans } from 'next/font/google'
 import './globals.css'
 import { Navbar } from '@/components/layout/Navbar'
 import { Footer } from '@/components/layout/Footer'
 import { FloatingWhatsApp } from '@/components/ui/FloatingWhatsApp'
 import { MobileBottomNav } from '@/components/layout/MobileBottomNav'
-
-const displayFont = Cormorant_Garamond({
-  subsets: ['latin'],
-  variable: '--font-display',
-  weight: ['400', '600', '700'],
-  style: ['normal', 'italic'],
-  display: 'swap',
-})
-
-const bodyFont = DM_Sans({
-  subsets: ['latin'],
-  variable: '--font-body',
-  weight: ['400', '500', '600'],
-  display: 'swap',
-})
 
 const siteUrl = new URL('https://sicilyrealty.co.ke')
 const defaultOgImage = '/images/logo-main.png'
@@ -63,7 +47,7 @@ export default function RootLayout({
   children: React.ReactNode
 }) {
   return (
-    <html lang="en" suppressHydrationWarning className={`${displayFont.variable} ${bodyFont.variable}`}>
+    <html lang="en" suppressHydrationWarning>
       <body className="antialiased">
         <Navbar />
         <main>{children}</main>

@@ -46,7 +46,7 @@ const realEstateAgentSchema = {
   aggregateRating: {
     '@type': 'AggregateRating',
     ratingValue: '5.0',
-    reviewCount: '85',
+    reviewCount: '18',
   },
 }
 

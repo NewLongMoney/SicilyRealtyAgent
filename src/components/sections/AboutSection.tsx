@@ -3,8 +3,8 @@ import Link from 'next/link'
 import { WHATSAPP_BASE, PHONE } from '@/lib/data'
 
 const STATS = [
-  { num: '150+', label: 'Closings Guided' },
-  { num: 'KES 2.5B', label: 'Value Advised' },
+  { num: '28+', label: 'Closings Guided' },
+  { num: 'KES 180M', label: 'Value Advised' },
   { num: '5.0', label: 'Client Rating' },
 ]
 
@@ -41,19 +41,19 @@ export function AboutSection() {
 
             {[
               {
-                num: '150+',
+                num: '28+',
                 label: 'Acquisitions Closed',
-                desc: "Verified transactions across Nairobi's prime residential corridors"
+                desc: "Closings guided across Nairobi's prime residential corridors"
               },
               {
-                num: 'KES 2.5B',
-                label: 'Total Value Transacted',
-                desc: 'Across residential, off-plan, and investment properties'
+                num: 'KES 180M',
+                label: 'Total Value Advised',
+                desc: 'Across residential acquisitions and off-plan investments'
               },
               {
                 num: '5.0',
                 label: 'Verified Client Rating',
-                desc: 'Average rating across all completed client engagements'
+                desc: 'Average rating across completed client engagements'
               },
             ].map(item => (
               <div

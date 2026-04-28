@@ -95,7 +95,7 @@ export function PropertyCard({ property, className }: PropertyCardProps) {
         
         {/* Enhanced CTA button */}
         <Link
-          href={`/properties?property=${property.id}#properties`}
+          href={`/properties/${property.id}`}
           className={cn(
             'inline-flex items-center gap-2 text-[0.75rem] tracking-[0.08em] uppercase',
             'text-gold border border-gold/30 px-5 py-2.5 rounded-full',
