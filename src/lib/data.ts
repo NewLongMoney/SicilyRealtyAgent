@@ -81,7 +81,7 @@ export const PROPERTIES: Property[] = [
     bedrooms: '2-3 Bedrooms',
     price: 'KES 9.2M',
     description: 'Kilimani Luxury · 2-3 Bedrooms · Prime Units',
-    image: '/images/hero.png',
+    image: '/images/Amethyst/Entrance.jpg',
     whatsappText: "Hi, I'd love to view Amethyst Springs",
   },
   {

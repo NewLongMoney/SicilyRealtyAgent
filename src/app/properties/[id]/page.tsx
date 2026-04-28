@@ -1,5 +1,7 @@
 import Image from 'next/image'
 import Link from 'next/link'
+import path from 'node:path'
+import { promises as fs } from 'node:fs'
 import { notFound } from 'next/navigation'
 import type { Metadata } from 'next'
 import { PROPERTIES, WHATSAPP_BASE } from '@/lib/data'
@@ -8,19 +10,37 @@ type Props = {
   params: Promise<{ id: string }>
 }
 
-const AMETHYST_GALLERY = [
-  '/images/Amethyst/Entrance.jpg',
-  '/images/Amethyst/enhanced_Living_Room.png',
-  '/images/Amethyst/Arise.jpg',
-  '/images/Amethyst/Rooftop lounge.jpg',
-  '/images/Amethyst/251030_FINAL-RoofPool02_EMETHYST_Night.jpg',
-  '/images/Amethyst/250908_D02_Rooftop Bar_V1_Op1-EMETHYST.jpg',
-  '/images/Amethyst/magnifics_upscale-x9U1wBGYcAYaScMX17LE-2_people_sitted_young_beautiful_black_woman_and_man_in_comfortable_light_clothing_sitted_on_the_sof_ih3v8goq5jvyp6i1af23_0.png',
-]
+const IMAGE_EXTENSIONS = new Set(['.jpg', '.jpeg', '.png', '.webp'])
 
-function getGallery(propertyId: string): string[] {
-  if (propertyId === 'amethyst-springs') return AMETHYST_GALLERY
-  return []
+function getFolderFromPrimaryImage(imagePath: string) {
+  // Expected: /images/<Folder>/<filename>
+  const parts = imagePath.split('/').filter(Boolean)
+  if (parts.length >= 3 && parts[0] === 'images') return parts[1]
+  return null
+}
+
+function toPublicImageUrl(folder: string, filename: string) {
+  return `/images/${encodeURIComponent(folder)}/${encodeURIComponent(filename)}`
+}
+
+async function getGalleryImages(propertyPrimaryImage: string): Promise<string[]> {
+  const folder = getFolderFromPrimaryImage(propertyPrimaryImage)
+  if (!folder) return []
+
+  const folderPath = path.join(process.cwd(), 'public', 'images', folder)
+
+  try {
+    const entries = await fs.readdir(folderPath, { withFileTypes: true })
+    const files = entries
+      .filter(entry => entry.isFile())
+      .map(entry => entry.name)
+      .filter(name => IMAGE_EXTENSIONS.has(path.extname(name).toLowerCase()))
+      .sort((a, b) => a.localeCompare(b, undefined, { numeric: true, sensitivity: 'base' }))
+
+    return files.map(file => toPublicImageUrl(folder, file))
+  } catch {
+    return []
+  }
 }
 
 export async function generateMetadata({ params }: Props): Promise<Metadata> {
@@ -28,6 +48,9 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
   const property = PROPERTIES.find(p => p.id === id)
 
   if (!property) return {}
+
+  const gallery = await getGalleryImages(property.image)
+  const ogImage = gallery[0] ?? property.image
 
   return {
     title: `${property.name} | Gallery | Sicily Realty`,
@@ -37,7 +60,7 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
       title: `${property.name} | Sicily Realty`,
       description: `${property.name} — ${property.bedrooms} in ${property.area}.`,
       url: `/properties/${property.id}`,
-      images: [{ url: property.image, width: 1200, height: 630 }],
+      images: [{ url: ogImage, width: 1200, height: 630 }],
     },
   }
 }
@@ -48,7 +71,7 @@ export default async function PropertyGalleryPage({ params }: Props) {
 
   if (!property) notFound()
 
-  const images = getGallery(property.id)
+  const images = await getGalleryImages(property.image)
   const waUrl = `${WHATSAPP_BASE}?text=${encodeURIComponent(property.whatsappText)}`
 
   return (
