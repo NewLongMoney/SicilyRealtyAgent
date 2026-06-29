@@ -36,7 +36,7 @@ const realEstateAgentSchema = {
     longitude: 36.8031,
   },
   openingHours: 'Mo-Sa 08:00-18:00',
-  priceRange: 'KES 6,800,000 - KES 20,000,000',
+  priceRange: 'KES 5,000,000 - KES 62,500,000',
   areaServed: ['Westlands', 'Kilimani', 'Kileleshwa', 'Lavington', 'Riverside', 'Nairobi'],
   sameAs: [
     'https://www.instagram.com/realtorsicily',

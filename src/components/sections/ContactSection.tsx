@@ -43,7 +43,7 @@ export function ContactSection() {
   const labelClass = "block text-[0.68rem] tracking-[0.14em] uppercase text-gold/85 font-semibold mb-2"
 
   return (
-    <section id="contact" className="py-[120px] bg-navy-deep">
+    <section id="contact" className="py-[120px] bg-white">
       <div className="max-w-[1280px] mx-auto px-6 md:px-8">
         <SectionHeading
           eyebrow="Get in Touch"
@@ -116,9 +116,9 @@ export function ContactSection() {
                 <div>
                   <p className="text-[0.65rem] tracking-[0.16em] uppercase text-gold/70 font-semibold mb-1">{item.label}</p>
                   {item.href ? (
-                    <a href={item.href} className="text-white hover:text-gold-bright transition-colors text-[0.95rem]">{item.value}</a>
+                    <a href={item.href} className="text-navy-deep hover:text-gold-mid transition-colors text-[0.95rem]">{item.value}</a>
                   ) : (
-                    <p className="text-white text-[0.95rem]">{item.value}</p>
+                    <p className="text-navy-deep text-[0.95rem]">{item.value}</p>
                   )}
                 </div>
               </div>

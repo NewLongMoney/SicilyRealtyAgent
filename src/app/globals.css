@@ -13,8 +13,8 @@
 html { scroll-behavior: smooth; }
 
 body {
-  background: radial-gradient(circle, #123E63 0%, #0A2A47 50%, #071C2F 100%);
-  color: #A8BDD0;
+  background: #ffffff;
+  color: #0A2A47;
   font-family: var(--font-body);
   overflow-x: hidden;
 }

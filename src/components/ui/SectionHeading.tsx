@@ -23,7 +23,7 @@ export function SectionHeading({
         </span>
       )}
       <h2 className={cn(
-        'font-display text-[clamp(2.2rem,3.5vw,3.2rem)] text-white leading-[1.15]',
+        'font-display text-[clamp(2.2rem,3.5vw,3.2rem)] text-navy-deep leading-[1.15]',
         'after:content-[""] after:block after:h-0.5 after:bg-gold-gradient after:rounded-sm after:mt-3.5',
         align === 'center' ? 'after:w-[52px] after:mx-auto' : 'after:w-[52px]'
       )}>
@@ -31,7 +31,7 @@ export function SectionHeading({
       </h2>
       {subtitle && (
         <p className={cn(
-          'text-sicily-body/80 text-[0.95rem] leading-[1.75] mt-5',
+          'text-navy-deep/60 text-[0.95rem] leading-[1.75] mt-5',
           align === 'center' ? 'max-w-[520px] mx-auto' : 'max-w-[480px]'
         )}>
           {subtitle}

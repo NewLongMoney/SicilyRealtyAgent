@@ -4,7 +4,7 @@ import { WHATSAPP_BASE } from '@/lib/data'
 
 export function MobileBottomNav() {
   return (
-    <nav className="md:hidden fixed bottom-0 left-0 right-0 z-[8000] bg-navy-deep/97 backdrop-blur-xl border-t border-gold/15 pb-safe grid grid-cols-5">
+    <nav className="md:hidden fixed bottom-0 left-0 right-0 z-[8000] bg-white/97 backdrop-blur-xl border-t border-gray-200 pb-safe grid grid-cols-5">
       {[
         { href: '/',            icon: <Home size={18} />,      label: 'Home' },
         { href: '/properties',  icon: <LayoutGrid size={18} />, label: 'Properties' },
@@ -25,7 +25,7 @@ export function MobileBottomNav() {
           className={
             item.isWa
               ? 'flex flex-col items-center justify-center relative -top-2.5'
-              : 'flex flex-col items-center justify-center gap-1 py-2 text-sicily-muted hover:text-gold transition-colors'
+              : 'flex flex-col items-center justify-center gap-1 py-2 text-navy-deep/45 hover:text-gold-mid transition-colors'
           }
         >
           {item.isWa ? (

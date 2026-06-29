@@ -13,7 +13,7 @@ interface Props { items: FaqItem[] }
 
 export function FaqSection({ items }: Props) {
   return (
-    <section id="faq" className="py-[120px] bg-navy-mid">
+    <section id="faq" className="py-[120px] bg-gray-50">
       <div className="max-w-[1280px] mx-auto px-6 md:px-8">
         <SectionHeading
           eyebrow="Common Questions"
@@ -25,12 +25,13 @@ export function FaqSection({ items }: Props) {
               <AccordionItem
                 key={item.id}
                 value={item.id}
-                className="border-b border-gold/10 data-[state=open]:border-gold/20"
+                id={item.id === 'foreigners' ? 'faq-foreigners' : undefined}
+                className="border-b border-gold/10 data-[state=open]:border-gold/20 scroll-mt-32"
               >
-                <AccordionTrigger className="text-[0.98rem] text-white/90 font-medium text-left py-6 hover:text-gold-bright hover:no-underline transition-colors [&[data-state=open]]:text-gold-bright">
+                <AccordionTrigger className="text-[0.98rem] text-navy-deep/90 font-medium text-left py-6 hover:text-gold-mid hover:no-underline transition-colors [&[data-state=open]]:text-gold-mid">
                   {item.question}
                 </AccordionTrigger>
-                <AccordionContent className="text-[0.9rem] text-sicily-body/85 leading-[1.8] pb-5">
+                <AccordionContent className="text-[0.9rem] text-navy-deep/65 leading-[1.8] pb-5">
                   {item.answer}
                 </AccordionContent>
               </AccordionItem>

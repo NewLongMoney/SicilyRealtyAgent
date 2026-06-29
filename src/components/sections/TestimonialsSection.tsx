@@ -6,7 +6,7 @@ interface Props { testimonials: Testimonial[] }
 
 export function TestimonialsSection({ testimonials }: Props) {
   return (
-    <section id="testimonials" className="py-[120px] bg-navy-deep">
+    <section id="testimonials" className="py-[120px] bg-white">
       <div className="max-w-[1280px] mx-auto px-6 md:px-8">
         <SectionHeading
           eyebrow="Client Stories"

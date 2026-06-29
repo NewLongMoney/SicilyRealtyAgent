@@ -7,27 +7,27 @@ import { useRouter } from 'next/navigation'
 import { ChevronRight, Search, MapPin, Home, TrendingUp, Star } from 'lucide-react'
 
 const SEARCH_OPTIONS = {
-  location: ['All Areas','Kilimani','Westlands','Kileleshwa','Lavington','Riverside'],
-  category: ['Any Collection','Signature','Select','Intelligent'],
+  location: ['All Areas', 'Kilimani', 'Westlands', 'Riverside'],
+  type: ['All Types', 'Apartments', 'Villas'],
 }
 
 interface SearchState {
   location: string
-  category: string
+  type: string
 }
 
 export function HeroSection() {
   const router = useRouter()
   const [search, setSearch] = useState<SearchState>({
-    location: '', category: ''
+    location: '', type: ''
   })
 
   function handleSearch() {
     const params = new URLSearchParams()
     if (search.location && search.location !== 'All Areas')
       params.set('area', search.location.toLowerCase())
-    if (search.category && search.category !== 'Any Collection')
-      params.set('category', search.category.toLowerCase())
+    if (search.type && search.type !== 'All Types')
+      params.set('type', search.type.toLowerCase())
     router.push(params.toString() ? `/properties?${params.toString()}#properties` : '/properties#properties')
   }
 
@@ -54,8 +54,8 @@ export function HeroSection() {
               Nairobi Luxury Property Advisory
             </span>
 
-            <h1 className="font-display text-[clamp(2.7rem,6vw,5.5rem)] leading-[1.02] tracking-tight text-white mb-6 animate-fade-up opacity-0 [animation-delay:0.3s] [animation-fill-mode:forwards]">
-              Luxury Apartments, Smart Homes, and Investment Residences in Nairobi
+            <h1 className="font-display text-[clamp(2rem,4.5vw,3.8rem)] leading-[1.08] tracking-tight text-white mb-6 animate-fade-up opacity-0 [animation-delay:0.3s] [animation-fill-mode:forwards]">
+              Smart Homes &amp; Investment Residences in Nairobi
             </h1>
 
             <p className="text-sicily-body text-[1rem] md:text-[1.06rem] leading-[1.8] max-w-[640px] mb-8 animate-fade-up opacity-0 [animation-delay:0.45s] [animation-fill-mode:forwards]">
@@ -72,7 +72,7 @@ export function HeroSection() {
               </Link>
               <Link
                 href="/#contact"
-                className="inline-flex items-center gap-2.5 border border-gold/30 text-gold font-semibold text-sm tracking-wider uppercase px-7 py-4 rounded-full bg-navy-deep/35 hover:bg-gold/10 transition-colors"
+                className="inline-flex items-center gap-2.5 bg-white text-navy-deep font-bold text-sm tracking-wider uppercase px-7 py-4 rounded-full shadow-lg transition-all duration-300 hover:scale-[1.02] hover:shadow-xl hover:bg-gray-50"
               >
                 Book a Private Consultation
               </Link>
@@ -85,7 +85,7 @@ export function HeroSection() {
                     <div key={key} className="min-w-0">
                       <label className="text-[0.58rem] tracking-[0.2em] uppercase text-gold font-bold mb-2 flex items-center gap-2">
                         {key === 'location' && <MapPin size={10} />}
-                        {key === 'category' && <Home size={10} />}
+                        {key === 'type' && <Home size={10} />}
                         {key.charAt(0).toUpperCase() + key.slice(1)}
                       </label>
                       <select

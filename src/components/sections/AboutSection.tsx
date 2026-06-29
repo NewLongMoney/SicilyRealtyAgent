@@ -10,7 +10,7 @@ const STATS = [
 
 export function AboutSection() {
   return (
-    <section id="about" className="py-[140px] bg-navy-mid overflow-visible">
+    <section id="about" className="py-[140px] bg-white overflow-visible">
       <div className="max-w-[1280px] mx-auto px-6 md:px-8">
 
         {/* Company about */}
@@ -19,10 +19,10 @@ export function AboutSection() {
             <span className="block text-[0.65rem] tracking-[0.22em] uppercase text-gold font-semibold mb-4">
               About Sicily Realty
             </span>
-            <h2 className="font-display text-[clamp(2rem,3.2vw,2.8rem)] text-white leading-[1.2] mb-7 break-words after:content-[''] after:block after:w-[52px] after:h-0.5 after:bg-gold-gradient after:rounded-sm after:mt-4">
+            <h2 className="font-display text-[clamp(2rem,3.2vw,2.8rem)] text-navy-deep leading-[1.2] mb-7 break-words after:content-[''] after:block after:w-[52px] after:h-0.5 after:bg-gold-gradient after:rounded-sm after:mt-4">
               Built on One Standard: Yours
             </h2>
-            <div className="space-y-4 text-sicily-body/85 text-[0.97rem] leading-[1.85]">
+            <div className="space-y-4 text-navy-deep/65 text-[0.97rem] leading-[1.85]">
               <p>Sicily Realty was built for buyers who refuse to settle. Not a listing aggregator. Not a call centre. A single dedicated advisor who handles your acquisition the way you would — if you had three years inside Nairobi&apos;s most competitive property corridors.</p>
               <p>Every engagement starts with a conversation, not a brochure. We map your financial position, timeline, and non-negotiables — then we source precisely. The result is a shortlist that fits, not a flood of options that don&apos;t.</p>
               <p>Our measure of success is simple: you close with confidence, on terms you understand, without surprises.</p>
@@ -80,13 +80,13 @@ export function AboutSection() {
             <span className="block text-[0.65rem] tracking-[0.22em] uppercase text-gold font-semibold mb-4">
               Your Advisor
             </span>
-            <h2 className="font-display text-[clamp(1.8rem,3vw,2.5rem)] text-white leading-[1.2] mb-2 break-words">
+            <h2 className="font-display text-[clamp(1.8rem,3vw,2.5rem)] text-navy-deep leading-[1.2] mb-2 break-words">
               One Advisor. Full Accountability.
             </h2>
-            <h3 className="font-display text-[1.1rem] text-gold/70 italic mb-7">
+            <h3 className="font-display text-[1.1rem] text-gold-mid italic mb-7">
               The Person Who Picks Up Your Call
             </h3>
-            <div className="space-y-4 text-sicily-body/85 text-[0.97rem] leading-[1.85] mb-8">
+            <div className="space-y-4 text-navy-deep/65 text-[0.97rem] leading-[1.85] mb-8">
               <p>I have spent years inside Nairobi&apos;s property market learning what developers won&apos;t tell you and what agents don&apos;t notice. That knowledge is what I bring to every client engagement — not a template, not a pitch deck.</p>
               <p>Whether you are stepping into homeownership for the first time or adding a second asset to your portfolio, the process I run is the same: deliberate, transparent, and built entirely around your outcome.</p>
             </div>
@@ -96,7 +96,7 @@ export function AboutSection() {
               {STATS.map(s => (
                 <div key={s.label}>
                   <span className="block font-display text-[2rem] gold-text-v font-bold leading-none mb-1.5">{s.num}</span>
-                  <span className="block text-[0.65rem] tracking-[0.14em] uppercase text-sicily-muted">{s.label}</span>
+                  <span className="block text-[0.65rem] tracking-[0.14em] uppercase text-navy-deep/45">{s.label}</span>
                 </div>
               ))}
             </div>

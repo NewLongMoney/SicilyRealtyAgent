@@ -8,7 +8,7 @@ interface Props { articles: InsightArticle[] }
 
 export function InsightsSection({ articles }: Props) {
   return (
-    <section id="insights" className="py-[120px] bg-navy-mid">
+    <section id="insights" className="py-[120px] bg-gray-50">
       <div className="max-w-[1280px] mx-auto px-6 md:px-8">
         <SectionHeading
           eyebrow="Market Intelligence"

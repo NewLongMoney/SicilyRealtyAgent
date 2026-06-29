@@ -3,8 +3,8 @@ import { PropertiesSection } from '@/components/sections/PropertiesSection'
 import { PROPERTIES } from '@/lib/data'
 
 export const metadata: Metadata = {
-  title: 'Properties | Sicily Realty - Luxury Apartments & Homes in Nairobi',
-  description: 'Browse our exclusive collection of luxury apartments and homes for sale in Nairobi\'s prime locations including Westlands, Kilimani, Lavington, and more.',
+  title: 'Properties | Sicily Realty - Homes & Residences in Nairobi',
+  description: 'Browse Sicily Realty\'s verified portfolio of off-plan apartments and investment residences across Kilimani, Westlands, and Riverside — from KES 5M to KES 62M.',
   alternates: {
     canonical: '/properties',
   },
@@ -13,13 +13,7 @@ export const metadata: Metadata = {
     description: "Browse Sicily Realty's full portfolio of verified apartments and investment residences across Nairobi's prime addresses.",
     url: '/properties',
     type: 'website',
-    images: [{ url: '/images/logo-main.png', width: 1200, height: 630, alt: 'Sicily Realty property gallery' }],
-  },
-  twitter: {
-    card: 'summary_large_image',
-    title: 'All Properties | Off-Plan & Ready Apartments in Nairobi | Sicily Realty',
-    description: "Browse Sicily Realty's full portfolio of verified apartments and investment residences across Nairobi's prime addresses.",
-    images: ['/images/logo-main.png'],
+    images: [{ url: '/images/Royal Legend/photo_2026-06-15_17-56-17.jpg', width: 1200, height: 630, alt: 'Sicily Realty property gallery' }],
   },
 }
 
@@ -27,6 +21,8 @@ type PropertiesPageProps = {
   searchParams?: Promise<{
     category?: string
     area?: string
+    type?: string
+    intent?: string
     property?: string
   }>
 }
@@ -39,27 +35,27 @@ export default async function PropertiesPage({ searchParams }: PropertiesPagePro
     : undefined
 
   return (
-    <div className="min-h-screen bg-navy-deep pt-24 md:pt-32">
-      <section className="max-w-[1280px] mx-auto px-6 md:px-8 pt-10 md:pt-16">
-        <p className="text-[0.68rem] tracking-[0.2em] uppercase text-gold font-semibold mb-4">
-          Property Gallery
+    <div className="min-h-screen bg-white pt-28 md:pt-36">
+      <section className="max-w-[1280px] mx-auto px-6 md:px-8 pt-10 md:pt-16 pb-4">
+        <p className="text-[0.68rem] tracking-[0.2em] uppercase text-gold-mid font-semibold mb-4">
+          Property Gallery · {PROPERTIES.length} Listings
         </p>
-        <h1 className="font-display text-[clamp(2.5rem,5vw,4.5rem)] leading-[1.08] text-white max-w-[720px]">
-          Luxury Apartments and Investment Properties in Nairobi
+        <h1 className="font-display text-[clamp(2rem,4vw,3.2rem)] leading-[1.1] text-navy-deep max-w-[720px]">
+          Verified Residences Across Nairobi
         </h1>
-        <p className="text-sicily-body/80 text-[1rem] leading-[1.8] max-w-[680px] mt-5">
-          Browse Sicily Realty&apos;s verified collection across Kilimani, Westlands, Kileleshwa, Lavington, and Riverside. Use the filters below to narrow in on the residences that match your location and investment brief.
+        <p className="text-navy-deep/60 text-[1rem] leading-[1.8] max-w-[680px] mt-5">
+          From Kilimani to Westlands and Riverside — browse off-plan apartments personally assessed by Sicily Realty. Filter by location, type, or collection.
         </p>
       </section>
 
-      <div>
-        <PropertiesSection
-          properties={PROPERTIES}
-          initialCategory={params?.category}
-          initialArea={resolvedProperty?.area ?? params?.area}
-          highlightedProperty={resolvedProperty?.id}
-        />
-      </div>
+      <PropertiesSection
+        properties={PROPERTIES}
+        initialCategory={params?.category}
+        initialArea={resolvedProperty?.area ?? params?.area}
+        initialType={params?.type}
+        initialListing={params?.intent}
+        highlightedProperty={resolvedProperty?.id}
+      />
     </div>
   )
 }

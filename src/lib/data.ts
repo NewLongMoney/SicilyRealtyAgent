@@ -1,15 +1,21 @@
-export interface Property {
-  id: string
-  name: string
-  area: 'kilimani' | 'westlands' | 'kileleshwa' | 'lavington' | 'riverside'
-  category: 'signature' | 'select' | 'intelligent'
-  status: 'offplan' | 'complete' | 'new' | 'bestseller'
-  bedrooms: string
-  price: string
-  description: string
-  image: string
-  whatsappText: string
-}
+export type {
+  Property,
+  PropertyArea,
+  PropertyCategory,
+  PropertyType,
+  PropertyListing,
+  PropertyStatus,
+  PropertyUnit,
+} from './property-types'
+
+export { img } from './property-types'
+export {
+  PROPERTIES,
+  BEST_SELLERS,
+  getPropertyById,
+  AREA_LABELS,
+  CATEGORY_LABELS,
+} from './properties'
 
 export interface Testimonial {
   id: string
@@ -34,111 +40,6 @@ export interface FaqItem {
   question: string
   answer: string
 }
-
-export const PROPERTIES: Property[] = [
-  {
-    id: 'montbleu',
-    name: 'Montbleu',
-    area: 'westlands',
-    category: 'select',
-    status: 'bestseller',
-    bedrooms: '2-3 Bedrooms',
-    price: 'KES 8.5M',
-    description: 'Off Plan · 2-3 Bedrooms · Premium Luxury Living',
-    image: '/images/Montbleu/122ca3bc-6baf-4aaf-a0b8-a12a83cc2849.jpg',
-    whatsappText: "Hi, I'd love to view Montbleu",
-  },
-  {
-    id: 'golden-mansion',
-    name: 'Golden Mansion',
-    area: 'westlands',
-    category: 'signature',
-    status: 'offplan',
-    bedrooms: '3-4 Bedrooms',
-    price: 'KES 12.5M',
-    description: 'Off Plan · 3-4 Bedrooms · Exclusive Apartments',
-    image: '/images/Golden mansion/07a1bb7a-1842-40b3-9d31-f80645f543ef.jpg',
-    whatsappText: "Hi, I'd love to view Golden Mansion",
-  },
-  {
-    id: 'ivy-park',
-    name: 'Ivy Park',
-    area: 'kilimani',
-    category: 'select',
-    status: 'bestseller',
-    bedrooms: '1-2 Bedrooms',
-    price: 'KES 6.8M',
-    description: 'Off Plan · 1-2 Bedrooms · Modern Finishes',
-    image: '/images/Ivy Park/1072801d-c49e-4171-bca6-7fb00f4aeb06.jpg',
-    whatsappText: "Hi, I'd love to view Ivy Park",
-  },
-  {
-    id: 'amethyst-springs',
-    name: 'Amethyst Springs',
-    area: 'kilimani',
-    category: 'select',
-    status: 'new',
-    bedrooms: '2-3 Bedrooms',
-    price: 'KES 9.2M',
-    description: 'Kilimani Luxury · 2-3 Bedrooms · Prime Units',
-    image: '/images/Amethyst/Entrance.jpg',
-    whatsappText: "Hi, I'd love to view Amethyst Springs",
-  },
-  {
-    id: 'project-1050',
-    name: 'Project 1050',
-    area: 'kilimani',
-    category: 'signature',
-    status: 'offplan',
-    bedrooms: '4-5 Bedrooms',
-    price: 'KES 15.8M',
-    description: 'Off Plan · 4-5 Bedrooms · Premium Architecture',
-    image: '/images/Project 1050/08b02ec9-15ba-4a5b-bcce-2b9d27445cda.jpg',
-    whatsappText: "Hi, I'd love to view Project 1050",
-  },
-  {
-    id: 'the-diplomat',
-    name: 'The Diplomat',
-    area: 'westlands',
-    category: 'select',
-    status: 'offplan',
-    bedrooms: '2-3 Bedrooms',
-    price: 'KES 11.2M',
-    description: 'Off Plan · 2-3 Bedrooms · Exclusive Residences',
-    image: '/images/Diplomat/1a978b59-8ca1-4b77-9cd5-029280704327.jpg',
-    whatsappText: "Hi, I'd love to view The Diplomat",
-  },
-  {
-    id: 'gemini',
-    name: 'Gemini',
-    area: 'westlands',
-    category: 'select',
-    status: 'offplan',
-    bedrooms: '1-2 Bedrooms',
-    price: 'KES 7.5M',
-    description: 'Off Plan · 1-2 Bedrooms · Modern Condos',
-    image: '/images/Gemini/56f3586f-ffe8-418c-bfa8-52afe44c953f.jpg',
-    whatsappText: "Hi, I'd love to view Gemini",
-  },
-  {
-    id: 'pandora',
-    name: 'Pandora',
-    area: 'westlands',
-    category: 'intelligent',
-    status: 'offplan',
-    bedrooms: '2-3 Bedrooms',
-    price: 'KES 10.5M',
-    description: 'Off Plan · 2-3 Bedrooms · Smart Homes',
-    image: '/images/Pandora/1cbbf675-ceb1-485e-981e-57236733b507.jpg',
-    whatsappText: "Hi, I'd love to view Pandora",
-  },
-]
-
-export const BEST_SELLERS: Property[] = [
-  PROPERTIES.find(p => p.id === 'montbleu')!,
-  PROPERTIES.find(p => p.id === 'golden-mansion')!,
-  PROPERTIES.find(p => p.id === 'ivy-park')!,
-]
 
 export const TESTIMONIALS: Testimonial[] = [
   {
@@ -235,6 +136,11 @@ export const FAQ_ITEMS: FaqItem[] = [
     answer: "A straightforward off-plan acquisition typically takes 2–4 weeks from reservation to signed agreement. Title transfer on completed units runs 60–90 days depending on developer readiness and legal due diligence.",
   },
   {
+    id: 'foreigners',
+    question: 'Can foreigners buy property in Kenya through Sicily Realty?',
+    answer: "Yes. Non-Kenyan nationals can legally own freehold and leasehold property in Kenya, subject to standard legal requirements. Sicily Realty guides foreign buyers through due diligence, legal representation, title verification, and remote purchase coordination — whether you are based in the UK, US, Europe, or the Gulf.",
+  },
+  {
     id: '4',
     question: 'Can diaspora Kenyans buy property through Sicily Realty?',
     answer: "Yes. A significant portion of our clients are based in the UK, US, Canada, and the Gulf. We handle the full process remotely — virtual viewings, legal representation, and M-Pesa or international wire payment coordination.",
@@ -242,11 +148,11 @@ export const FAQ_ITEMS: FaqItem[] = [
   {
     id: '5',
     question: 'What is the minimum budget to buy an apartment in Nairobi?',
-    answer: "The entry point for a quality 1-bedroom apartment in a prime Nairobi location currently sits around KES 6.8 million for off-plan units. Sicily Realty works across the KES 6.8M to KES 20M range.",
+    answer: "Entry pricing for quality off-plan apartments in prime Nairobi locations currently starts from around KES 5 million. Sicily Realty works across developments from KES 5M to KES 62M+, covering studios through luxury duplex residences.",
   },
 ]
 
 export const WHATSAPP_BASE = 'https://wa.me/254799124122'
 export const PHONE = '+254799124122'
 export const EMAIL = 'info@sicily.co.ke'
-export const AREAS = ['Kilimani','Westlands','Kileleshwa','Lavington','Riverside']
+export const AREAS = ['Kilimani', 'Westlands', 'Kileleshwa', 'Lavington', 'Riverside']
