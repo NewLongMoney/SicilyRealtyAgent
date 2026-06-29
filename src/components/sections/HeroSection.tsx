@@ -45,7 +45,7 @@ export function HeroSection() {
       <div className="absolute inset-0 bg-[radial-gradient(circle_at_top,rgba(246,198,103,0.14),transparent_34%),radial-gradient(circle_at_70%_20%,rgba(18,62,99,0.28),transparent_35%)] z-[1]" />
 
       {/* Content */}
-      <div className="relative z-[2] w-full max-w-[1180px] mx-auto px-6 md:px-8 pb-20 md:pb-24 pt-32 md:pt-44">
+      <div className="relative z-[2] w-full max-w-[1180px] mx-auto px-6 md:px-8 pb-20 md:pb-24 pt-28 md:pt-32 lg:pt-40">
         <div className="grid items-end gap-12 lg:grid-cols-[minmax(0,1fr)_320px]">
           <div className="max-w-[760px]">
 
@@ -143,8 +143,8 @@ export function HeroSection() {
               </h2>
               <ul className="space-y-4 text-[0.92rem] text-sicily-body/85 leading-[1.7]">
                 <li>Verified listings only, across Nairobi&apos;s prime residential corridors.</li>
-                <li>Guidance for both homebuyers and investors who need sharper due diligence.</li>
-                <li>One advisor from shortlist to viewing to negotiation.</li>
+                <li>One named advisor — Sicily — from shortlist to viewing to negotiation.</li>
+                <li>Guidance for homebuyers, diaspora buyers, and investors who need sharper due diligence.</li>
               </ul>
             </div>
           </aside>

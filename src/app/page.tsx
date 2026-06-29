@@ -3,15 +3,15 @@ import { PropertiesSection } from '@/components/sections/PropertiesSection'
 import { ClosingFastSection } from '@/components/sections/ClosingFastSection'
 import { AboutSection } from '@/components/sections/AboutSection'
 import { TestimonialsSection } from '@/components/sections/TestimonialsSection'
-import { InsightsSection } from '@/components/sections/InsightsSection'
+import { MarketBriefSection } from '@/components/sections/MarketBriefSection'
 import { ContactSection } from '@/components/sections/ContactSection'
 import { FaqSection } from '@/components/sections/FaqSection'
 import {
   PROPERTIES,
   BEST_SELLERS,
   TESTIMONIALS,
-  INSIGHTS,
   FAQ_ITEMS,
+  ADVISOR,
 } from '@/lib/data'
 
 const realEstateAgentSchema = {
@@ -23,7 +23,12 @@ const realEstateAgentSchema = {
   image: 'https://sicilyrealty.co.ke/images/logo-main.png',
   description: "Sicily Realty is Nairobi's premier luxury property advisory, specialising in off-plan residential investments, apartment sales, and smart home acquisitions across Westlands, Kilimani, Kileleshwa, Lavington, and Riverside.",
   telephone: '+254799124122',
-  email: 'info@sicily.co.ke',
+  email: 'info@sicilyrealty.co.ke',
+  employee: {
+    '@type': 'Person',
+    name: ADVISOR.fullTitle,
+    jobTitle: ADVISOR.title,
+  },
   address: {
     '@type': 'PostalAddress',
     streetAddress: 'Westlands',
@@ -79,7 +84,7 @@ export default function HomePage() {
       <ClosingFastSection properties={BEST_SELLERS} />
       <AboutSection />
       <TestimonialsSection testimonials={TESTIMONIALS} />
-      <InsightsSection articles={INSIGHTS} />
+      <MarketBriefSection />
       <FaqSection items={FAQ_ITEMS} />
       <ContactSection />
     </>

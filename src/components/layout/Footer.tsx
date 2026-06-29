@@ -1,6 +1,6 @@
 import Image from 'next/image'
 import Link from 'next/link'
-import { EMAIL, PHONE } from '@/lib/data'
+import { EMAIL, PHONE, PHONE_DISPLAY } from '@/lib/data'
 
 const SOCIAL_LINKS = [
   {
@@ -55,7 +55,7 @@ export function Footer() {
           <div>
             <h4 className="text-[0.68rem] tracking-[0.18em] uppercase text-gold/80 font-semibold mb-5">Quick Links</h4>
             {['/', '/properties', '/#about', '/#insights', '/#faq', '/#contact'].map((href, i) => {
-              const labels = ['Home','Properties','About Us','Insights','FAQ','Contact']
+              const labels = ['Home','Properties','About Us','Market Brief','FAQ','Contact']
               return (
                 <Link key={href} href={href}
                   className="block text-[0.83rem] text-sicily-body/65 hover:text-gold hover:pl-1.5 transition-all mb-2.5">
@@ -81,12 +81,15 @@ export function Footer() {
             <h4 className="text-[0.68rem] tracking-[0.18em] uppercase text-gold/80 font-semibold mb-5">Contact</h4>
             <div className="space-y-3 text-[0.83rem]">
               <p className="text-sicily-body/65">Westlands, Nairobi, Kenya</p>
-              <a href={`tel:${PHONE}`} className="block text-sicily-body/65 hover:text-gold transition-colors">
-                {PHONE}
+              <a href={`tel:${PHONE}`} className="block text-sicily-body/65 hover:text-gold transition-colors tabular-nums">
+                {PHONE_DISPLAY}
               </a>
               <a href={`mailto:${EMAIL}`} className="block text-sicily-body/65 hover:text-gold transition-colors">
                 {EMAIL}
               </a>
+              <p className="text-[0.72rem] text-sicily-muted/80 leading-relaxed pt-1">
+                Official inbox for sicilyrealty.co.ke
+              </p>
             </div>
           </div>
         </div>

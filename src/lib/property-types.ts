@@ -28,6 +28,7 @@ export interface Property {
   address?: string
   completion?: string
   developer?: string
+  paymentPlanAvailable?: boolean
   units?: PropertyUnit[]
   highlights?: string[]
   amenities?: string[]

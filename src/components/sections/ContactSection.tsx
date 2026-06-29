@@ -5,7 +5,7 @@ import { Button } from '@/components/ui/button'
 import { Input } from '@/components/ui/input'
 import { Textarea } from '@/components/ui/textarea'
 import { SectionHeading } from '@/components/ui/SectionHeading'
-import { EMAIL, PHONE, WHATSAPP_BASE } from '@/lib/data'
+import { EMAIL, PHONE, WHATSAPP_BASE, PHONE_DISPLAY, ADVISOR } from '@/lib/data'
 import { Mail, MapPin, Phone } from 'lucide-react'
 
 type FormState = {
@@ -90,8 +90,8 @@ export function ContactSection() {
                   placeholder="Tell us more about your preferred area, budget, timeline, or unit type..."
                   className={`${inputClass} h-28 resize-none`} />
               </div>
-              <p className="text-[0.78rem] leading-[1.7] text-sicily-body/70">
-                This sends your brief to Sicily Realty through WhatsApp with your details prefilled so you can continue the conversation immediately.
+              <p className="text-[0.78rem] leading-[1.7] text-navy-deep/55">
+                This sends your brief to {ADVISOR.name} at Sicily Realty through WhatsApp with your details prefilled.
               </p>
               <Button
                 type="submit"
@@ -107,7 +107,7 @@ export function ContactSection() {
             {[
               { icon: MapPin, label: 'Address', value: 'Westlands, Nairobi, Kenya' },
               { icon: Mail,   label: 'Email',   value: EMAIL, href: `mailto:${EMAIL}` },
-              { icon: Phone,  label: 'Phone',   value: '+254 799 124 122', href: `tel:${PHONE}` },
+              { icon: Phone,  label: 'Phone',   value: PHONE_DISPLAY, href: `tel:${PHONE}` },
             ].map(item => (
               <div key={item.label} className="flex gap-4 items-start">
                 <div className="w-10 h-10 rounded-xl bg-gold/10 border border-gold/20 flex items-center justify-center flex-shrink-0 mt-0.5">
@@ -116,9 +116,12 @@ export function ContactSection() {
                 <div>
                   <p className="text-[0.65rem] tracking-[0.16em] uppercase text-gold/70 font-semibold mb-1">{item.label}</p>
                   {item.href ? (
-                    <a href={item.href} className="text-navy-deep hover:text-gold-mid transition-colors text-[0.95rem]">{item.value}</a>
+                    <a href={item.href} className="text-navy-deep hover:text-gold-mid transition-colors text-[0.95rem] tabular-nums">{item.value}</a>
                   ) : (
                     <p className="text-navy-deep text-[0.95rem]">{item.value}</p>
+                  )}
+                  {item.label === 'Email' && (
+                    <p className="text-[0.72rem] text-navy-deep/45 mt-1">Official inbox for sicilyrealty.co.ke</p>
                   )}
                 </div>
               </div>

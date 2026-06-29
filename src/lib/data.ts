@@ -154,5 +154,18 @@ export const FAQ_ITEMS: FaqItem[] = [
 
 export const WHATSAPP_BASE = 'https://wa.me/254799124122'
 export const PHONE = '+254799124122'
-export const EMAIL = 'info@sicily.co.ke'
+export const PHONE_DISPLAY = '+254 799 124 122'
+export const EMAIL = 'info@sicilyrealty.co.ke'
 export const AREAS = ['Kilimani', 'Westlands', 'Kileleshwa', 'Lavington', 'Riverside']
+
+export const ADVISOR = {
+  name: 'Sicily',
+  title: 'Principal Real Estate Advisor',
+  fullTitle: 'Sicily — Principal Real Estate Advisor',
+}
+
+export const GOOGLE_REVIEWS_URL =
+  'https://www.google.com/search?q=Sicily+Realty+Nairobi+reviews'
+
+export const DEVELOPER_ON_REQUEST =
+  'Developer details available on request — Sicily Realty shares track record and delivery history before you commit.'

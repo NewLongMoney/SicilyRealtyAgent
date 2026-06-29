@@ -3,7 +3,7 @@ import Link from 'next/link'
 import { cn } from '@/lib/utils'
 import type { Property } from '@/lib/data'
 import { AREA_LABELS } from '@/lib/data'
-import { MapPin, Star, ArrowRight, Calendar } from 'lucide-react'
+import { MapPin, Star, ArrowRight, Calendar, CreditCard } from 'lucide-react'
 
 const BADGE_STYLES: Record<string, string> = {
   bestseller: 'bg-gold-gradient text-navy-deep font-bold',
@@ -54,6 +54,12 @@ export function PropertyCard({ property, className }: PropertyCardProps) {
             {property.status === 'bestseller' && <Star size={9} />}
             {BADGE_LABELS[property.status]}
           </span>
+          {property.paymentPlanAvailable !== false && property.status !== 'complete' && (
+            <span className="text-[0.58rem] font-semibold tracking-[0.08em] uppercase px-2.5 py-1 rounded-full bg-white/95 text-navy-deep border border-white/80 flex items-center gap-1">
+              <CreditCard size={9} />
+              Payment plan
+            </span>
+          )}
         </div>
 
         <div className="absolute bottom-3 left-3 right-3">

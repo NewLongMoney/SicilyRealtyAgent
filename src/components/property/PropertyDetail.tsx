@@ -11,9 +11,11 @@ import {
   ArrowLeft,
   MessageCircle,
   ChevronRight,
+  Landmark,
+  CreditCard,
 } from 'lucide-react'
 import type { Property } from '@/lib/data'
-import { AREA_LABELS, CATEGORY_LABELS, WHATSAPP_BASE } from '@/lib/data'
+import { AREA_LABELS, CATEGORY_LABELS, WHATSAPP_BASE, DEVELOPER_ON_REQUEST } from '@/lib/data'
 import { cn } from '@/lib/utils'
 
 const STATUS_LABELS: Record<Property['status'], string> = {
@@ -34,7 +36,7 @@ export function PropertyDetail({ property, images }: Props) {
   const waUrl = `${WHATSAPP_BASE}?text=${encodeURIComponent(property.whatsappText)}`
 
   return (
-    <main className="min-h-screen bg-white pt-28 md:pt-36 pb-24">
+    <main className="min-h-screen bg-white pt-24 md:pt-[7.5rem] lg:pt-32 pb-24">
       <div className="max-w-[1280px] mx-auto px-6 md:px-8">
         <Link
           href="/properties#properties"
@@ -115,6 +117,24 @@ export function PropertyDetail({ property, images }: Props) {
                   <p className="text-navy-deep font-semibold text-[0.95rem]">{property.completion}</p>
                 </div>
               )}
+              {property.paymentPlanAvailable !== false && property.status !== 'complete' && (
+                <div>
+                  <p className="text-[0.6rem] tracking-[0.16em] uppercase text-navy-deep/40 mb-1 flex items-center gap-1">
+                    <CreditCard size={10} /> Payment
+                  </p>
+                  <p className="text-navy-deep font-semibold text-[0.88rem]">Plan available</p>
+                </div>
+              )}
+            </div>
+
+            <div className="rounded-xl border border-gray-100 bg-gray-50 px-4 py-3.5 mb-6 flex items-start gap-3">
+              <Landmark size={16} className="text-gold-mid flex-shrink-0 mt-0.5" />
+              <div>
+                <p className="text-[0.58rem] tracking-[0.14em] uppercase text-navy-deep/45 font-semibold mb-0.5">Developer</p>
+                <p className="text-[0.88rem] text-navy-deep/75 leading-[1.55]">
+                  {property.developer ?? DEVELOPER_ON_REQUEST}
+                </p>
+              </div>
             </div>
 
             <div className="flex flex-col sm:flex-row gap-3">
