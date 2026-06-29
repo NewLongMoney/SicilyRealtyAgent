@@ -10,8 +10,8 @@ const STATS = [
 
 export function AboutSection() {
   return (
-    <section id="about" className="py-[140px] bg-section-warm border-t border-section-divider overflow-visible">
-      <div className="max-w-[1280px] mx-auto px-6 md:px-8">
+    <section id="about" className="py-16 md:py-20 bg-section-warm border-t border-section-divider overflow-visible">
+      <div className="max-w-[1280px] mx-auto px-4 md:px-6">
 
         <div className="grid grid-cols-1 md:grid-cols-2 gap-16 md:gap-[100px] items-center mb-24">
           <div className="min-w-0">

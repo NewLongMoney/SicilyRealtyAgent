@@ -34,6 +34,11 @@ export function PropertyDetail({ property, images }: Props) {
   const [activeImage, setActiveImage] = useState(0)
   const gallery = images.length > 0 ? images : [property.image]
   const waUrl = `${WHATSAPP_BASE}?text=${encodeURIComponent(property.whatsappText)}`
+  const devWaUrl = `${WHATSAPP_BASE}?text=${encodeURIComponent(
+    `Hi Sicily, please share the full developer track record and delivery history for ${property.name}.`
+  )}`
+  const isDeveloperOnRequest =
+    !property.developer || property.developer.toLowerCase().includes('on request')
 
   return (
     <main className="min-h-screen bg-white pt-24 md:pt-[7.5rem] lg:pt-32 pb-24">
@@ -68,7 +73,7 @@ export function PropertyDetail({ property, images }: Props) {
             </div>
 
             {gallery.length > 1 && (
-              <div className="mt-4 flex gap-2 overflow-x-auto pb-2 scrollbar-custom">
+              <div className="mt-4 flex gap-2 overflow-x-auto pb-2 scrollbar-hide snap-scroll-x">
                 {gallery.map((src, i) => (
                   <button
                     key={src}
@@ -85,6 +90,12 @@ export function PropertyDetail({ property, images }: Props) {
                   </button>
                 ))}
               </div>
+            )}
+
+            {gallery.length <= 2 && (
+              <p className="mt-4 text-sm text-navy-deep/55 italic">
+                Professional photography &amp; virtual tour available on request — message Sicily on WhatsApp.
+              </p>
             )}
           </div>
 
@@ -129,11 +140,22 @@ export function PropertyDetail({ property, images }: Props) {
 
             <div className="rounded-xl border border-gray-100 bg-gray-50 px-4 py-3.5 mb-6 flex items-start gap-3">
               <Landmark size={16} className="text-gold-mid flex-shrink-0 mt-0.5" />
-              <div>
+              <div className="min-w-0">
                 <p className="text-[0.58rem] tracking-[0.14em] uppercase text-navy-deep/45 font-semibold mb-0.5">Developer</p>
                 <p className="text-[0.88rem] text-navy-deep/75 leading-[1.55]">
                   {property.developer ?? DEVELOPER_ON_REQUEST}
                 </p>
+                {isDeveloperOnRequest && (
+                  <Link
+                    href={devWaUrl}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="mt-3 inline-flex items-center gap-2 text-[0.72rem] tracking-[0.06em] uppercase font-semibold text-navy-deep border border-gray-200 bg-white px-4 py-2.5 rounded-full hover:border-gold/40 hover:text-gold-mid transition-all"
+                  >
+                    <MessageCircle size={14} />
+                    Request full developer track record &amp; delivery history via WhatsApp
+                  </Link>
+                )}
               </div>
             </div>
 
@@ -201,6 +223,12 @@ export function PropertyDetail({ property, images }: Props) {
                     </table>
                   </div>
                 </div>
+                {property.paymentPlanAvailable !== false && property.status !== 'complete' && (
+                  <p className="mt-4 text-sm text-navy-deep/60 flex items-start gap-2">
+                    <CreditCard size={15} className="text-gold-mid flex-shrink-0 mt-0.5" />
+                    Flexible payment plans available — enquire for schedule via WhatsApp.
+                  </p>
+                )}
               </section>
             )}
 
@@ -267,7 +295,7 @@ export function PropertyDetail({ property, images }: Props) {
           </aside>
         </div>
 
-        {gallery.length > 3 && (
+        {gallery.length > 1 && (
           <section className="mt-20">
             <h2 className="font-display text-[1.75rem] text-navy-deep mb-8 after:content-[''] after:block after:w-10 after:h-0.5 after:bg-gold-gradient after:mt-3">
               Gallery

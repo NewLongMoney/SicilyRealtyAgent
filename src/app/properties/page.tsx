@@ -36,7 +36,7 @@ export default async function PropertiesPage({ searchParams }: PropertiesPagePro
 
   return (
     <div className="min-h-screen bg-white pt-28 md:pt-36">
-      <section className="max-w-[1280px] mx-auto px-6 md:px-8 pt-10 md:pt-16 pb-4">
+      <section className="max-w-[1280px] mx-auto px-4 md:px-6 pt-10 md:pt-16 pb-4">
         <p className="text-[0.68rem] tracking-[0.2em] uppercase text-gold-mid font-semibold mb-4">
           Property Gallery · {PROPERTIES.length} Listings
         </p>

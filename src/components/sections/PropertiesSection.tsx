@@ -117,8 +117,8 @@ export function PropertiesSection({
   const hasActiveFilters = !focusedProperty && (area !== 'all' || type !== 'all' || collection !== 'all' || listing !== 'all')
 
   return (
-    <section id="properties" className="py-[100px] md:py-[120px] bg-white border-t border-section-divider">
-      <div className="max-w-[1280px] mx-auto px-6 md:px-8">
+    <section id="properties" className="py-16 md:py-20 bg-white border-t border-section-divider">
+      <div className="max-w-[1280px] mx-auto px-4 md:px-6">
         <SectionHeading
           eyebrow="Our Portfolio"
           title={`${properties.length} Verified Residences Across Nairobi`}
@@ -177,10 +177,18 @@ export function PropertiesSection({
                 {filter.label}
               </FilterPill>
             ))}
+            {hasActiveFilters && (
+              <Link
+                href="/properties#properties"
+                className="snap-card flex-shrink-0 inline-flex items-center px-4 py-2 rounded-full text-sm border border-gray-200 bg-white text-gray-700 hover:bg-gray-50 transition-all whitespace-nowrap"
+              >
+                Clear all
+              </Link>
+            )}
           </FilterGroup>
         </div>
 
-        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6 mt-12">
+        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 mt-12">
           {filtered.map(p => (
             <PropertyCard
               key={p.id}
@@ -213,8 +221,8 @@ function FilterGroup({ label, children }: { label: string; children: React.React
   return (
     <div>
       <p className="text-[0.62rem] tracking-[0.16em] uppercase text-gold-mid font-semibold mb-3">{label}</p>
-      <div className="-mx-6 px-6 md:mx-0 md:px-0">
-        <div className="flex gap-2 overflow-x-auto flex-nowrap pb-1 snap-scroll-x scrollbar-hide md:flex-wrap md:overflow-visible">
+      <div className="-mx-4 px-4 md:mx-0 md:px-0">
+        <div className="flex gap-2 overflow-x-auto snap-x snap-scroll-x pb-3 scrollbar-hide md:flex-wrap md:overflow-visible md:pb-0">
           {children}
         </div>
       </div>
@@ -239,10 +247,10 @@ function FilterPill({
       onClick={onClick}
       disabled={disabled}
       className={cn(
-        'snap-card flex-shrink-0 text-[0.72rem] tracking-[0.08em] uppercase px-4 py-2.5 rounded-full border transition-all duration-250 whitespace-nowrap',
+        'snap-card flex-shrink-0 inline-flex items-center px-4 py-2 rounded-full text-sm border transition-all whitespace-nowrap',
         active
-          ? 'bg-navy-deep text-white border-navy-deep font-semibold shadow-sm'
-          : 'bg-white text-navy-deep/70 border-[#e8e4dc] hover:border-navy-deep/30',
+          ? 'bg-zinc-900 text-white border-zinc-900 font-semibold shadow-sm'
+          : 'bg-white border-gray-200 text-gray-700 hover:bg-gray-50',
         disabled && 'opacity-50 cursor-not-allowed'
       )}
     >

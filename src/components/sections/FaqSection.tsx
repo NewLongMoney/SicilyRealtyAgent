@@ -13,8 +13,8 @@ interface Props { items: FaqItem[] }
 
 export function FaqSection({ items }: Props) {
   return (
-    <section id="faq" className="py-[120px] bg-section-warm border-t border-section-divider">
-      <div className="max-w-[1280px] mx-auto px-6 md:px-8">
+    <section id="faq" className="py-16 md:py-20 bg-section-warm border-t border-section-divider">
+      <div className="max-w-[1280px] mx-auto px-4 md:px-6">
         <SectionHeading
           eyebrow="Common Questions"
           title="Questions We Hear Often"

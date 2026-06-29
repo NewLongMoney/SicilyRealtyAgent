@@ -43,8 +43,8 @@ export function ContactSection() {
   const labelClass = "block text-[0.68rem] tracking-[0.14em] uppercase text-gold/85 font-semibold mb-2"
 
   return (
-    <section id="contact" className="py-[120px] bg-white border-t border-section-divider">
-      <div className="max-w-[1280px] mx-auto px-6 md:px-8">
+    <section id="contact" className="py-16 md:py-20 bg-white border-t border-section-divider">
+      <div className="max-w-[1280px] mx-auto px-4 md:px-6">
         <SectionHeading
           eyebrow="Get in Touch"
           title="Let&apos;s Talk Property"

@@ -4,8 +4,8 @@ import { WHATSAPP_BASE } from '@/lib/data'
 
 export function MarketBriefSection() {
   return (
-    <section id="insights" className="py-[120px] bg-section-warm border-t border-section-divider">
-      <div className="max-w-[1280px] mx-auto px-6 md:px-8">
+    <section id="insights" className="py-16 md:py-20 bg-section-warm border-t border-section-divider">
+      <div className="max-w-[1280px] mx-auto px-4 md:px-6">
         <div className="grid gap-12 lg:grid-cols-[1fr_1.1fr] items-start">
           <div className="relative aspect-[4/3] rounded-3xl overflow-hidden shadow-[0_20px_60px_rgba(7,28,47,0.1)] border border-gray-100">
             <Image

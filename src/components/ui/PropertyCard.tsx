@@ -29,9 +29,9 @@ export function PropertyCard({ property, className }: PropertyCardProps) {
     <article
       className={cn(
         'group relative bg-white rounded-2xl overflow-hidden',
-        'border border-gray-100 shadow-[0_4px_24px_rgba(7,28,47,0.06)]',
+        'border border-gray-100 shadow-sm',
         'transition-all duration-500 ease-luxury',
-        'hover:-translate-y-2 hover:shadow-[0_20px_60px_rgba(7,28,47,0.12)]',
+        'hover:-translate-y-1 hover:shadow-md',
         'hover:border-gold/25',
         className
       )}

@@ -1,3 +1,5 @@
+import { publicImageUrl } from './images'
+
 export type PropertyArea = 'kilimani' | 'westlands' | 'kileleshwa' | 'lavington' | 'riverside'
 export type PropertyCategory = 'signature' | 'select' | 'investment'
 export type PropertyType = 'apartment' | 'villa'
@@ -38,5 +40,5 @@ export interface Property {
 }
 
 export function img(folder: string, filename: string): string {
-  return `/images/${folder}/${filename}`
+  return publicImageUrl(folder, filename)
 }

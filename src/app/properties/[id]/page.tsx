@@ -11,9 +11,7 @@ type Props = {
 
 const IMAGE_EXTENSIONS = new Set(['.jpg', '.jpeg', '.png', '.webp'])
 
-function toPublicImageUrl(folder: string, filename: string) {
-  return `/images/${encodeURIComponent(folder)}/${encodeURIComponent(filename)}`
-}
+import { publicImageUrl } from '@/lib/images'
 
 async function getGalleryImages(imageFolder: string): Promise<string[]> {
   const folderPath = path.join(process.cwd(), 'public', 'images', imageFolder)
@@ -26,7 +24,7 @@ async function getGalleryImages(imageFolder: string): Promise<string[]> {
       .filter(name => IMAGE_EXTENSIONS.has(path.extname(name).toLowerCase()))
       .sort((a, b) => a.localeCompare(b, undefined, { numeric: true, sensitivity: 'base' }))
 
-    return files.map(file => toPublicImageUrl(imageFolder, file))
+    return files.map(file => publicImageUrl(imageFolder, file))
   } catch {
     return []
   }

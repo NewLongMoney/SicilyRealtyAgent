@@ -296,6 +296,12 @@ body {
   .snap-card {
     scroll-snap-align: start;
   }
+
+  @keyframes wa-pop {
+    0% { opacity: 0; transform: scale(0.85) translateY(8px); }
+    70% { transform: scale(1.04) translateY(0); }
+    100% { opacity: 1; transform: scale(1) translateY(0); }
+  }
   
   /* Focus styles */
   .focus-ring:focus {

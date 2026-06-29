@@ -62,17 +62,17 @@ export function HeroSection() {
               Sicily Realty curates verified opportunities in Kilimani, Westlands, Kileleshwa, Lavington, and Riverside for buyers who want clarity, quality, and a shortlist worth acting on.
             </p>
 
-            <div className="flex flex-col sm:flex-row gap-3 sm:gap-4 mb-10 w-full max-w-md sm:max-w-none animate-fade-up opacity-0 [animation-delay:0.6s] [animation-fill-mode:forwards]">
+            <div className="flex flex-col md:flex-row gap-3 mb-10 w-full max-w-md md:max-w-none animate-fade-up opacity-0 [animation-delay:0.6s] [animation-fill-mode:forwards]">
               <Link
                 href="/properties#properties"
-                className="w-full sm:w-auto inline-flex items-center justify-center gap-2.5 bg-gold-gradient text-navy-deep font-bold text-sm tracking-wider uppercase min-h-12 px-7 py-3 rounded-full shadow-xl transition-all duration-300 hover:scale-[1.02] hover:shadow-gold/30"
+                className="w-full md:w-auto inline-flex items-center justify-center gap-2.5 bg-gold-gradient text-navy-deep font-bold text-sm tracking-wider uppercase min-h-[48px] px-7 py-3 rounded-full shadow-xl transition-all duration-300 hover:scale-[1.02] hover:shadow-gold/30"
               >
                 Browse Properties
                 <ChevronRight size={16} />
               </Link>
               <Link
                 href="/#contact"
-                className="w-full sm:w-auto inline-flex items-center justify-center gap-2.5 bg-white text-navy-deep font-bold text-sm tracking-wider uppercase min-h-12 px-7 py-3 rounded-full shadow-lg transition-all duration-300 hover:scale-[1.02] hover:shadow-xl hover:bg-gray-50"
+                className="w-full md:w-auto inline-flex items-center justify-center gap-2.5 bg-white text-navy-deep font-bold text-sm tracking-wider uppercase min-h-[48px] px-7 py-3 rounded-full shadow-lg transition-all duration-300 hover:scale-[1.02] hover:shadow-xl hover:bg-gray-50"
               >
                 Book a Private Consultation
               </Link>
