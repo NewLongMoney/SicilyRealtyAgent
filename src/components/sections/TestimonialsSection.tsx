@@ -8,7 +8,7 @@ interface Props { testimonials: Testimonial[] }
 
 export function TestimonialsSection({ testimonials }: Props) {
   return (
-    <section id="testimonials" className="py-[120px] bg-white">
+    <section id="testimonials" className="py-[120px] bg-white border-t border-section-divider">
       <div className="max-w-[1280px] mx-auto px-6 md:px-8">
         <SectionHeading
           eyebrow="Client Stories"
@@ -16,10 +16,20 @@ export function TestimonialsSection({ testimonials }: Props) {
           subtitle="Real feedback from buyers and investors who worked with Sicily one-on-one."
         />
 
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 mt-14">
-          {testimonials.map(t => (
-            <TestimonialCard key={t.id} testimonial={t} />
-          ))}
+        {/* Mobile: horizontal snap scroll with peek */}
+        <div className="mt-14 -mx-6 px-6 md:mx-0 md:px-0">
+          <div
+            className="flex gap-4 overflow-x-auto snap-scroll-x scrollbar-hide pb-4 md:grid md:grid-cols-2 lg:grid-cols-3 md:gap-6 md:overflow-visible md:pb-0"
+          >
+            {testimonials.map(t => (
+              <div
+                key={t.id}
+                className="snap-card shrink-0 w-[82vw] max-w-[340px] md:w-auto md:max-w-none md:shrink"
+              >
+                <TestimonialCard testimonial={t} />
+              </div>
+            ))}
+          </div>
         </div>
 
         <div className="mt-12 flex flex-col sm:flex-row items-center justify-center gap-4 text-center">
@@ -33,7 +43,7 @@ export function TestimonialsSection({ testimonials }: Props) {
             href={GOOGLE_REVIEWS_URL}
             target="_blank"
             rel="noopener noreferrer"
-            className="inline-flex items-center gap-2 text-[0.75rem] tracking-[0.08em] uppercase text-navy-deep border border-gray-200 px-5 py-2.5 rounded-full hover:border-gold/40 hover:text-gold-mid transition-all font-semibold"
+            className="inline-flex items-center gap-2 text-[0.75rem] tracking-[0.08em] uppercase text-navy-deep border border-[#e8e4dc] px-5 py-2.5 rounded-full hover:border-gold/40 hover:text-gold-mid transition-all font-semibold"
           >
             Read reviews on Google
             <ExternalLink size={14} />
@@ -46,7 +56,7 @@ export function TestimonialsSection({ testimonials }: Props) {
 
 function TestimonialCard({ testimonial: t }: { testimonial: Testimonial }) {
   return (
-    <div className="relative bg-gray-50 rounded-2xl border border-gray-100 border-l-[3px] border-l-gold/60 p-7 transition-all duration-300 hover:-translate-y-1 hover:shadow-md">
+    <div className="relative bg-white rounded-2xl border border-[#eeebe5] border-l-[3px] border-l-gold/60 p-7 h-full shadow-sm">
       <span className="absolute top-3 right-5 font-display text-[5rem] leading-none text-gold/[0.06] pointer-events-none select-none">
         &ldquo;
       </span>

@@ -117,7 +117,7 @@ export function PropertiesSection({
   const hasActiveFilters = !focusedProperty && (area !== 'all' || type !== 'all' || collection !== 'all' || listing !== 'all')
 
   return (
-    <section id="properties" className="py-[100px] md:py-[120px] bg-white">
+    <section id="properties" className="py-[100px] md:py-[120px] bg-white border-t border-section-divider">
       <div className="max-w-[1280px] mx-auto px-6 md:px-8">
         <SectionHeading
           eyebrow="Our Portfolio"
@@ -213,7 +213,11 @@ function FilterGroup({ label, children }: { label: string; children: React.React
   return (
     <div>
       <p className="text-[0.62rem] tracking-[0.16em] uppercase text-gold-mid font-semibold mb-3">{label}</p>
-      <div className="flex flex-wrap gap-2">{children}</div>
+      <div className="-mx-6 px-6 md:mx-0 md:px-0">
+        <div className="flex gap-2 overflow-x-auto flex-nowrap pb-1 snap-scroll-x scrollbar-hide md:flex-wrap md:overflow-visible">
+          {children}
+        </div>
+      </div>
     </div>
   )
 }
@@ -235,10 +239,10 @@ function FilterPill({
       onClick={onClick}
       disabled={disabled}
       className={cn(
-        'text-[0.72rem] tracking-[0.08em] uppercase px-4 py-2 rounded-full border transition-all duration-250',
+        'snap-card flex-shrink-0 text-[0.72rem] tracking-[0.08em] uppercase px-4 py-2.5 rounded-full border transition-all duration-250 whitespace-nowrap',
         active
-          ? 'bg-gold-gradient text-navy-deep border-transparent font-bold shadow-[0_4px_16px_rgba(229,169,60,0.2)]'
-          : 'border-gray-200 text-navy-deep/65 hover:border-gold/45 hover:text-gold-mid',
+          ? 'bg-navy-deep text-white border-navy-deep font-semibold shadow-sm'
+          : 'bg-white text-navy-deep/70 border-[#e8e4dc] hover:border-navy-deep/30',
         disabled && 'opacity-50 cursor-not-allowed'
       )}
     >

@@ -10,7 +10,7 @@ const STATS = [
 
 export function AboutSection() {
   return (
-    <section id="about" className="py-[140px] bg-white overflow-visible">
+    <section id="about" className="py-[140px] bg-section-warm border-t border-section-divider overflow-visible">
       <div className="max-w-[1280px] mx-auto px-6 md:px-8">
 
         <div className="grid grid-cols-1 md:grid-cols-2 gap-16 md:gap-[100px] items-center mb-24">
@@ -75,7 +75,7 @@ export function AboutSection() {
               </p>
             </div>
 
-            <div className="flex gap-8 py-7 border-y border-gold/12 mb-8">
+            <div className="flex gap-8 py-7 px-6 bg-stats-warm rounded-2xl mb-8">
               {STATS.map(s => (
                 <div key={s.label}>
                   <span className="block font-display text-[2rem] gold-text-v font-bold leading-none mb-1.5">{s.num}</span>
