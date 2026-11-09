@@ -2,11 +2,11 @@
 
 import { useState } from 'react'
 import Link from 'next/link'
-import Image from 'next/image'
 import { Sheet, SheetContent, SheetTrigger } from '@/components/ui/sheet'
 import { Button } from '@/components/ui/button'
 import { Menu, Phone, MapPin, Home, Mail, ChevronDown, Building2, Users } from 'lucide-react'
 import { PHONE, PHONE_DISPLAY, AREAS } from '@/lib/data'
+import { BrandMark } from '@/components/brand/BrandMark'
 import { cn } from '@/lib/utils'
 
 type NavDropdown = {
@@ -20,8 +20,8 @@ const NAV_DROPDOWNS: NavDropdown[] = [
     label: 'For Sale',
     icon: Building2,
     items: [
-      { href: '/properties?intent=sale&type=apartments', label: 'Apartments' },
-      { href: '/properties?intent=sale&type=villas', label: 'Villas' },
+      { href: '/properties?intent=sale&type=apartment', label: 'Apartments' },
+      { href: '/properties?intent=sale&status=offplan', label: 'Off-plan' },
       { href: '/properties?intent=sale', label: 'All for Sale' },
     ],
   },
@@ -29,8 +29,8 @@ const NAV_DROPDOWNS: NavDropdown[] = [
     label: 'Listings',
     icon: MapPin,
     items: [
-      { href: '/properties?type=apartments', label: 'Apartments' },
-      { href: '/properties?type=villas', label: 'Villas' },
+      { href: '/properties?type=apartment', label: 'Apartments' },
+      { href: '/properties?status=featured', label: 'Featured' },
       { href: '/properties', label: 'All Listings' },
     ],
   },
@@ -88,26 +88,9 @@ export function Navbar() {
 
   return (
     <>
-      <header className="fixed top-0 left-0 right-0 z-50 bg-white border-b border-gray-200 shadow-sm">
+      <header className="fixed top-0 left-0 right-0 z-50 bg-white/95 backdrop-blur-md border-b border-[#eeebe5]">
         <div className="max-w-[1320px] mx-auto px-4 sm:px-6 lg:px-8 h-[72px] flex items-center justify-between gap-3">
-          <Link href="/" className="flex-shrink-0 flex items-center gap-2.5 min-w-0">
-            <Image
-              src="/images/logo-main.png"
-              alt="Sicily Realty"
-              width={200}
-              height={64}
-              className="h-11 sm:h-12 w-auto object-contain"
-              priority
-            />
-            <div className="hidden md:block leading-tight min-w-0">
-              <span className="block font-display text-lg lg:text-xl font-bold text-navy-deep tracking-tight truncate">
-                Sicily Realty
-              </span>
-              <span className="block text-[0.55rem] lg:text-[0.58rem] tracking-[0.14em] uppercase text-gold-mid font-semibold">
-                Property Advisory
-              </span>
-            </div>
-          </Link>
+          <BrandMark variant="light" size="md" />
 
           <nav className="hidden xl:flex items-center gap-6">
             {NAV_LINKS.map(link => (
@@ -141,7 +124,7 @@ export function Navbar() {
             </a>
             <Button
               asChild
-              className="bg-gold-gradient text-navy-deep font-bold text-[0.72rem] tracking-wider uppercase rounded-full px-5 h-10 shadow-sm hover:shadow-md transition-all border-0 whitespace-nowrap"
+              className="bg-gold-gradient text-navy-deep font-bold text-[0.72rem] tracking-[0.14em] uppercase rounded-none px-5 h-10 shadow-sm hover:shadow-md transition-all border-0 whitespace-nowrap"
             >
               <Link href="/#contact">Book a Viewing</Link>
             </Button>
@@ -159,12 +142,7 @@ export function Navbar() {
             </SheetTrigger>
             <SheetContent side="right" className="bg-white border-l border-gray-200 w-[300px] p-6 overflow-y-auto">
               <div className="flex flex-col gap-6 mt-6">
-                <div>
-                  <div className="font-display text-xl text-navy-deep font-bold">Sicily Realty</div>
-                  <div className="text-[0.58rem] tracking-[0.14em] uppercase text-gold-mid font-semibold mt-1">
-                    Property Advisory
-                  </div>
-                </div>
+                <div><BrandMark variant="light" size="sm" /></div>
 
                 <nav className="flex flex-col gap-4">
                   {NAV_LINKS.map(link => (
@@ -220,7 +198,7 @@ export function Navbar() {
         </div>
       </header>
 
-      <div className="fixed top-[72px] left-0 right-0 z-40 hidden lg:block bg-gray-50 border-b border-gray-200">
+      <div className="fixed top-[72px] left-0 right-0 z-40 hidden lg:block bg-[#faf9f7]/95 backdrop-blur border-b border-[#eeebe5]">
         <div className="max-w-[1320px] mx-auto px-4 sm:px-6 lg:px-8 py-2 flex items-center gap-3 flex-wrap">
           <span className="text-[0.56rem] tracking-[0.14em] uppercase text-gold-mid font-semibold flex items-center gap-1.5 flex-shrink-0">
             <MapPin size={10} />

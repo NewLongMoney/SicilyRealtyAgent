@@ -9,7 +9,6 @@ import { FaqSection } from '@/components/sections/FaqSection'
 import {
   PROPERTIES,
   BEST_SELLERS,
-  TESTIMONIALS,
   FAQ_ITEMS,
   ADVISOR,
 } from '@/lib/data'
@@ -21,7 +20,7 @@ const realEstateAgentSchema = {
   url: 'https://sicilyrealty.co.ke',
   logo: 'https://sicilyrealty.co.ke/images/logo-main.png',
   image: 'https://sicilyrealty.co.ke/images/logo-main.png',
-  description: "Sicily Realty is Nairobi's premier luxury property advisory, specialising in off-plan residential investments, apartment sales, and smart home acquisitions across Westlands, Kilimani, Kileleshwa, Lavington, and Riverside.",
+  description: "Sicily Realty is Nairobi's selective luxury property advisory, specialising in off-plan residential investments, apartment sales, and home acquisitions across Westlands, Kilimani, Kileleshwa, Lavington, and Riverside.",
   telephone: '+254799124122',
   email: 'info@sicilyrealty.co.ke',
   employee: {
@@ -37,8 +36,8 @@ const realEstateAgentSchema = {
   },
   geo: {
     '@type': 'GeoCoordinates',
-    latitude: -1.2673,
-    longitude: 36.8031,
+    latitude: -1.267,
+    longitude: 36.8105,
   },
   openingHours: 'Mo-Sa 08:00-18:00',
   priceRange: 'KES 5,000,000 - KES 62,500,000',
@@ -48,11 +47,6 @@ const realEstateAgentSchema = {
     'https://www.facebook.com/share/1D1T3i7vYD/',
     'https://www.tiktok.com/@realtorsicily',
   ],
-  aggregateRating: {
-    '@type': 'AggregateRating',
-    ratingValue: '5.0',
-    reviewCount: '18',
-  },
 }
 
 const faqSchema = {
@@ -80,10 +74,10 @@ export default function HomePage() {
         dangerouslySetInnerHTML={{ __html: JSON.stringify(faqSchema) }}
       />
       <HeroSection />
-      <PropertiesSection properties={PROPERTIES} />
+      <PropertiesSection properties={PROPERTIES} compactHeading />
       <ClosingFastSection properties={BEST_SELLERS} />
       <AboutSection />
-      <TestimonialsSection testimonials={TESTIMONIALS} />
+      <TestimonialsSection />
       <MarketBriefSection />
       <FaqSection items={FAQ_ITEMS} />
       <ContactSection />

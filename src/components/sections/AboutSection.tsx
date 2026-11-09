@@ -1,11 +1,24 @@
 import Image from 'next/image'
 import Link from 'next/link'
 import { WHATSAPP_BASE, PHONE, ADVISOR } from '@/lib/data'
+import { ShieldCheck, Compass, Handshake } from 'lucide-react'
 
-const STATS = [
-  { num: '28+', label: 'Closings Guided' },
-  { num: 'KES 180M', label: 'Value Advised' },
-  { num: '5.0', label: 'Client Rating' },
+const TRUST_POINTS = [
+  {
+    num: '01',
+    label: 'Personal advisory',
+    desc: 'One named advisor from first brief to final transfer — no call-centre handoffs.',
+  },
+  {
+    num: '02',
+    label: 'Verified shortlists',
+    desc: 'Only developments Sicily has assessed for location, product, and delivery risk.',
+  },
+  {
+    num: '03',
+    label: 'Clear next steps',
+    desc: 'Viewings, developer diligence, and negotiation guidance on terms you understand.',
+  },
 ]
 
 export function AboutSection() {
@@ -22,7 +35,7 @@ export function AboutSection() {
               Built on One Standard: Yours
             </h2>
             <div className="space-y-4 text-navy-deep/65 text-[0.97rem] leading-[1.85]">
-              <p>Sicily Realty was built for buyers who refuse to settle. Not a listing aggregator. Not a call centre. {ADVISOR.name} handles your acquisition personally — with three years inside Nairobi&apos;s most competitive property corridors.</p>
+              <p>Sicily Realty was built for buyers who refuse to settle. Not a listing aggregator. Not a call centre. {ADVISOR.name} handles your acquisition personally — with deep experience inside Nairobi&apos;s most competitive property corridors.</p>
               <p>Every engagement starts with a conversation, not a brochure. We map your financial position, timeline, and non-negotiables — then we source precisely. The result is a shortlist that fits, not a flood of options that don&apos;t.</p>
               <p>Our measure of success is simple: you close with confidence, on terms you understand, without surprises.</p>
             </div>
@@ -32,14 +45,7 @@ export function AboutSection() {
           </div>
 
           <div className="relative hidden md:flex flex-col justify-center gap-6">
-            <div className="absolute top-0 right-0 font-display text-[10rem] leading-none text-gold/[0.04] select-none pointer-events-none">
-              2022
-            </div>
-            {[
-              { num: '28+', label: 'Acquisitions Closed', desc: "Closings guided across Nairobi's prime residential corridors" },
-              { num: 'KES 180M', label: 'Total Value Advised', desc: 'Across residential acquisitions and off-plan investments' },
-              { num: '5.0', label: 'Verified Client Rating', desc: 'Average rating across completed client engagements' },
-            ].map(item => (
+            {TRUST_POINTS.map(item => (
               <div
                 key={item.label}
                 className="card-dark rounded-2xl p-6 border border-gold/15 hover:border-gold/30 transition-colors duration-250"
@@ -68,18 +74,22 @@ export function AboutSection() {
             </h3>
             <div className="space-y-4 text-navy-deep/65 text-[0.97rem] leading-[1.85] mb-8">
               <p>
-                I am {ADVISOR.name}. I have spent years inside Nairobi&apos;s property market learning what developers won&apos;t tell you and what agents don&apos;t notice. That knowledge is what I bring to every client engagement — not a template, not a pitch deck.
+                I am {ADVISOR.name}. I work inside Nairobi&apos;s property market with a focus on what developers omit and what rushed viewings miss. That judgment is what I bring to every client engagement — not a template, not a pitch deck.
               </p>
               <p>
                 Whether you are stepping into homeownership for the first time, buying from abroad, or adding a second asset to your portfolio, the process I run is the same: deliberate, transparent, and built entirely around your outcome.
               </p>
             </div>
 
-            <div className="flex gap-8 py-7 px-6 bg-stats-warm rounded-2xl mb-8">
-              {STATS.map(s => (
-                <div key={s.label}>
-                  <span className="block font-display text-[2rem] gold-text-v font-bold leading-none mb-1.5">{s.num}</span>
-                  <span className="block text-[0.65rem] tracking-[0.14em] uppercase text-navy-deep/45">{s.label}</span>
+            <div className="grid grid-cols-1 sm:grid-cols-3 gap-4 py-7 px-6 bg-stats-warm rounded-2xl mb-8">
+              {[
+                { icon: ShieldCheck, label: 'Verified listings' },
+                { icon: Compass, label: 'Corridor expertise' },
+                { icon: Handshake, label: 'Direct WhatsApp access' },
+              ].map(s => (
+                <div key={s.label} className="flex items-center gap-2.5">
+                  <s.icon size={16} className="text-gold-mid flex-shrink-0" />
+                  <span className="text-[0.72rem] tracking-[0.08em] uppercase text-navy-deep/70 font-semibold leading-snug">{s.label}</span>
                 </div>
               ))}
             </div>
@@ -108,7 +118,7 @@ export function AboutSection() {
               alt={`${ADVISOR.name}, ${ADVISOR.title} at Sicily Realty`}
               width={500}
               height={625}
-              className="relative z-10 w-full rounded-lg object-cover object-top aspect-[4/5]"
+              className="relative z-10 w-full rounded-lg object-cover object-top aspect-[4/5] shadow-[0_24px_60px_rgba(7,28,47,0.14)]"
             />
             <div className="absolute bottom-10 left-10 right-10 z-20 bg-white/95 backdrop-blur-sm rounded-xl px-5 py-4 shadow-lg border border-gray-100">
               <p className="font-display text-xl text-navy-deep font-bold">{ADVISOR.name}</p>

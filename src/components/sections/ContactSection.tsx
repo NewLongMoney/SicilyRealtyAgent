@@ -54,7 +54,7 @@ export function ContactSection() {
         <div className="grid grid-cols-1 md:grid-cols-[1.1fr_1fr] gap-16 mt-16 items-start">
 
           {/* Form */}
-          <div className="card-dark rounded-2xl p-10 shadow-[0_20px_60px_rgba(3,8,16,0.5)]">
+          <div className="card-dark p-10 md:p-12 shadow-[0_20px_60px_rgba(3,8,16,0.5)]">
             <form onSubmit={handleSubmit} className="space-y-5">
               <div>
                 <label className={labelClass}>Full Name *</label>
@@ -110,7 +110,7 @@ export function ContactSection() {
               { icon: Phone,  label: 'Phone',   value: PHONE_DISPLAY, href: `tel:${PHONE}` },
             ].map(item => (
               <div key={item.label} className="flex gap-4 items-start">
-                <div className="w-10 h-10 rounded-xl bg-gold/10 border border-gold/20 flex items-center justify-center flex-shrink-0 mt-0.5">
+                <div className="w-10 h-10 bg-gold/10 border border-gold/20 flex items-center justify-center flex-shrink-0 mt-0.5">
                   <item.icon size={16} className="text-gold" />
                 </div>
                 <div>
@@ -127,18 +127,20 @@ export function ContactSection() {
               </div>
             ))}
 
-            {/* Map */}
-            <div className="mt-4 rounded-xl overflow-hidden border border-gold/15">
+            {/* Map — OSM Westlands centroid (no API key). Exact office pin pending client address. */}
+            <div className="mt-4 rounded-xl overflow-hidden border border-gold/15 shadow-sm">
               <iframe
-                src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3988.8196!2d36.8031!3d-1.2673!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x182f173c0a1f9de7%3A0x46e3b0de38c1b47a!2sWestlands%2C%20Nairobi!5e0!3m2!1sen!2ske!4v1"
+                src="https://www.openstreetmap.org/export/embed.html?bbox=36.7855%2C-1.2820%2C36.8355%2C-1.2520&layer=mapnik&marker=-1.2670%2C36.8105"
                 width="100%"
                 height="220"
-                className="border-0 opacity-80"
-                style={{ filter: 'invert(0.88) hue-rotate(180deg) saturate(0.8)' }}
+                className="border-0"
                 allowFullScreen
                 loading="lazy"
                 title="Sicily Realty — Westlands, Nairobi"
               />
+              <p className="px-3 py-2 text-[0.7rem] text-navy-deep/50 bg-white border-t border-gold/10">
+                Meetings in Westlands, Nairobi — exact pin shared when you book.
+              </p>
             </div>
           </div>
         </div>

@@ -1,12 +1,25 @@
 'use client'
 
-import { useMemo } from 'react'
+import { useMemo, useState } from 'react'
 import Link from 'next/link'
 import { usePathname, useRouter } from 'next/navigation'
 import { PropertyCard } from '@/components/ui/PropertyCard'
 import { SectionHeading } from '@/components/ui/SectionHeading'
+import { AreaMap } from '@/components/map/AreaMap'
 import { cn } from '@/lib/utils'
-import type { Property, PropertyArea, PropertyType } from '@/lib/data'
+import type { Property, PropertyArea } from '@/lib/data'
+import {
+  PRICE_BANDS,
+  matchesBedsLoose,
+  matchesPriceBand,
+  matchesStatus,
+  sortProperties,
+  type BedsFilter,
+  type PriceBand,
+  type SortKey,
+  type StatusFilter,
+} from '@/lib/filters'
+import { LayoutGrid, Map as MapIcon } from 'lucide-react'
 
 const AREA_FILTERS: { value: 'all' | PropertyArea; label: string }[] = [
   { value: 'all', label: 'All Areas' },
@@ -17,12 +30,6 @@ const AREA_FILTERS: { value: 'all' | PropertyArea; label: string }[] = [
   { value: 'kileleshwa', label: 'Kileleshwa' },
 ]
 
-const TYPE_FILTERS: { value: 'all' | PropertyType; label: string }[] = [
-  { value: 'all', label: 'All Types' },
-  { value: 'apartment', label: 'Apartments' },
-  { value: 'villa', label: 'Villas' },
-]
-
 const COLLECTION_FILTERS = [
   { value: 'all', label: 'All Listings' },
   { value: 'signature', label: 'Signature' },
@@ -31,13 +38,35 @@ const COLLECTION_FILTERS = [
   { value: 'featured', label: 'Featured' },
 ] as const
 
+const BED_FILTERS: { value: BedsFilter; label: string }[] = [
+  { value: 'all', label: 'Any beds' },
+  { value: '1', label: '1 BR' },
+  { value: '2', label: '2 BR' },
+  { value: '3', label: '3 BR' },
+  { value: '4', label: '4+ BR' },
+]
+
+const STATUS_FILTERS: { value: StatusFilter; label: string }[] = [
+  { value: 'all', label: 'Any status' },
+  { value: 'offplan', label: 'Off-plan' },
+  { value: 'ready', label: 'Ready' },
+  { value: 'featured', label: 'Featured' },
+]
+
 interface Props {
   properties: Property[]
   initialArea?: string
   initialType?: string
   initialCategory?: string
   initialListing?: string
+  initialBeds?: string
+  initialPrice?: string
+  initialStatus?: string
+  initialSort?: string
   highlightedProperty?: string
+  /** Homepage: keep section heading. Properties page supplies its own page H1. */
+  compactHeading?: boolean
+  showMap?: boolean
 }
 
 function normalizeArea(value?: string): 'all' | PropertyArea {
@@ -45,30 +74,51 @@ function normalizeArea(value?: string): 'all' | PropertyArea {
   return AREA_FILTERS.some(f => f.value === normalized) ? normalized : 'all'
 }
 
-function normalizeType(value?: string): 'all' | PropertyType {
-  const normalized = value?.toLowerCase() as PropertyType
-  return TYPE_FILTERS.some(f => f.value === normalized) ? normalized : 'all'
-}
-
 function normalizeCollection(value?: string): string {
   const normalized = value?.toLowerCase()
   return COLLECTION_FILTERS.some(f => f.value === normalized) ? normalized! : 'all'
 }
 
+function normalizeBeds(value?: string): BedsFilter {
+  if (value === '1' || value === '2' || value === '3' || value === '4') return value
+  return 'all'
+}
+
+function normalizePrice(value?: string): PriceBand {
+  return PRICE_BANDS.some(b => b.value === value) ? (value as PriceBand) : 'all'
+}
+
+function normalizeStatus(value?: string): StatusFilter {
+  if (value === 'offplan' || value === 'ready' || value === 'featured') return value
+  return 'all'
+}
+
+function normalizeSort(value?: string): SortKey {
+  if (value === 'price-asc' || value === 'price-desc' || value === 'name' || value === 'featured') return value
+  return 'featured'
+}
+
 export function PropertiesSection({
   properties,
   initialArea,
-  initialType,
   initialCategory,
-  initialListing,
+  initialBeds,
+  initialPrice,
+  initialStatus,
+  initialSort,
   highlightedProperty,
+  compactHeading = false,
+  showMap = true,
 }: Props) {
   const router = useRouter()
   const pathname = usePathname()
   const area = normalizeArea(initialArea)
-  const type = normalizeType(initialType)
   const collection = normalizeCollection(initialCategory)
-  const listing = initialListing?.toLowerCase() === 'rent' ? 'rent' : initialListing?.toLowerCase() === 'sale' ? 'sale' : 'all'
+  const beds = normalizeBeds(initialBeds)
+  const price = normalizePrice(initialPrice)
+  const status = normalizeStatus(initialStatus)
+  const sort = normalizeSort(initialSort)
+  const [view, setView] = useState<'grid' | 'map'>('grid')
 
   const focusedProperty = useMemo(() => {
     if (!highlightedProperty) return null
@@ -78,35 +128,39 @@ export function PropertiesSection({
   const filtered = useMemo(() => {
     if (focusedProperty) return [focusedProperty]
 
-    return properties.filter(property => {
+    const list = properties.filter(property => {
       const matchesArea = area === 'all' || property.area === area
-      const matchesType = type === 'all' || property.type === type
-      const matchesListing = listing === 'all' || property.listing === listing
       const matchesCollection =
         collection === 'all' ||
         (collection === 'featured' ? property.featured : property.category === collection)
-      return matchesArea && matchesType && matchesListing && matchesCollection
+      return (
+        matchesArea &&
+        matchesCollection &&
+        matchesBedsLoose(property, beds) &&
+        matchesPriceBand(property, price) &&
+        matchesStatus(property, status)
+      )
     })
-  }, [area, type, collection, listing, focusedProperty, properties])
+    return sortProperties(list, sort)
+  }, [area, collection, beds, price, status, sort, focusedProperty, properties])
 
-  function updateFilters(updates: {
-    area?: string
-    type?: string
-    category?: string
-    listing?: string
-  }) {
+  function updateFilters(updates: Record<string, string | undefined>) {
     const params = new URLSearchParams()
-    const nextArea = updates.area !== undefined ? normalizeArea(updates.area) : area
-    const nextType = updates.type !== undefined ? normalizeType(updates.type) : type
-    const nextCollection = updates.category !== undefined ? normalizeCollection(updates.category) : collection
-    const nextListing = updates.listing !== undefined
-      ? (updates.listing === 'rent' ? 'rent' : updates.listing === 'sale' ? 'sale' : 'all')
-      : listing
+    const next = {
+      area: updates.area !== undefined ? normalizeArea(updates.area) : area,
+      category: updates.category !== undefined ? normalizeCollection(updates.category) : collection,
+      beds: updates.beds !== undefined ? normalizeBeds(updates.beds) : beds,
+      price: updates.price !== undefined ? normalizePrice(updates.price) : price,
+      status: updates.status !== undefined ? normalizeStatus(updates.status) : status,
+      sort: updates.sort !== undefined ? normalizeSort(updates.sort) : sort,
+    }
 
-    if (nextArea !== 'all') params.set('area', nextArea)
-    if (nextType !== 'all') params.set('type', nextType)
-    if (nextCollection !== 'all') params.set('category', nextCollection)
-    if (nextListing !== 'all') params.set('intent', nextListing)
+    if (next.area !== 'all') params.set('area', next.area)
+    if (next.category !== 'all') params.set('category', next.category)
+    if (next.beds !== 'all') params.set('beds', next.beds)
+    if (next.price !== 'all') params.set('price', next.price)
+    if (next.status !== 'all') params.set('status', next.status)
+    if (next.sort !== 'featured') params.set('sort', next.sort)
 
     const queryString = params.toString()
     router.replace(queryString ? `${pathname}?${queryString}#properties` : `${pathname}#properties`, {
@@ -114,30 +168,74 @@ export function PropertiesSection({
     })
   }
 
-  const hasActiveFilters = !focusedProperty && (area !== 'all' || type !== 'all' || collection !== 'all' || listing !== 'all')
+  const hasActiveFilters =
+    !focusedProperty &&
+    (area !== 'all' || collection !== 'all' || beds !== 'all' || price !== 'all' || status !== 'all' || sort !== 'featured')
 
   return (
     <section id="properties" className="py-16 md:py-20 bg-white border-t border-section-divider">
       <div className="max-w-[1280px] mx-auto px-4 md:px-6">
-        <SectionHeading
-          eyebrow="Our Portfolio"
-          title={`${properties.length} Verified Residences Across Nairobi`}
-          subtitle="Filter by area, property type, or collection. Every listing has been personally assessed by Sicily Realty."
-        />
+        {compactHeading ? (
+          <SectionHeading
+            eyebrow="Our Portfolio"
+            title={`${properties.length} Verified Residences Across Nairobi`}
+            subtitle="Filter by area, budget, bedrooms, or status. Every listing has been personally assessed by Sicily Realty."
+          />
+        ) : null}
 
-        <div className="mt-12 space-y-8">
+        <div className={cn('space-y-8', compactHeading ? 'mt-12' : 'mt-2')}>
           <div className="flex items-center justify-between gap-4 flex-wrap">
             <p className="text-[0.72rem] tracking-[0.14em] uppercase text-navy-deep/50">
               Showing {filtered.length} {filtered.length === 1 ? 'property' : 'properties'}
             </p>
-            {hasActiveFilters && (
-              <Link
-                href="/properties#properties"
-                className="text-[0.72rem] tracking-[0.12em] uppercase text-gold-mid hover:text-gold-bright transition-colors"
-              >
-                Clear all filters
-              </Link>
-            )}
+            <div className="flex items-center gap-3 flex-wrap">
+              <label className="text-[0.62rem] tracking-[0.14em] uppercase text-navy-deep/45 font-semibold">
+                Sort
+                <select
+                  className="ml-2 rounded-full border border-gray-200 bg-white px-3 py-1.5 text-[0.8rem] text-navy-deep tracking-normal normal-case"
+                  value={sort}
+                  onChange={e => updateFilters({ sort: e.target.value })}
+                  disabled={!!focusedProperty}
+                >
+                  <option value="featured">Featured first</option>
+                  <option value="price-asc">Price · low to high</option>
+                  <option value="price-desc">Price · high to low</option>
+                  <option value="name">Name</option>
+                </select>
+              </label>
+              {showMap && (
+                <div className="inline-flex rounded-full border border-gray-200 p-0.5 bg-white">
+                  <button
+                    type="button"
+                    onClick={() => setView('grid')}
+                    className={cn(
+                      'inline-flex items-center gap-1.5 px-3 py-1.5 rounded-full text-[0.72rem] tracking-[0.08em] uppercase font-semibold transition-colors',
+                      view === 'grid' ? 'bg-navy-deep text-white' : 'text-navy-deep/60'
+                    )}
+                  >
+                    <LayoutGrid size={12} /> Grid
+                  </button>
+                  <button
+                    type="button"
+                    onClick={() => setView('map')}
+                    className={cn(
+                      'inline-flex items-center gap-1.5 px-3 py-1.5 rounded-full text-[0.72rem] tracking-[0.08em] uppercase font-semibold transition-colors',
+                      view === 'map' ? 'bg-navy-deep text-white' : 'text-navy-deep/60'
+                    )}
+                  >
+                    <MapIcon size={12} /> Map
+                  </button>
+                </div>
+              )}
+              {hasActiveFilters && (
+                <Link
+                  href={`${pathname}#properties`}
+                  className="text-[0.72rem] tracking-[0.12em] uppercase text-gold-mid hover:text-gold-bright transition-colors"
+                >
+                  Clear all
+                </Link>
+              )}
+            </div>
           </div>
 
           <FilterGroup label="Location">
@@ -153,13 +251,39 @@ export function PropertiesSection({
             ))}
           </FilterGroup>
 
-          <FilterGroup label="Property Type">
-            {TYPE_FILTERS.map(filter => (
+          <FilterGroup label="Budget">
+            {PRICE_BANDS.map(filter => (
               <FilterPill
                 key={filter.value}
-                active={!focusedProperty && type === filter.value}
+                active={!focusedProperty && price === filter.value}
                 disabled={!!focusedProperty}
-                onClick={() => updateFilters({ type: filter.value })}
+                onClick={() => updateFilters({ price: filter.value })}
+              >
+                {filter.label}
+              </FilterPill>
+            ))}
+          </FilterGroup>
+
+          <FilterGroup label="Bedrooms">
+            {BED_FILTERS.map(filter => (
+              <FilterPill
+                key={filter.value}
+                active={!focusedProperty && beds === filter.value}
+                disabled={!!focusedProperty}
+                onClick={() => updateFilters({ beds: filter.value })}
+              >
+                {filter.label}
+              </FilterPill>
+            ))}
+          </FilterGroup>
+
+          <FilterGroup label="Status">
+            {STATUS_FILTERS.map(filter => (
+              <FilterPill
+                key={filter.value}
+                active={!focusedProperty && status === filter.value}
+                disabled={!!focusedProperty}
+                onClick={() => updateFilters({ status: filter.value })}
               >
                 {filter.label}
               </FilterPill>
@@ -177,26 +301,29 @@ export function PropertiesSection({
                 {filter.label}
               </FilterPill>
             ))}
-            {hasActiveFilters && (
-              <Link
-                href="/properties#properties"
-                className="snap-card flex-shrink-0 inline-flex items-center px-4 py-2 rounded-full text-sm border border-gray-200 bg-white text-gray-700 hover:bg-gray-50 transition-all whitespace-nowrap"
-              >
-                Clear all
-              </Link>
-            )}
           </FilterGroup>
         </div>
 
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 mt-12">
-          {filtered.map(p => (
-            <PropertyCard
-              key={p.id}
-              property={p}
-              className={highlightedProperty === p.id ? 'ring-2 ring-gold/40 shadow-[0_24px_60px_rgba(229,169,60,0.12)]' : undefined}
+        {showMap && view === 'map' && (
+          <div className="mt-10">
+            <AreaMap
+              properties={focusedProperty ? [focusedProperty] : filtered}
+              activeArea={area}
             />
-          ))}
-        </div>
+          </div>
+        )}
+
+        {(view === 'grid' || !showMap) && (
+          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 mt-12">
+            {filtered.map(p => (
+              <PropertyCard
+                key={p.id}
+                property={p}
+                className={highlightedProperty === p.id ? 'ring-2 ring-gold/40 shadow-[0_24px_60px_rgba(229,169,60,0.12)]' : undefined}
+              />
+            ))}
+          </div>
+        )}
 
         {filtered.length === 0 && (
           <div className="rounded-2xl border border-gray-100 bg-gray-50 px-8 py-12 text-center mt-12">
@@ -249,8 +376,8 @@ function FilterPill({
       className={cn(
         'snap-card flex-shrink-0 inline-flex items-center px-4 py-2 rounded-full text-sm border transition-all whitespace-nowrap',
         active
-          ? 'bg-zinc-900 text-white border-zinc-900 font-semibold shadow-sm'
-          : 'bg-white border-gray-200 text-gray-700 hover:bg-gray-50',
+          ? 'bg-navy-deep text-white border-navy-deep font-semibold shadow-sm'
+          : 'bg-white border-gray-200 text-gray-700 hover:bg-gray-50 hover:border-gold/30',
         disabled && 'opacity-50 cursor-not-allowed'
       )}
     >

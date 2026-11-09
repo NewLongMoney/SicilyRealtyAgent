@@ -25,7 +25,7 @@ export function ClosingFastSection({ properties }: Props) {
                 key={p.id}
                 href={`/properties/${p.id}`}
                 className={cn(
-                  'group bg-white rounded-2xl overflow-hidden border border-gray-100',
+                  'group bg-white overflow-hidden border border-[#eeebe5]',
                   'shadow-[0_4px_24px_rgba(7,28,47,0.06)]',
                   'transition-all duration-400 hover:-translate-y-2 hover:shadow-[0_20px_60px_rgba(7,28,47,0.1)] hover:border-gold/25',
                   isFeatured ? 'md:col-span-2 md:grid md:grid-cols-2' : 'md:col-span-1'

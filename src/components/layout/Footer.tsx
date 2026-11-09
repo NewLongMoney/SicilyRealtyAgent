@@ -1,6 +1,6 @@
-import Image from 'next/image'
 import Link from 'next/link'
 import { EMAIL, PHONE, PHONE_DISPLAY } from '@/lib/data'
+import { BrandMark } from '@/components/brand/BrandMark'
 
 const SOCIAL_LINKS = [
   {
@@ -33,9 +33,7 @@ export function Footer() {
 
           {/* Brand column */}
           <div>
-            <Image src="/images/logo-main.png" alt="Sicily Realty"
-              width={160} height={52} className="h-12 w-auto object-contain mb-3" />
-            <p className="text-lg font-bold text-white tracking-wide mb-2">Sicily Realty</p>
+            <div className="mb-4"><BrandMark variant="dark" size="md" /></div>
             <p className="text-[0.82rem] text-sicily-body/70 leading-[1.7] max-w-[260px] mb-5">
               Nairobi&apos;s most selective property advisory. We don&apos;t list everything — only what we would buy ourselves.
             </p>

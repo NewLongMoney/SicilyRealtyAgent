@@ -1,6 +1,6 @@
 'use client'
 
-import { useState } from 'react'
+import { useEffect, useMemo, useState } from 'react'
 import Image from 'next/image'
 import Link from 'next/link'
 import {
@@ -11,11 +11,16 @@ import {
   ArrowLeft,
   MessageCircle,
   ChevronRight,
+  ChevronLeft,
   Landmark,
   CreditCard,
+  Phone,
+  X,
 } from 'lucide-react'
 import type { Property } from '@/lib/data'
-import { AREA_LABELS, CATEGORY_LABELS, WHATSAPP_BASE, DEVELOPER_ON_REQUEST } from '@/lib/data'
+import { AREA_LABELS, CATEGORY_LABELS, WHATSAPP_BASE, DEVELOPER_ON_REQUEST, PHONE, PHONE_DISPLAY, PROPERTIES } from '@/lib/data'
+import { osmEmbedUrl } from '@/lib/areas'
+import { PropertyCard } from '@/components/ui/PropertyCard'
 import { cn } from '@/lib/utils'
 
 const STATUS_LABELS: Record<Property['status'], string> = {
@@ -32,17 +37,87 @@ interface Props {
 
 export function PropertyDetail({ property, images }: Props) {
   const [activeImage, setActiveImage] = useState(0)
+  const [lightbox, setLightbox] = useState(false)
   const gallery = images.length > 0 ? images : [property.image]
   const waUrl = `${WHATSAPP_BASE}?text=${encodeURIComponent(property.whatsappText)}`
+  const brochureWa = `${WHATSAPP_BASE}?text=${encodeURIComponent(
+    `Hi Sicily, please share the brochure, floor plans, and current availability for ${property.name}.`
+  )}`
   const devWaUrl = `${WHATSAPP_BASE}?text=${encodeURIComponent(
     `Hi Sicily, please share the full developer track record and delivery history for ${property.name}.`
   )}`
   const isDeveloperOnRequest =
     !property.developer || property.developer.toLowerCase().includes('on request')
 
+  const similar = useMemo(() => {
+    return PROPERTIES.filter(
+      p => p.id !== property.id && (p.area === property.area || p.category === property.category)
+    )
+      .sort((a, b) => Math.abs(a.priceFrom - property.priceFrom) - Math.abs(b.priceFrom - property.priceFrom))
+      .slice(0, 3)
+  }, [property])
+
+  useEffect(() => {
+    if (!lightbox) return
+    const onKey = (e: KeyboardEvent) => {
+      if (e.key === 'Escape') setLightbox(false)
+      if (e.key === 'ArrowRight') setActiveImage(i => (i + 1) % gallery.length)
+      if (e.key === 'ArrowLeft') setActiveImage(i => (i - 1 + gallery.length) % gallery.length)
+    }
+    window.addEventListener('keydown', onKey)
+    document.body.style.overflow = 'hidden'
+    return () => {
+      window.removeEventListener('keydown', onKey)
+      document.body.style.overflow = ''
+    }
+  }, [lightbox, gallery.length])
+
+  const residenceSchema = {
+    '@context': 'https://schema.org',
+    '@type': 'Residence',
+    name: property.name,
+    description: property.overview,
+    url: `https://sicilyrealty.co.ke/properties/${property.id}`,
+    image: gallery.slice(0, 6).map(src =>
+      src.startsWith('http') ? src : `https://sicilyrealty.co.ke${src}`
+    ),
+    address: {
+      '@type': 'PostalAddress',
+      streetAddress: property.address ?? AREA_LABELS[property.area],
+      addressLocality: 'Nairobi',
+      addressCountry: 'KE',
+    },
+  }
+
+  const offerSchema = {
+    '@context': 'https://schema.org',
+    '@type': 'Offer',
+    name: property.name,
+    description: `${property.bedrooms} · ${property.price}`,
+    url: `https://sicilyrealty.co.ke/properties/${property.id}`,
+    priceCurrency: 'KES',
+    price: property.priceFrom,
+    availability: 'https://schema.org/InStock',
+    seller: {
+      '@type': 'RealEstateAgent',
+      name: 'Sicily Realty',
+      telephone: '+254799124122',
+      url: 'https://sicilyrealty.co.ke',
+    },
+  }
+
   return (
-    <main className="min-h-screen bg-white pt-24 md:pt-[7.5rem] lg:pt-32 pb-24">
-      <div className="max-w-[1280px] mx-auto px-6 md:px-8">
+    <main className="min-h-screen bg-white pt-24 md:pt-[7.5rem] lg:pt-32 pb-28 md:pb-24">
+      <script
+        type="application/ld+json"
+        dangerouslySetInnerHTML={{ __html: JSON.stringify(residenceSchema) }}
+      />
+      <script
+        type="application/ld+json"
+        dangerouslySetInnerHTML={{ __html: JSON.stringify(offerSchema) }}
+      />
+
+      <div className="max-w-[1280px] mx-auto px-4 sm:px-6 md:px-8">
         <Link
           href="/properties#properties"
           className="inline-flex items-center gap-2 text-[0.72rem] tracking-[0.14em] uppercase text-navy-deep/50 hover:text-gold-mid transition-colors mb-8"
@@ -53,13 +128,17 @@ export function PropertyDetail({ property, images }: Props) {
 
         <div className="grid gap-10 lg:grid-cols-[1.15fr_0.85fr] lg:gap-14 items-start">
           <div>
-            <div className="relative aspect-[16/10] rounded-3xl overflow-hidden shadow-[0_24px_80px_rgba(7,28,47,0.12)] border border-gray-100">
+            <button
+              type="button"
+              onClick={() => setLightbox(true)}
+              className="relative aspect-[16/10] w-full rounded-3xl overflow-hidden shadow-[0_24px_80px_rgba(7,28,47,0.12)] border border-gray-100 group text-left"
+            >
               <Image
                 src={gallery[activeImage]}
                 alt={`${property.name} — photo ${activeImage + 1}`}
                 fill
                 priority
-                className="object-cover"
+                className="object-cover transition-transform duration-700 group-hover:scale-[1.02]"
                 sizes="(max-width: 1024px) 100vw, 65vw"
               />
               <div className="absolute top-4 left-4 flex flex-wrap gap-2">
@@ -70,7 +149,10 @@ export function PropertyDetail({ property, images }: Props) {
                   {CATEGORY_LABELS[property.category]}
                 </span>
               </div>
-            </div>
+              <span className="absolute bottom-4 right-4 rounded-full bg-navy-deep/80 text-white text-[0.65rem] tracking-[0.12em] uppercase px-3 py-1.5 opacity-0 group-hover:opacity-100 transition-opacity">
+                Open gallery
+              </span>
+            </button>
 
             {gallery.length > 1 && (
               <div className="mt-4 flex gap-2 overflow-x-auto pb-2 scrollbar-hide snap-scroll-x">
@@ -111,25 +193,31 @@ export function PropertyDetail({ property, images }: Props) {
               {property.description}
             </p>
 
-            <div className="flex flex-wrap gap-4 mb-8 pb-8 border-b border-gray-100">
-              <div>
+            <div className="grid grid-cols-2 gap-3 sm:flex sm:flex-wrap sm:gap-4 mb-8 pb-8 border-b border-gray-100">
+              <div className="min-w-0 rounded-xl bg-stats-warm/60 px-3 py-3 sm:bg-transparent sm:p-0">
                 <p className="text-[0.6rem] tracking-[0.16em] uppercase text-navy-deep/40 mb-1">From</p>
-                <p className="font-display text-[2rem] gold-text-v font-bold leading-none">{property.price}</p>
+                <p className="font-display text-[1.35rem] sm:text-[2rem] gold-text-v font-bold leading-tight break-words">
+                  {property.price}
+                </p>
               </div>
-              <div>
+              <div className="min-w-0 rounded-xl bg-stats-warm/60 px-3 py-3 sm:bg-transparent sm:p-0">
                 <p className="text-[0.6rem] tracking-[0.16em] uppercase text-navy-deep/40 mb-1">Layout</p>
-                <p className="text-navy-deep font-semibold text-[0.95rem]">{property.bedrooms}</p>
+                <p className="text-navy-deep font-semibold text-[0.88rem] sm:text-[0.95rem] leading-snug break-words">
+                  {property.bedrooms}
+                </p>
               </div>
               {property.completion && (
-                <div>
+                <div className="min-w-0 rounded-xl bg-stats-warm/60 px-3 py-3 sm:bg-transparent sm:p-0">
                   <p className="text-[0.6rem] tracking-[0.16em] uppercase text-navy-deep/40 mb-1 flex items-center gap-1">
                     <Calendar size={10} /> Completion
                   </p>
-                  <p className="text-navy-deep font-semibold text-[0.95rem]">{property.completion}</p>
+                  <p className="text-navy-deep font-semibold text-[0.88rem] sm:text-[0.95rem] break-words">
+                    {property.completion}
+                  </p>
                 </div>
               )}
               {property.paymentPlanAvailable !== false && property.status !== 'complete' && (
-                <div>
+                <div className="min-w-0 rounded-xl bg-stats-warm/60 px-3 py-3 sm:bg-transparent sm:p-0">
                   <p className="text-[0.6rem] tracking-[0.16em] uppercase text-navy-deep/40 mb-1 flex items-center gap-1">
                     <CreditCard size={10} /> Payment
                   </p>
@@ -153,7 +241,7 @@ export function PropertyDetail({ property, images }: Props) {
                     className="mt-3 inline-flex items-center gap-2 text-[0.72rem] tracking-[0.06em] uppercase font-semibold text-navy-deep border border-gray-200 bg-white px-4 py-2.5 rounded-full hover:border-gold/40 hover:text-gold-mid transition-all"
                   >
                     <MessageCircle size={14} />
-                    Request full developer track record &amp; delivery history via WhatsApp
+                    Request developer track record via WhatsApp
                   </Link>
                 )}
               </div>
@@ -170,13 +258,22 @@ export function PropertyDetail({ property, images }: Props) {
                 Book a Site Visit
               </Link>
               <Link
-                href="/#contact"
+                href={`tel:${PHONE}`}
                 className="inline-flex items-center justify-center gap-2 border border-gray-200 text-navy-deep font-semibold text-[0.82rem] tracking-[0.08em] uppercase px-7 py-4 rounded-full hover:border-gold/40 hover:text-gold-mid transition-all"
               >
-                Request Brochure
-                <ChevronRight size={16} />
+                <Phone size={16} />
+                Call {PHONE_DISPLAY}
               </Link>
             </div>
+            <Link
+              href={brochureWa}
+              target="_blank"
+              rel="noopener"
+              className="mt-3 inline-flex w-full items-center justify-center gap-2 text-[0.78rem] tracking-[0.08em] uppercase text-navy-deep/70 hover:text-gold-mid transition-colors font-semibold"
+            >
+              Request brochure &amp; floor plans
+              <ChevronRight size={16} />
+            </Link>
 
             {property.address && (
               <p className="mt-6 text-[0.85rem] text-navy-deep/50 flex items-start gap-2">
@@ -247,6 +344,25 @@ export function PropertyDetail({ property, images }: Props) {
                 </ul>
               </section>
             )}
+
+            <section>
+              <h2 className="font-display text-[1.75rem] text-navy-deep mb-5 after:content-[''] after:block after:w-10 after:h-0.5 after:bg-gold-gradient after:mt-3">
+                Location · {AREA_LABELS[property.area]}
+              </h2>
+              <p className="text-navy-deep/60 text-sm mb-4">
+                Map centred on the {AREA_LABELS[property.area]} neighbourhood. Exact building pins are shared on request after your brief.
+              </p>
+              <div className="rounded-2xl overflow-hidden border border-gray-100 shadow-sm">
+                <iframe
+                  src={osmEmbedUrl(property.area)}
+                  width="100%"
+                  height="280"
+                  className="border-0"
+                  loading="lazy"
+                  title={`${property.name} — ${AREA_LABELS[property.area]}, Nairobi`}
+                />
+              </div>
+            </section>
           </div>
 
           <aside className="space-y-6">
@@ -278,7 +394,7 @@ export function PropertyDetail({ property, images }: Props) {
               </div>
             )}
 
-            <div className="rounded-2xl bg-navy-deep p-6 text-white">
+            <div className="rounded-2xl bg-navy-deep p-6 text-white shadow-[0_20px_50px_rgba(7,28,47,0.25)]">
               <p className="text-[0.65rem] tracking-[0.16em] uppercase text-gold-bright font-semibold mb-2">Next Step</p>
               <p className="font-display text-xl leading-[1.35] mb-5">
                 Ready to view {property.name}?
@@ -290,6 +406,12 @@ export function PropertyDetail({ property, images }: Props) {
                 className="inline-flex w-full items-center justify-center gap-2 bg-gold-gradient text-navy-deep font-bold text-[0.78rem] tracking-[0.08em] uppercase py-3.5 rounded-full hover:opacity-90 transition-opacity"
               >
                 Message on WhatsApp
+              </Link>
+              <Link
+                href={`tel:${PHONE}`}
+                className="mt-3 inline-flex w-full items-center justify-center gap-2 border border-white/20 text-white font-semibold text-[0.78rem] tracking-[0.08em] uppercase py-3.5 rounded-full hover:bg-white/5 transition-colors"
+              >
+                Call {PHONE_DISPLAY}
               </Link>
             </div>
           </aside>
@@ -307,7 +429,7 @@ export function PropertyDetail({ property, images }: Props) {
                   type="button"
                   onClick={() => {
                     setActiveImage(i)
-                    window.scrollTo({ top: 0, behavior: 'smooth' })
+                    setLightbox(true)
                   }}
                   className="relative aspect-[4/3] rounded-2xl overflow-hidden border border-gray-100 shadow-sm hover:shadow-lg hover:scale-[1.01] transition-all duration-300 group"
                 >
@@ -323,7 +445,92 @@ export function PropertyDetail({ property, images }: Props) {
             </div>
           </section>
         )}
+
+        {similar.length > 0 && (
+          <section className="mt-20">
+            <h2 className="font-display text-[1.75rem] text-navy-deep mb-8 after:content-[''] after:block after:w-10 after:h-0.5 after:bg-gold-gradient after:mt-3">
+              Similar residences
+            </h2>
+            <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
+              {similar.map(p => (
+                <PropertyCard key={p.id} property={p} />
+              ))}
+            </div>
+          </section>
+        )}
       </div>
+
+      {/* Sticky mobile CTA */}
+      <div className="fixed bottom-[64px] inset-x-0 z-40 md:hidden px-3 pb-2 pointer-events-none">
+        <div className="pointer-events-auto mx-auto max-w-lg grid grid-cols-2 gap-2 rounded-2xl bg-navy-deep/95 backdrop-blur border border-gold/20 p-2 shadow-[0_12px_40px_rgba(3,8,16,0.45)]">
+          <Link
+            href={waUrl}
+            target="_blank"
+            rel="noopener"
+            className="inline-flex items-center justify-center gap-1.5 bg-gold-gradient text-navy-deep font-bold text-[0.68rem] tracking-[0.06em] uppercase py-3 rounded-xl"
+          >
+            <MessageCircle size={14} /> WhatsApp
+          </Link>
+          <Link
+            href={`tel:${PHONE}`}
+            className="inline-flex items-center justify-center gap-1.5 bg-white text-navy-deep font-bold text-[0.68rem] tracking-[0.06em] uppercase py-3 rounded-xl"
+          >
+            <Phone size={14} /> Call
+          </Link>
+        </div>
+      </div>
+
+      {lightbox && (
+        <div
+          className="fixed inset-0 z-[80] bg-navy-deep/95 backdrop-blur-sm flex flex-col"
+          role="dialog"
+          aria-modal="true"
+          aria-label={`${property.name} gallery`}
+        >
+          <div className="flex items-center justify-between px-4 py-3 text-white">
+            <p className="text-[0.75rem] tracking-[0.12em] uppercase text-gold">
+              {activeImage + 1} / {gallery.length}
+            </p>
+            <button
+              type="button"
+              onClick={() => setLightbox(false)}
+              className="inline-flex items-center gap-2 rounded-full border border-white/20 px-3 py-2 text-sm hover:bg-white/10"
+            >
+              <X size={16} /> Close
+            </button>
+          </div>
+          <div className="relative flex-1 mx-3 mb-3 rounded-2xl overflow-hidden">
+            <Image
+              src={gallery[activeImage]}
+              alt={`${property.name} — photo ${activeImage + 1}`}
+              fill
+              className="object-contain"
+              sizes="100vw"
+              priority
+            />
+            {gallery.length > 1 && (
+              <>
+                <button
+                  type="button"
+                  aria-label="Previous photo"
+                  onClick={() => setActiveImage(i => (i - 1 + gallery.length) % gallery.length)}
+                  className="absolute left-3 top-1/2 -translate-y-1/2 w-11 h-11 rounded-full bg-white/90 text-navy-deep flex items-center justify-center hover:bg-white"
+                >
+                  <ChevronLeft size={22} />
+                </button>
+                <button
+                  type="button"
+                  aria-label="Next photo"
+                  onClick={() => setActiveImage(i => (i + 1) % gallery.length)}
+                  className="absolute right-3 top-1/2 -translate-y-1/2 w-11 h-11 rounded-full bg-white/90 text-navy-deep flex items-center justify-center hover:bg-white"
+                >
+                  <ChevronRight size={22} />
+                </button>
+              </>
+            )}
+          </div>
+        </div>
+      )}
     </main>
   )
 }

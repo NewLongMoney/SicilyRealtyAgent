@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 280 200" role="img" aria-label="Sicily Realty">
+  <defs>
+    <linearGradient id="gold" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0%" stop-color="#F6C667"/>
+      <stop offset="100%" stop-color="#C8841F"/>
+    </linearGradient>
+  </defs>
+  <g transform="translate(102,8)">
+    <rect x="1.5" y="1.5" width="72" height="72" fill="none" stroke="url(#gold)" stroke-width="1.4"/>
+    <path d="M38 1.5 L40 4.4 L36 4.4 Z" fill="url(#gold)"/>
+    <text x="38" y="50" text-anchor="middle" font-family="Cormorant Garamond, Georgia, serif"
+          font-size="34" font-weight="700" fill="url(#gold)">SR</text>
+  </g>
+  <text x="140" y="118" text-anchor="middle" font-family="Cormorant Garamond, Georgia, serif"
+        font-size="28" font-weight="700" letter-spacing="0.08em" fill="#071C2F">SICILY REALTY</text>
+  <text x="140" y="142" text-anchor="middle" font-family="DM Sans, Helvetica, Arial, sans-serif"
+        font-size="10" font-weight="600" letter-spacing="0.34em" fill="#C8841F">PROPERTY ADVISORY</text>
+</svg>

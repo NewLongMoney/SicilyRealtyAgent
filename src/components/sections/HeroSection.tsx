@@ -4,11 +4,12 @@ import Image from 'next/image'
 import Link from 'next/link'
 import { useState } from 'react'
 import { useRouter } from 'next/navigation'
-import { ChevronRight, Search, MapPin, Home, TrendingUp, Star } from 'lucide-react'
+import { ChevronRight, Search, MapPin, Home, ShieldCheck, UserRound, MessageCircle } from 'lucide-react'
+import { BrandDivider } from '@/components/brand/BrandMark'
 
 const SEARCH_OPTIONS = {
-  location: ['All Areas', 'Kilimani', 'Westlands', 'Riverside'],
-  type: ['All Types', 'Apartments', 'Villas'],
+  location: ['All Areas', 'Kilimani', 'Westlands', 'Kileleshwa', 'Lavington', 'Riverside'],
+  type: ['All Types', 'Apartments'],
 }
 
 interface SearchState {
@@ -18,136 +19,113 @@ interface SearchState {
 
 export function HeroSection() {
   const router = useRouter()
-  const [search, setSearch] = useState<SearchState>({
-    location: '', type: ''
-  })
+  const [search, setSearch] = useState<SearchState>({ location: '', type: '' })
 
   function handleSearch() {
     const params = new URLSearchParams()
     if (search.location && search.location !== 'All Areas')
       params.set('area', search.location.toLowerCase())
     if (search.type && search.type !== 'All Types')
-      params.set('type', search.type.toLowerCase())
+      params.set('type', 'apartment')
     router.push(params.toString() ? `/properties?${params.toString()}#properties` : '/properties#properties')
   }
 
   return (
-    <section className="relative min-h-[720px] md:min-h-[840px] flex items-end justify-center overflow-hidden">
+    <section className="relative min-h-[100svh] md:min-h-[880px] flex items-end justify-center overflow-hidden">
       <Image
-        src="/images/hero.png"
-        alt="Luxury apartment interior curated by Sicily Realty in Nairobi"
+        src="/images/hero.jpg"
+        alt="Nairobi corridor residence at dusk — Sicily Realty portfolio"
         fill
         priority
-        className="object-cover object-center"
+        className="object-cover object-center scale-[1.02]"
         sizes="100vw"
       />
-      <div className="absolute inset-0 bg-gradient-to-b from-navy-deep/30 via-navy-deep/65 to-navy-deep/95 z-[1]" />
-      <div className="absolute inset-0 bg-[radial-gradient(circle_at_top,rgba(246,198,103,0.14),transparent_34%),radial-gradient(circle_at_70%_20%,rgba(18,62,99,0.28),transparent_35%)] z-[1]" />
+      <div className="absolute inset-0 bg-gradient-to-b from-navy-deep/45 via-navy-deep/55 to-navy-deep z-[1]" />
+      <div className="absolute inset-0 bg-[radial-gradient(ellipse_at_top,rgba(246,198,103,0.12),transparent_50%)] z-[1]" />
 
-      {/* Content */}
-      <div className="relative z-[2] w-full max-w-[1180px] mx-auto px-6 md:px-8 pb-20 md:pb-24 pt-28 md:pt-32 lg:pt-40">
-        <div className="grid items-end gap-12 lg:grid-cols-[minmax(0,1fr)_320px]">
-          <div className="max-w-[760px]">
+      <div className="relative z-[2] w-full max-w-[1180px] mx-auto px-5 sm:px-8 pb-16 md:pb-24 pt-32 md:pt-40">
+        <div className="max-w-[720px]">
+          <div className="animate-fade-up opacity-0 [animation-delay:0.1s] [animation-fill-mode:forwards] mb-7">
+            <BrandDivider />
+          </div>
 
-            <span className="inline-flex items-center gap-2 rounded-full border border-gold/25 bg-navy-deep/45 px-4 py-2 text-[0.65rem] tracking-[0.24em] uppercase text-gold font-semibold mb-6 animate-fade-up opacity-0 [animation-delay:0.15s] [animation-fill-mode:forwards]">
-              <span className="w-2 h-2 bg-gold rounded-full" />
-              Nairobi Luxury Property Advisory
-            </span>
+          <p className="text-[0.65rem] tracking-[0.32em] uppercase text-gold font-semibold mb-5 animate-fade-up opacity-0 [animation-delay:0.2s] [animation-fill-mode:forwards]">
+            Nairobi · Private Client Advisory
+          </p>
 
-            <h1 className="font-display text-[clamp(2rem,4.5vw,3.8rem)] leading-[1.08] tracking-tight text-white mb-6 animate-fade-up opacity-0 [animation-delay:0.3s] [animation-fill-mode:forwards]">
-              Smart Homes &amp; Investment Residences in Nairobi
-            </h1>
+          <h1 className="font-display text-[clamp(2.4rem,5.2vw,4.2rem)] leading-[1.05] tracking-tight text-white mb-6 animate-fade-up opacity-0 [animation-delay:0.3s] [animation-fill-mode:forwards] font-semibold">
+            Residences worth a shortlist — not a scroll.
+          </h1>
 
-            <p className="text-sicily-body text-[1rem] md:text-[1.06rem] leading-[1.8] max-w-[640px] mb-8 animate-fade-up opacity-0 [animation-delay:0.45s] [animation-fill-mode:forwards]">
-              Sicily Realty curates verified opportunities in Kilimani, Westlands, Kileleshwa, Lavington, and Riverside for buyers who want clarity, quality, and a shortlist worth acting on.
-            </p>
+          <p className="text-sicily-body text-[1.02rem] md:text-[1.08rem] leading-[1.85] max-w-[560px] mb-10 animate-fade-up opacity-0 [animation-delay:0.45s] [animation-fill-mode:forwards]">
+            Sicily Realty curates verified apartments across Kilimani, Westlands, Kileleshwa, Lavington, and Riverside for buyers who want clarity before they commit.
+          </p>
 
-            <div className="flex flex-col md:flex-row gap-3 mb-10 w-full max-w-md md:max-w-none animate-fade-up opacity-0 [animation-delay:0.6s] [animation-fill-mode:forwards]">
-              <Link
-                href="/properties#properties"
-                className="w-full md:w-auto inline-flex items-center justify-center gap-2.5 bg-gold-gradient text-navy-deep font-bold text-sm tracking-wider uppercase min-h-[48px] px-7 py-3 rounded-full shadow-xl transition-all duration-300 hover:scale-[1.02] hover:shadow-gold/30"
-              >
-                Browse Properties
-                <ChevronRight size={16} />
-              </Link>
-              <Link
-                href="/#contact"
-                className="w-full md:w-auto inline-flex items-center justify-center gap-2.5 bg-white text-navy-deep font-bold text-sm tracking-wider uppercase min-h-[48px] px-7 py-3 rounded-full shadow-lg transition-all duration-300 hover:scale-[1.02] hover:shadow-xl hover:bg-gray-50"
-              >
-                Book a Private Consultation
-              </Link>
-            </div>
+          <div className="flex flex-col sm:flex-row gap-3 mb-12 w-full max-w-md sm:max-w-none animate-fade-up opacity-0 [animation-delay:0.55s] [animation-fill-mode:forwards]">
+            <Link
+              href="/properties#properties"
+              className="w-full sm:w-auto inline-flex items-center justify-center gap-2.5 bg-gold-gradient text-navy-deep font-bold text-[0.78rem] tracking-[0.14em] uppercase min-h-[50px] px-8 py-3.5 transition-all duration-300 hover:scale-[1.01] hover:shadow-[0_12px_40px_rgba(229,169,60,0.28)]"
+            >
+              Browse Properties
+              <ChevronRight size={16} />
+            </Link>
+            <Link
+              href="/#contact"
+              className="w-full sm:w-auto inline-flex items-center justify-center gap-2.5 border border-white/35 text-white font-bold text-[0.78rem] tracking-[0.14em] uppercase min-h-[50px] px-8 py-3.5 hover:bg-white hover:text-navy-deep transition-all duration-300"
+            >
+              Private Consultation
+            </Link>
+          </div>
 
-            <div className="frosted border border-gold/20 rounded-2xl p-4 md:p-5 max-w-[880px] animate-fade-up opacity-0 shadow-[0_20px_60px_rgba(3,8,16,0.45)] [animation-delay:0.75s] [animation-fill-mode:forwards]">
-              <div className="grid gap-3 md:grid-cols-[1.3fr_1fr_auto] md:items-end">
-                {(Object.entries(SEARCH_OPTIONS) as [keyof typeof SEARCH_OPTIONS, string[]][]).map(
-                  ([key, options]) => (
-                    <div key={key} className="min-w-0">
-                      <label className="text-[0.58rem] tracking-[0.2em] uppercase text-gold font-bold mb-2 flex items-center gap-2">
-                        {key === 'location' && <MapPin size={10} />}
-                        {key === 'type' && <Home size={10} />}
-                        {key.charAt(0).toUpperCase() + key.slice(1)}
-                      </label>
-                      <select
-                        value={search[key]}
-                        onChange={e => setSearch(prev => ({ ...prev, [key]: e.target.value }))}
-                        className="w-full rounded-xl border border-gold/15 bg-navy-light/50 px-4 py-3 text-white text-[0.92rem] outline-none transition-colors hover:border-gold/35 focus:border-gold/45"
-                      >
-                        {options.map(opt => (
-                          <option key={opt} value={opt === options[0] ? '' : opt} className="bg-navy-mid text-white">
-                            {opt}
-                          </option>
-                        ))}
-                      </select>
-                    </div>
-                  )
-                )}
-                <button
-                  onClick={handleSearch}
-                  className="flex-shrink-0 inline-flex items-center justify-center gap-2 bg-gold-gradient text-navy-deep font-bold text-[0.85rem] tracking-wide px-8 py-4 rounded-xl transition-all duration-300 hover:scale-[1.02] hover:shadow-[0_8px_32px_rgba(229,169,60,0.25)] active:scale-[0.99]"
-                >
-                  <Search size={16} />
-                  Search Properties
-                </button>
-              </div>
-            </div>
-
-            <div className="bg-stats-warm rounded-2xl px-5 py-6 md:px-8 flex flex-wrap gap-8 md:gap-10 animate-fade-up opacity-0 [animation-delay:0.9s] [animation-fill-mode:forwards]">
-              {[
-                { num: '28+', label: 'Successful Closings', icon: Home },
-                { num: 'KES 180M', label: 'Transaction Value Guided', icon: TrendingUp },
-                { num: '5.0', label: 'Client Rating', icon: Star },
-              ].map(stat => (
-                <div key={stat.label} className="min-w-[120px]">
-                  <div className="flex items-center gap-2 mb-2">
-                    <stat.icon size={16} className="text-gold" />
-                    <span className="text-[0.62rem] tracking-[0.16em] uppercase text-gold/75">
-                      {stat.label}
-                    </span>
+          <div className="border border-gold/20 bg-navy-deep/55 backdrop-blur-md p-4 md:p-5 max-w-[820px] animate-fade-up opacity-0 shadow-[0_20px_60px_rgba(3,8,16,0.4)] [animation-delay:0.7s] [animation-fill-mode:forwards]">
+            <div className="grid gap-3 md:grid-cols-[1.3fr_1fr_auto] md:items-end">
+              {(Object.entries(SEARCH_OPTIONS) as [keyof typeof SEARCH_OPTIONS, string[]][]).map(
+                ([key, options]) => (
+                  <div key={key} className="min-w-0">
+                    <label className="text-[0.58rem] tracking-[0.22em] uppercase text-gold font-bold mb-2 flex items-center gap-2">
+                      {key === 'location' && <MapPin size={10} />}
+                      {key === 'type' && <Home size={10} />}
+                      {key.charAt(0).toUpperCase() + key.slice(1)}
+                    </label>
+                    <select
+                      value={search[key]}
+                      onChange={e => setSearch(prev => ({ ...prev, [key]: e.target.value }))}
+                      className="w-full border border-gold/15 bg-navy-light/40 px-4 py-3.5 text-white text-[0.92rem] outline-none transition-colors hover:border-gold/35 focus:border-gold/45"
+                    >
+                      {options.map(opt => (
+                        <option key={opt} value={opt === options[0] ? '' : opt} className="bg-navy-mid text-white">
+                          {opt}
+                        </option>
+                      ))}
+                    </select>
                   </div>
-                  <span className="block font-display text-[2rem] md:text-[2.5rem] gold-text-v font-bold leading-none">
-                    {stat.num}
-                  </span>
-                </div>
-              ))}
+                )
+              )}
+              <button
+                onClick={handleSearch}
+                className="flex-shrink-0 inline-flex items-center justify-center gap-2 bg-gold-gradient text-navy-deep font-bold text-[0.82rem] tracking-[0.12em] uppercase px-8 py-4 transition-all duration-300 hover:scale-[1.01]"
+              >
+                <Search size={16} />
+                Search
+              </button>
             </div>
           </div>
 
-          <aside className="hidden lg:block animate-fade-up opacity-0 [animation-delay:1.05s] [animation-fill-mode:forwards]">
-            <div className="card-dark rounded-3xl border border-gold/15 p-7 shadow-[0_18px_50px_rgba(3,8,16,0.45)]">
-              <p className="text-[0.65rem] tracking-[0.18em] uppercase text-gold font-semibold mb-3">
-                Why buyers choose Sicily
-              </p>
-              <h2 className="font-display text-[2rem] text-white leading-[1.15] mb-4">
-                Curated advice, not portal noise.
-              </h2>
-              <ul className="space-y-4 text-[0.92rem] text-sicily-body/85 leading-[1.7]">
-                <li>Verified listings only, across Nairobi&apos;s prime residential corridors.</li>
-                <li>One named advisor — Sicily — from shortlist to viewing to negotiation.</li>
-                <li>Guidance for homebuyers, diaspora buyers, and investors who need sharper due diligence.</li>
-              </ul>
-            </div>
-          </aside>
+          <div className="mt-8 grid grid-cols-1 sm:grid-cols-3 gap-5 animate-fade-up opacity-0 [animation-delay:0.85s] [animation-fill-mode:forwards]">
+            {[
+              { label: 'Verified listings', detail: 'Personally assessed', icon: ShieldCheck },
+              { label: 'One named advisor', detail: 'Sicily — shortlist to close', icon: UserRound },
+              { label: 'WhatsApp-first', detail: 'Homebuyers & diaspora', icon: MessageCircle },
+            ].map(stat => (
+              <div key={stat.label} className="flex items-start gap-3 border-t border-gold/15 pt-4">
+                <stat.icon size={16} className="text-gold mt-0.5 flex-shrink-0" />
+                <div>
+                  <p className="text-[0.62rem] tracking-[0.18em] uppercase text-gold/80 mb-1">{stat.label}</p>
+                  <p className="text-[0.9rem] text-white/80 leading-snug">{stat.detail}</p>
+                </div>
+              </div>
+            ))}
+          </div>
         </div>
       </div>
     </section>

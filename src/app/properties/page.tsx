@@ -1,6 +1,8 @@
 import { Metadata } from 'next'
-import { PropertiesSection } from '@/components/sections/PropertiesSection'
 import { PROPERTIES } from '@/lib/data'
+import { Suspense } from 'react'
+import { PropertiesClient } from './PropertiesClient'
+import { PropertiesSection } from '@/components/sections/PropertiesSection'
 
 export const metadata: Metadata = {
   title: 'Properties | Sicily Realty - Homes & Residences in Nairobi',
@@ -13,30 +15,14 @@ export const metadata: Metadata = {
     description: "Browse Sicily Realty's full portfolio of verified apartments and investment residences across Nairobi's prime addresses.",
     url: '/properties',
     type: 'website',
-    images: [{ url: '/images/Royal Legend/photo_2026-06-15_17-56-17.jpg', width: 1200, height: 630, alt: 'Sicily Realty property gallery' }],
+    images: [{ url: '/images/Royal%20Legend/photo_2026-06-15_17-56-17.jpg', width: 1200, height: 630, alt: 'Sicily Realty property gallery' }],
   },
 }
 
-type PropertiesPageProps = {
-  searchParams?: Promise<{
-    category?: string
-    area?: string
-    type?: string
-    intent?: string
-    property?: string
-  }>
-}
-
-export default async function PropertiesPage({ searchParams }: PropertiesPageProps) {
-  const params = await searchParams
-  const requestedProperty = params?.property
-  const resolvedProperty = requestedProperty
-    ? PROPERTIES.find(p => p.id === requestedProperty)
-    : undefined
-
+export default function PropertiesPage() {
   return (
     <div className="min-h-screen bg-white pt-28 md:pt-36">
-      <section className="max-w-[1280px] mx-auto px-4 md:px-6 pt-10 md:pt-16 pb-4">
+      <section className="max-w-[1280px] mx-auto px-4 md:px-6 pt-10 md:pt-16 pb-2">
         <p className="text-[0.68rem] tracking-[0.2em] uppercase text-gold-mid font-semibold mb-4">
           Property Gallery · {PROPERTIES.length} Listings
         </p>
@@ -44,18 +30,13 @@ export default async function PropertiesPage({ searchParams }: PropertiesPagePro
           Verified Residences Across Nairobi
         </h1>
         <p className="text-navy-deep/60 text-[1rem] leading-[1.8] max-w-[680px] mt-5">
-          From Kilimani to Westlands and Riverside — browse off-plan apartments personally assessed by Sicily Realty. Filter by location, type, or collection.
+          From Kilimani to Westlands and Riverside — browse off-plan apartments personally assessed by Sicily Realty. Filter by location, budget, bedrooms, or status.
         </p>
       </section>
 
-      <PropertiesSection
-        properties={PROPERTIES}
-        initialCategory={params?.category}
-        initialArea={resolvedProperty?.area ?? params?.area}
-        initialType={params?.type}
-        initialListing={params?.intent}
-        highlightedProperty={resolvedProperty?.id}
-      />
+      <Suspense fallback={<PropertiesSection properties={PROPERTIES} compactHeading={false} />}>
+        <PropertiesClient />
+      </Suspense>
     </div>
   )
 }

@@ -6,7 +6,7 @@ import { FloatingWhatsApp } from '@/components/ui/FloatingWhatsApp'
 import { MobileBottomNav } from '@/components/layout/MobileBottomNav'
 
 const siteUrl = new URL('https://sicilyrealty.co.ke')
-const defaultOgImage = '/images/logo-main.png'
+const defaultOgImage = '/images/og-image.jpg'
 
 export const metadata: Metadata = {
   metadataBase: siteUrl,
