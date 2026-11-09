@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100" role="img" aria-label="Sicily Realty">
+<rect width="100" height="100" fill="#071C2F"/>
+  <g fill="none" stroke="#E5A93C" stroke-width="4" stroke-linecap="square" stroke-linejoin="miter">
+    <path d="M26 90 L26 50"/>
+    <path d="M74 90 L74 50"/>
+    <path d="M26 50 A24 24 0 0 1 74 50"/>
+    <path d="M20 90 L80 90"/>
+  </g>
+  <path d="M45 22 L55 22 L52.5 33 L47.5 33 Z" fill="#E5A93C"/>
+  <path d="M33 90 L33 52 A17 17 0 0 1 67 52 L67 90" fill="none" stroke="#E5A93C" stroke-width="1.4" opacity="0.5"/>
+
+</svg>

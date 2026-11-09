@@ -6,7 +6,7 @@ export function MarketBriefSection() {
   const areas = Array.from(new Set(PROPERTIES.map(p => p.area))).length
 
   return (
-    <section id="insights" className="py-16 md:py-20 bg-section-warm border-t border-section-divider">
+    <section id="market" className="py-16 md:py-20 bg-paper-soft dark:bg-navy-glow border-t border-navy-deep/8 dark:border-white/8">
       <div className="max-w-[1280px] mx-auto px-4 md:px-6">
         <div className="grid gap-12 lg:grid-cols-[1fr_1.1fr] items-start">
           <div className="relative aspect-[4/3] rounded-3xl overflow-hidden shadow-[0_20px_60px_rgba(7,28,47,0.1)] border border-gray-100">
@@ -27,14 +27,14 @@ export function MarketBriefSection() {
               How Sicily Reads Nairobi&apos;s Prime Residential Corridors
             </h2>
 
-            <div className="flex gap-8 py-5 border-y border-gray-200 mb-6">
+            <div className="flex gap-8 py-5 border-y border-navy-deep/10 dark:border-white/10 mb-6">
               <div>
                 <span className="block font-display text-[2rem] gold-text-v font-bold leading-none">{PROPERTIES.length}</span>
-                <span className="block text-[0.62rem] tracking-[0.12em] uppercase text-navy-deep/45 mt-1">Verified listings on site</span>
+                <span className="block text-[0.62rem] tracking-[0.12em] uppercase text-navy-deep/45 dark:text-white/40 mt-1">Verified listings on site</span>
               </div>
               <div>
                 <span className="block font-display text-[2rem] gold-text-v font-bold leading-none">{areas}</span>
-                <span className="block text-[0.62rem] tracking-[0.12em] uppercase text-navy-deep/45 mt-1">Prime corridors covered</span>
+                <span className="block text-[0.62rem] tracking-[0.12em] uppercase text-navy-deep/45 dark:text-white/40 mt-1">Prime corridors covered</span>
               </div>
             </div>
 
@@ -48,7 +48,7 @@ export function MarketBriefSection() {
               <p>
                 For diaspora and local buyers alike, the working method is the same: start with your brief, narrow to a verified shortlist, then walk the buildings (or coordinate remote diligence) before any reservation.
               </p>
-              <p className="text-navy-deep/55 text-[0.88rem] italic">
+              <p className="text-navy-deep/55 dark:text-white/50 text-[0.88rem] italic">
                 Figures for growth rates or yields are shared privately when Sicily can point to a source — they are not published as marketing statistics on this site.
               </p>
             </div>
@@ -57,7 +57,7 @@ export function MarketBriefSection() {
               href={`${WHATSAPP_BASE}?text=${encodeURIComponent("Hi Sicily, I'd like a current corridor shortlist based on my budget and timeline.")}`}
               target="_blank"
               rel="noopener"
-              className="inline-flex items-center gap-2 mt-8 text-[0.78rem] tracking-[0.08em] uppercase text-navy-deep border border-gray-200 px-6 py-3.5 rounded-full hover:bg-gold-gradient hover:border-transparent transition-all font-semibold"
+              className="inline-flex items-center gap-2 mt-8 text-[0.78rem] tracking-[0.08em] uppercase text-navy-deep border border-navy-deep/10 dark:border-white/10 px-6 py-3.5 rounded-full hover:bg-gold-gradient hover:border-transparent transition-all font-semibold"
             >
               Request a tailored shortlist via WhatsApp →
             </Link>

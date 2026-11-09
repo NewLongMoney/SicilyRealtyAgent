@@ -173,7 +173,7 @@ export function PropertiesSection({
     (area !== 'all' || collection !== 'all' || beds !== 'all' || price !== 'all' || status !== 'all' || sort !== 'featured')
 
   return (
-    <section id="properties" className="py-16 md:py-20 bg-white border-t border-section-divider">
+    <section id="properties" className="py-16 md:py-20 bg-paper dark:bg-navy-deep border-t border-navy-deep/8 dark:border-white/8">
       <div className="max-w-[1280px] mx-auto px-4 md:px-6">
         {compactHeading ? (
           <SectionHeading
@@ -189,10 +189,10 @@ export function PropertiesSection({
               Showing {filtered.length} {filtered.length === 1 ? 'property' : 'properties'}
             </p>
             <div className="flex items-center gap-3 flex-wrap">
-              <label className="text-[0.62rem] tracking-[0.14em] uppercase text-navy-deep/45 font-semibold">
+              <label className="text-[0.62rem] tracking-[0.14em] uppercase text-navy-deep/45 dark:text-white/40 font-semibold">
                 Sort
                 <select
-                  className="ml-2 rounded-full border border-gray-200 bg-white px-3 py-1.5 text-[0.8rem] text-navy-deep tracking-normal normal-case"
+                  className="ml-2 rounded-full border border-navy-deep/10 dark:border-white/10 bg-paper dark:bg-navy-deep px-3 py-1.5 text-[0.8rem] text-navy-deep tracking-normal normal-case"
                   value={sort}
                   onChange={e => updateFilters({ sort: e.target.value })}
                   disabled={!!focusedProperty}
@@ -204,7 +204,7 @@ export function PropertiesSection({
                 </select>
               </label>
               {showMap && (
-                <div className="inline-flex rounded-full border border-gray-200 p-0.5 bg-white">
+                <div className="inline-flex rounded-full border border-navy-deep/10 dark:border-white/10 p-0.5 bg-paper dark:bg-navy-deep">
                   <button
                     type="button"
                     onClick={() => setView('grid')}
@@ -326,14 +326,14 @@ export function PropertiesSection({
         )}
 
         {filtered.length === 0 && (
-          <div className="rounded-2xl border border-gray-100 bg-gray-50 px-8 py-12 text-center mt-12">
+          <div className="rounded-2xl border border-gray-100 bg-paper-soft dark:bg-navy-glow px-8 py-12 text-center mt-12">
             <p className="font-display text-2xl text-navy-deep mb-2">No properties match this brief yet.</p>
             <p className="text-navy-deep/60 text-sm max-w-[520px] mx-auto mb-6">
               Reset the filters or contact Sicily Realty for private access to upcoming opportunities.
             </p>
             <Link
               href="/#contact"
-              className="inline-flex items-center gap-2 text-[0.78rem] tracking-[0.08em] uppercase text-navy-deep border border-gray-200 px-5 py-3 rounded-full hover:bg-gold-gradient hover:border-transparent transition-all duration-250 font-semibold"
+              className="inline-flex items-center gap-2 text-[0.78rem] tracking-[0.08em] uppercase text-navy-deep border border-navy-deep/10 dark:border-white/10 px-5 py-3 rounded-full hover:bg-gold-gradient hover:border-transparent transition-all duration-250 font-semibold"
             >
               Request a tailored shortlist
             </Link>
@@ -377,7 +377,7 @@ function FilterPill({
         'snap-card flex-shrink-0 inline-flex items-center px-4 py-2 rounded-full text-sm border transition-all whitespace-nowrap',
         active
           ? 'bg-navy-deep text-white border-navy-deep font-semibold shadow-sm'
-          : 'bg-white border-gray-200 text-gray-700 hover:bg-gray-50 hover:border-gold/30',
+          : 'bg-paper dark:bg-navy-deep border-navy-deep/10 dark:border-white/10 text-gray-700 hover:bg-paper-soft dark:bg-navy-glow hover:border-gold/30',
         disabled && 'opacity-50 cursor-not-allowed'
       )}
     >

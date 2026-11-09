@@ -96,12 +96,12 @@ export function AreaMap({ properties, activeArea = 'all' }: Props) {
         </p>
       </div>
       <div ref={containerRef} className="h-[320px] md:h-[380px] w-full bg-[#e8eef3]" />
-      <div className="flex flex-wrap gap-2 px-4 py-3 bg-white border-t border-gray-100">
+      <div className="flex flex-wrap gap-2 px-4 py-3 bg-paper dark:bg-navy-deep border-t border-gray-100">
         {areaGroups.map(g => (
           <Link
             key={g.area}
             href={`/properties?area=${g.area}#properties`}
-            className="text-[0.72rem] tracking-[0.06em] uppercase px-3 py-1.5 rounded-full border border-gray-200 text-navy-deep/70 hover:border-gold/40 hover:text-gold-mid transition-colors"
+            className="text-[0.72rem] tracking-[0.06em] uppercase px-3 py-1.5 rounded-full border border-navy-deep/10 dark:border-white/10 text-navy-deep/70 hover:border-gold/40 hover:text-gold-mid transition-colors"
           >
             {AREA_LABELS[g.area]} · {g.items.length}
           </Link>

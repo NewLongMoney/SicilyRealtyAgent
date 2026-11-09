@@ -11,30 +11,25 @@ interface Props {
 
 export function SectionHeading({
   eyebrow, title, subtitle,
-  align = 'center', className
+  align = 'left', className
 }: Props) {
   return (
-    <div className={cn(
-      align === 'center' ? 'text-center' : 'text-left',
-      className
-    )}>
+    <div className={cn(align === 'center' ? 'text-center' : 'text-left', className)}>
       {eyebrow && (
-        <span className="block text-[0.65rem] tracking-[0.28em] uppercase text-gold-mid font-semibold mb-5">
+        <span className="block text-[0.65rem] tracking-[0.32em] uppercase text-gold-mid dark:text-gold font-semibold mb-5">
           {eyebrow}
         </span>
       )}
-      <h2 className={cn(
-        'font-display text-[clamp(2rem,3.4vw,3.1rem)] text-navy-deep leading-[1.12] tracking-tight font-semibold',
-      )}>
+      <h2 className="font-display text-[clamp(2.2rem,4.2vw,3.6rem)] text-navy-deep dark:text-white leading-[1.08] tracking-tight font-semibold">
         {title}
       </h2>
-      <div className={cn('mt-5', align === 'center' ? 'flex justify-center' : '')}>
+      <div className={cn('mt-6', align === 'center' ? 'flex justify-center' : '')}>
         <BrandDivider />
       </div>
       {subtitle && (
         <p className={cn(
-          'text-navy-deep/58 text-[0.98rem] leading-[1.8] mt-6',
-          align === 'center' ? 'max-w-[540px] mx-auto' : 'max-w-[520px]'
+          'text-navy-deep/60 dark:text-white/55 text-[1.02rem] leading-[1.8] mt-6',
+          align === 'center' ? 'max-w-[540px] mx-auto' : 'max-w-[560px]'
         )}>
           {subtitle}
         </p>

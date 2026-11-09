@@ -10,7 +10,7 @@ interface Props { properties: Property[] }
 
 export function ClosingFastSection({ properties }: Props) {
   return (
-    <section id="best-sellers" className="py-16 md:py-20 bg-section-warm border-t border-section-divider">
+    <section id="best-sellers" className="py-16 md:py-20 bg-paper-soft dark:bg-navy-glow border-t border-navy-deep/8 dark:border-white/8">
       <div className="max-w-[1280px] mx-auto px-4 md:px-6">
         <SectionHeading
           eyebrow="Featured Developments"
@@ -25,7 +25,7 @@ export function ClosingFastSection({ properties }: Props) {
                 key={p.id}
                 href={`/properties/${p.id}`}
                 className={cn(
-                  'group bg-white overflow-hidden border border-[#eeebe5]',
+                  'group bg-paper dark:bg-navy-deep overflow-hidden border border-navy-deep/10 dark:border-white/10',
                   'shadow-[0_4px_24px_rgba(7,28,47,0.06)]',
                   'transition-all duration-400 hover:-translate-y-2 hover:shadow-[0_20px_60px_rgba(7,28,47,0.1)] hover:border-gold/25',
                   isFeatured ? 'md:col-span-2 md:grid md:grid-cols-2' : 'md:col-span-1'
@@ -50,7 +50,7 @@ export function ClosingFastSection({ properties }: Props) {
                   <h3 className="font-display text-[1.4rem] text-navy-deep mb-2 group-hover:text-gold-mid transition-colors">
                     {p.name}
                   </h3>
-                  <p className="text-navy-deep/55 text-sm leading-[1.6] mb-4 line-clamp-2">{p.description}</p>
+                  <p className="text-navy-deep/55 dark:text-white/50 text-sm leading-[1.6] mb-4 line-clamp-2">{p.description}</p>
                   <div className="flex items-center justify-between gap-3 mt-auto">
                     <span className="font-display text-xl gold-text-v font-bold">{p.price}</span>
                     <span className="inline-flex items-center gap-1 text-[0.72rem] tracking-[0.08em] uppercase text-navy-deep/60 font-semibold group-hover:text-gold-mid transition-colors">
@@ -66,7 +66,7 @@ export function ClosingFastSection({ properties }: Props) {
         <div className="text-center mt-10">
           <Link
             href="/properties#properties"
-            className="inline-flex items-center gap-2 text-[0.78rem] tracking-[0.1em] uppercase text-navy-deep border border-gray-200 px-6 py-3 rounded-full hover:bg-gold-gradient hover:border-transparent transition-all font-semibold"
+            className="inline-flex items-center gap-2 text-[0.78rem] tracking-[0.1em] uppercase text-navy-deep border border-navy-deep/10 dark:border-white/10 px-6 py-3 rounded-full hover:bg-gold-gradient hover:border-transparent transition-all font-semibold"
           >
             View all listings
             <ArrowRight size={14} />

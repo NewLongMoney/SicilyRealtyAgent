@@ -6,7 +6,7 @@ import { MessageCircle, Phone } from 'lucide-react'
 /** Named testimonials are withheld until Sicily supplies written permission (see REMOVED_CLAIMS.md). */
 export function TestimonialsSection() {
   return (
-    <section id="testimonials" className="py-16 md:py-20 bg-section-warm border-t border-section-divider">
+    <section id="testimonials" className="py-16 md:py-20 bg-paper-soft dark:bg-navy-glow border-t border-navy-deep/8 dark:border-white/8">
       <div className="max-w-[1280px] mx-auto px-4 md:px-6">
         <SectionHeading
           eyebrow="How engagements work"
@@ -34,11 +34,11 @@ export function TestimonialsSection() {
           ].map(item => (
             <div
               key={item.step}
-              className="rounded-2xl border border-gray-100 bg-white p-7 shadow-[0_8px_30px_rgba(7,28,47,0.05)] hover:border-gold/25 transition-colors"
+              className="rounded-2xl border border-gray-100 bg-paper dark:bg-navy-deep p-7 shadow-[0_8px_30px_rgba(7,28,47,0.05)] hover:border-gold/25 transition-colors"
             >
               <p className="font-display text-[2rem] gold-text-v font-bold leading-none mb-3">{item.step}</p>
               <h3 className="font-display text-xl text-navy-deep mb-2">{item.title}</h3>
-              <p className="text-[0.92rem] text-navy-deep/65 leading-[1.7]">{item.body}</p>
+              <p className="text-[0.92rem] text-navy-deep/65 dark:text-white/60 leading-[1.7]">{item.body}</p>
             </div>
           ))}
         </div>

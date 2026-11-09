@@ -1,133 +1,73 @@
 import Image from 'next/image'
 import Link from 'next/link'
-import { WHATSAPP_BASE, PHONE, ADVISOR } from '@/lib/data'
-import { ShieldCheck, Compass, Handshake } from 'lucide-react'
+import { ADVISOR } from '@/lib/data'
 
-const TRUST_POINTS = [
-  {
-    num: '01',
-    label: 'Personal advisory',
-    desc: 'One named advisor from first brief to final transfer — no call-centre handoffs.',
-  },
-  {
-    num: '02',
-    label: 'Verified shortlists',
-    desc: 'Only developments Sicily has assessed for location, product, and delivery risk.',
-  },
-  {
-    num: '03',
-    label: 'Clear next steps',
-    desc: 'Viewings, developer diligence, and negotiation guidance on terms you understand.',
-  },
+const PILLARS = [
+  { num: '01', label: 'Personal advisory', desc: 'One named advisor from first brief to final transfer — no call-centre handoffs.' },
+  { num: '02', label: 'Verified shortlists', desc: 'Only developments Sicily has assessed for location, product, and delivery risk.' },
+  { num: '03', label: 'Clear next steps', desc: 'Viewings, developer diligence, and negotiation guidance on terms you understand.' },
 ]
 
 export function AboutSection() {
   return (
-    <section id="about" className="py-16 md:py-20 bg-section-warm border-t border-section-divider overflow-visible">
-      <div className="max-w-[1280px] mx-auto px-4 md:px-6">
-
-        <div className="grid grid-cols-1 md:grid-cols-2 gap-16 md:gap-[100px] items-center mb-24">
-          <div className="min-w-0">
-            <span className="block text-[0.65rem] tracking-[0.22em] uppercase text-gold font-semibold mb-4">
-              About Sicily Realty
-            </span>
-            <h2 className="font-display text-[clamp(2rem,3.2vw,2.8rem)] text-navy-deep leading-[1.2] mb-7 break-words after:content-[''] after:block after:w-[52px] after:h-0.5 after:bg-gold-gradient after:rounded-sm after:mt-4">
-              Built on One Standard: Yours
-            </h2>
-            <div className="space-y-4 text-navy-deep/65 text-[0.97rem] leading-[1.85]">
-              <p>Sicily Realty was built for buyers who refuse to settle. Not a listing aggregator. Not a call centre. {ADVISOR.name} handles your acquisition personally — with deep experience inside Nairobi&apos;s most competitive property corridors.</p>
-              <p>Every engagement starts with a conversation, not a brochure. We map your financial position, timeline, and non-negotiables — then we source precisely. The result is a shortlist that fits, not a flood of options that don&apos;t.</p>
-              <p>Our measure of success is simple: you close with confidence, on terms you understand, without surprises.</p>
-            </div>
-            <Link href="/#contact" className="inline-flex mt-8 text-[0.78rem] tracking-[0.1em] uppercase text-gold border border-gold/30 px-6 py-3 rounded-full hover:bg-gold-gradient hover:text-navy-deep hover:border-transparent transition-all duration-250 font-semibold">
-              Start the Conversation
-            </Link>
-          </div>
-
-          <div className="relative hidden md:flex flex-col justify-center gap-6">
-            {TRUST_POINTS.map(item => (
-              <div
-                key={item.label}
-                className="card-dark rounded-2xl p-6 border border-gold/15 hover:border-gold/30 transition-colors duration-250"
-              >
-                <span className="block font-display text-[2.2rem] gold-text-v font-bold leading-none mb-2">{item.num}</span>
-                <p className="text-[0.76rem] tracking-[0.1em] uppercase text-gold/70 font-semibold mb-1.5">{item.label}</p>
-                <p className="text-[0.82rem] text-sicily-body/65 leading-[1.6]">{item.desc}</p>
-              </div>
-            ))}
-          </div>
-        </div>
-
-        <div className="grid grid-cols-1 md:grid-cols-2 gap-16 md:gap-[100px] items-center">
-          <div className="order-2 md:order-1 min-w-0">
-            <span className="block text-[0.65rem] tracking-[0.22em] uppercase text-gold font-semibold mb-4">
-              Your Advisor
-            </span>
-            <h2 className="font-display text-[clamp(2rem,3.2vw,2.75rem)] text-navy-deep leading-[1.1] mb-1">
-              {ADVISOR.name}
-            </h2>
-            <p className="text-[0.85rem] tracking-[0.1em] uppercase text-gold-mid font-semibold mb-2">
-              {ADVISOR.title}
+    <section id="about" className="relative py-24 md:py-32 bg-paper dark:bg-navy-deep border-t border-navy-deep/8 dark:border-white/8 overflow-hidden">
+      <div className="max-w-[1400px] mx-auto px-6 sm:px-10">
+        <div className="grid lg:grid-cols-12 gap-12 lg:gap-16 items-start">
+          <div className="lg:col-span-5 lg:sticky lg:top-28">
+            <p className="text-[0.65rem] tracking-[0.32em] uppercase text-gold-mid dark:text-gold font-semibold mb-5">
+              The advisory
             </p>
-            <h3 className="font-display text-[1.05rem] text-navy-deep/55 italic mb-7">
-              The person who picks up your call — from first inquiry to final transfer
-            </h3>
-            <div className="space-y-4 text-navy-deep/65 text-[0.97rem] leading-[1.85] mb-8">
+            <h2 className="font-display text-[clamp(2.4rem,4.5vw,3.8rem)] text-navy-deep dark:text-white leading-[1.05] font-semibold mb-8">
+              Built on one standard: <span className="italic font-normal text-gold-mid dark:text-gold">yours.</span>
+            </h2>
+            <div className="relative aspect-[4/5] overflow-hidden mb-8 max-w-md">
+              <Image
+                src="/images/realtor.png"
+                alt={`${ADVISOR.name}, ${ADVISOR.title}`}
+                fill
+                className="object-cover object-top"
+                sizes="(max-width:1024px) 100vw, 40vw"
+              />
+              <div className="absolute inset-0 ring-1 ring-inset ring-navy-deep/10 dark:ring-white/10" />
+            </div>
+            <p className="font-display text-xl text-navy-deep dark:text-white">{ADVISOR.fullTitle}</p>
+          </div>
+
+          <div className="lg:col-span-7 lg:pt-16">
+            <div className="space-y-6 text-[1.05rem] leading-[1.85] text-navy-deep/70 dark:text-white/65 max-w-xl">
               <p>
-                I am {ADVISOR.name}. I work inside Nairobi&apos;s property market with a focus on what developers omit and what rushed viewings miss. That judgment is what I bring to every client engagement — not a template, not a pitch deck.
+                Sicily Realty was built for buyers who refuse to settle. Not a listing aggregator.
+                Not a call centre. {ADVISOR.name} handles your acquisition personally — with deep experience
+                inside Nairobi&apos;s most competitive property corridors.
               </p>
               <p>
-                Whether you are stepping into homeownership for the first time, buying from abroad, or adding a second asset to your portfolio, the process I run is the same: deliberate, transparent, and built entirely around your outcome.
+                Every engagement starts with a conversation, not a brochure. We map your financial position,
+                timeline, and non-negotiables — then we source precisely. The result is a shortlist that fits,
+                not a flood of options that don&apos;t.
+              </p>
+              <p>
+                Our measure of success is simple: you close with confidence, on terms you understand, without surprises.
               </p>
             </div>
 
-            <div className="grid grid-cols-1 sm:grid-cols-3 gap-4 py-7 px-6 bg-stats-warm rounded-2xl mb-8">
-              {[
-                { icon: ShieldCheck, label: 'Verified listings' },
-                { icon: Compass, label: 'Corridor expertise' },
-                { icon: Handshake, label: 'Direct WhatsApp access' },
-              ].map(s => (
-                <div key={s.label} className="flex items-center gap-2.5">
-                  <s.icon size={16} className="text-gold-mid flex-shrink-0" />
-                  <span className="text-[0.72rem] tracking-[0.08em] uppercase text-navy-deep/70 font-semibold leading-snug">{s.label}</span>
+            <div className="mt-16 grid sm:grid-cols-3 gap-8 border-t border-navy-deep/10 dark:border-white/10 pt-10">
+              {PILLARS.map((p) => (
+                <div key={p.num}>
+                  <p className="font-display text-3xl text-gold-mid dark:text-gold mb-3">{p.num}</p>
+                  <p className="text-[0.65rem] tracking-[0.22em] uppercase text-navy-deep dark:text-white font-semibold mb-2">{p.label}</p>
+                  <p className="text-[0.88rem] leading-relaxed text-navy-deep/55 dark:text-white/50 dark:text-white/50">{p.desc}</p>
                 </div>
               ))}
             </div>
 
-            <div className="flex gap-4 flex-wrap">
-              <Link
-                href={`${WHATSAPP_BASE}?text=${encodeURIComponent(`Hi ${ADVISOR.name}, I'd love to work with you!`)}`}
-                target="_blank"
-                rel="noopener"
-                className="inline-flex items-center gap-2 bg-gold-gradient text-navy-deep font-bold text-[0.82rem] tracking-[0.06em] uppercase px-6 py-3.5 rounded-full hover:opacity-90 transition-opacity shadow-lg"
-              >
-                Message {ADVISOR.name}
-              </Link>
-              <Link
-                href={`tel:${PHONE}`}
-                className="inline-flex items-center gap-2 text-[0.82rem] tracking-[0.06em] uppercase text-gold border border-gold/30 px-6 py-3.5 rounded-full hover:bg-gold/10 transition-colors font-semibold"
-              >
-                Speak Directly
-              </Link>
-            </div>
-          </div>
-
-          <div className="order-1 md:order-2 relative p-6">
-            <Image
-              src="/images/realtor.png"
-              alt={`${ADVISOR.name}, ${ADVISOR.title} at Sicily Realty`}
-              width={500}
-              height={625}
-              className="relative z-10 w-full rounded-lg object-cover object-top aspect-[4/5] shadow-[0_24px_60px_rgba(7,28,47,0.14)]"
-            />
-            <div className="absolute bottom-10 left-10 right-10 z-20 bg-white/95 backdrop-blur-sm rounded-xl px-5 py-4 shadow-lg border border-gray-100">
-              <p className="font-display text-xl text-navy-deep font-bold">{ADVISOR.name}</p>
-              <p className="text-[0.65rem] tracking-[0.12em] uppercase text-gold-mid font-semibold mt-0.5">{ADVISOR.title}</p>
-            </div>
-            <div className="absolute inset-3 border border-gold/40 rounded-xl pointer-events-none z-0" />
+            <Link
+              href="/#contact"
+              className="inline-flex mt-12 h-12 items-center px-7 rounded-full border border-navy-deep/20 dark:border-white/20 text-[0.7rem] tracking-[0.2em] uppercase text-navy-deep dark:text-white hover:border-gold hover:text-gold-mid dark:hover:text-gold transition-colors"
+            >
+              Start the conversation
+            </Link>
           </div>
         </div>
-
       </div>
     </section>
   )

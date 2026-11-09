@@ -107,7 +107,7 @@ export function PropertyDetail({ property, images }: Props) {
   }
 
   return (
-    <main className="min-h-screen bg-white pt-24 md:pt-[7.5rem] lg:pt-32 pb-28 md:pb-24">
+    <main className="min-h-screen bg-paper dark:bg-navy-deep pt-24 md:pt-[7.5rem] lg:pt-32 pb-28 md:pb-24">
       <script
         type="application/ld+json"
         dangerouslySetInnerHTML={{ __html: JSON.stringify(residenceSchema) }}
@@ -145,7 +145,7 @@ export function PropertyDetail({ property, images }: Props) {
                 <span className="bg-gold-gradient text-navy-deep text-[0.62rem] font-bold tracking-[0.12em] uppercase px-3 py-1.5 rounded-full">
                   {STATUS_LABELS[property.status]}
                 </span>
-                <span className="bg-white/95 text-navy-deep text-[0.62rem] font-semibold tracking-[0.1em] uppercase px-3 py-1.5 rounded-full backdrop-blur-sm">
+                <span className="bg-paper dark:bg-navy-deep/95 text-navy-deep text-[0.62rem] font-semibold tracking-[0.1em] uppercase px-3 py-1.5 rounded-full backdrop-blur-sm">
                   {CATEGORY_LABELS[property.category]}
                 </span>
               </div>
@@ -175,7 +175,7 @@ export function PropertyDetail({ property, images }: Props) {
             )}
 
             {gallery.length <= 2 && (
-              <p className="mt-4 text-sm text-navy-deep/55 italic">
+              <p className="mt-4 text-sm text-navy-deep/55 dark:text-white/50 italic">
                 Professional photography &amp; virtual tour available on request — message Sicily on WhatsApp.
               </p>
             )}
@@ -195,20 +195,20 @@ export function PropertyDetail({ property, images }: Props) {
 
             <div className="grid grid-cols-2 gap-3 sm:flex sm:flex-wrap sm:gap-4 mb-8 pb-8 border-b border-gray-100">
               <div className="min-w-0 rounded-xl bg-stats-warm/60 px-3 py-3 sm:bg-transparent sm:p-0">
-                <p className="text-[0.6rem] tracking-[0.16em] uppercase text-navy-deep/40 mb-1">From</p>
+                <p className="text-[0.6rem] tracking-[0.16em] uppercase text-navy-deep/40 dark:text-white/35 mb-1">From</p>
                 <p className="font-display text-[1.35rem] sm:text-[2rem] gold-text-v font-bold leading-tight break-words">
                   {property.price}
                 </p>
               </div>
               <div className="min-w-0 rounded-xl bg-stats-warm/60 px-3 py-3 sm:bg-transparent sm:p-0">
-                <p className="text-[0.6rem] tracking-[0.16em] uppercase text-navy-deep/40 mb-1">Layout</p>
+                <p className="text-[0.6rem] tracking-[0.16em] uppercase text-navy-deep/40 dark:text-white/35 mb-1">Layout</p>
                 <p className="text-navy-deep font-semibold text-[0.88rem] sm:text-[0.95rem] leading-snug break-words">
                   {property.bedrooms}
                 </p>
               </div>
               {property.completion && (
                 <div className="min-w-0 rounded-xl bg-stats-warm/60 px-3 py-3 sm:bg-transparent sm:p-0">
-                  <p className="text-[0.6rem] tracking-[0.16em] uppercase text-navy-deep/40 mb-1 flex items-center gap-1">
+                  <p className="text-[0.6rem] tracking-[0.16em] uppercase text-navy-deep/40 dark:text-white/35 mb-1 flex items-center gap-1">
                     <Calendar size={10} /> Completion
                   </p>
                   <p className="text-navy-deep font-semibold text-[0.88rem] sm:text-[0.95rem] break-words">
@@ -218,7 +218,7 @@ export function PropertyDetail({ property, images }: Props) {
               )}
               {property.paymentPlanAvailable !== false && property.status !== 'complete' && (
                 <div className="min-w-0 rounded-xl bg-stats-warm/60 px-3 py-3 sm:bg-transparent sm:p-0">
-                  <p className="text-[0.6rem] tracking-[0.16em] uppercase text-navy-deep/40 mb-1 flex items-center gap-1">
+                  <p className="text-[0.6rem] tracking-[0.16em] uppercase text-navy-deep/40 dark:text-white/35 mb-1 flex items-center gap-1">
                     <CreditCard size={10} /> Payment
                   </p>
                   <p className="text-navy-deep font-semibold text-[0.88rem]">Plan available</p>
@@ -226,11 +226,11 @@ export function PropertyDetail({ property, images }: Props) {
               )}
             </div>
 
-            <div className="rounded-xl border border-gray-100 bg-gray-50 px-4 py-3.5 mb-6 flex items-start gap-3">
+            <div className="rounded-xl border border-gray-100 bg-paper-soft dark:bg-navy-glow px-4 py-3.5 mb-6 flex items-start gap-3">
               <Landmark size={16} className="text-gold-mid flex-shrink-0 mt-0.5" />
               <div className="min-w-0">
-                <p className="text-[0.58rem] tracking-[0.14em] uppercase text-navy-deep/45 font-semibold mb-0.5">Developer</p>
-                <p className="text-[0.88rem] text-navy-deep/75 leading-[1.55]">
+                <p className="text-[0.58rem] tracking-[0.14em] uppercase text-navy-deep/45 dark:text-white/40 font-semibold mb-0.5">Developer</p>
+                <p className="text-[0.88rem] text-navy-deep/75 dark:text-white/70 leading-[1.55]">
                   {property.developer ?? DEVELOPER_ON_REQUEST}
                 </p>
                 {isDeveloperOnRequest && (
@@ -238,7 +238,7 @@ export function PropertyDetail({ property, images }: Props) {
                     href={devWaUrl}
                     target="_blank"
                     rel="noopener noreferrer"
-                    className="mt-3 inline-flex items-center gap-2 text-[0.72rem] tracking-[0.06em] uppercase font-semibold text-navy-deep border border-gray-200 bg-white px-4 py-2.5 rounded-full hover:border-gold/40 hover:text-gold-mid transition-all"
+                    className="mt-3 inline-flex items-center gap-2 text-[0.72rem] tracking-[0.06em] uppercase font-semibold text-navy-deep border border-navy-deep/10 dark:border-white/10 bg-paper dark:bg-navy-deep px-4 py-2.5 rounded-full hover:border-gold/40 hover:text-gold-mid transition-all"
                   >
                     <MessageCircle size={14} />
                     Request developer track record via WhatsApp
@@ -259,7 +259,7 @@ export function PropertyDetail({ property, images }: Props) {
               </Link>
               <Link
                 href={`tel:${PHONE}`}
-                className="inline-flex items-center justify-center gap-2 border border-gray-200 text-navy-deep font-semibold text-[0.82rem] tracking-[0.08em] uppercase px-7 py-4 rounded-full hover:border-gold/40 hover:text-gold-mid transition-all"
+                className="inline-flex items-center justify-center gap-2 border border-navy-deep/10 dark:border-white/10 text-navy-deep font-semibold text-[0.82rem] tracking-[0.08em] uppercase px-7 py-4 rounded-full hover:border-gold/40 hover:text-gold-mid transition-all"
               >
                 <Phone size={16} />
                 Call {PHONE_DISPLAY}
@@ -302,7 +302,7 @@ export function PropertyDetail({ property, images }: Props) {
                   <div className="overflow-x-auto">
                     <table className="w-full text-left min-w-[480px]">
                       <thead>
-                        <tr className="bg-gray-50 border-b border-gray-100">
+                        <tr className="bg-paper-soft dark:bg-navy-glow border-b border-gray-100">
                           <th className="px-5 py-3.5 text-[0.65rem] tracking-[0.14em] uppercase text-navy-deep/50 font-semibold">Unit</th>
                           <th className="px-5 py-3.5 text-[0.65rem] tracking-[0.14em] uppercase text-navy-deep/50 font-semibold">Size</th>
                           <th className="px-5 py-3.5 text-[0.65rem] tracking-[0.14em] uppercase text-navy-deep/50 font-semibold">Price</th>
@@ -310,9 +310,9 @@ export function PropertyDetail({ property, images }: Props) {
                       </thead>
                       <tbody>
                         {property.units.map((unit, i) => (
-                          <tr key={`${unit.label}-${i}`} className="border-b border-gray-50 last:border-0 hover:bg-gray-50/60 transition-colors">
+                          <tr key={`${unit.label}-${i}`} className="border-b border-gray-50 last:border-0 hover:bg-paper-soft dark:bg-navy-glow/60 transition-colors">
                             <td className="px-5 py-4 text-[0.92rem] text-navy-deep font-medium">{unit.label}</td>
-                            <td className="px-5 py-4 text-[0.88rem] text-navy-deep/55">{unit.size ?? '—'}</td>
+                            <td className="px-5 py-4 text-[0.88rem] text-navy-deep/55 dark:text-white/50">{unit.size ?? '—'}</td>
                             <td className="px-5 py-4 text-[0.92rem] text-gold-mid font-semibold">{unit.price}</td>
                           </tr>
                         ))}
@@ -367,11 +367,11 @@ export function PropertyDetail({ property, images }: Props) {
 
           <aside className="space-y-6">
             {property.highlights && property.highlights.length > 0 && (
-              <div className="rounded-2xl border border-gray-100 bg-gray-50 p-6 shadow-sm">
+              <div className="rounded-2xl border border-gray-100 bg-paper-soft dark:bg-navy-glow p-6 shadow-sm">
                 <h3 className="font-display text-xl text-navy-deep mb-4">Property Highlights</h3>
                 <ul className="space-y-3">
                   {property.highlights.map(item => (
-                    <li key={item} className="flex items-start gap-2 text-[0.88rem] text-navy-deep/65 leading-[1.6]">
+                    <li key={item} className="flex items-start gap-2 text-[0.88rem] text-navy-deep/65 dark:text-white/60 leading-[1.6]">
                       <span className="w-1.5 h-1.5 rounded-full bg-gold-mid flex-shrink-0 mt-2" />
                       {item}
                     </li>
@@ -385,7 +385,7 @@ export function PropertyDetail({ property, images }: Props) {
                 <h3 className="font-display text-xl text-navy-deep mb-4">Why Invest Here</h3>
                 <ul className="space-y-3">
                   {property.investmentPoints.map(item => (
-                    <li key={item} className="flex items-start gap-2 text-[0.88rem] text-navy-deep/65 leading-[1.6]">
+                    <li key={item} className="flex items-start gap-2 text-[0.88rem] text-navy-deep/65 dark:text-white/60 leading-[1.6]">
                       <CheckCircle2 size={14} className="text-gold-mid flex-shrink-0 mt-1" />
                       {item}
                     </li>
@@ -409,7 +409,7 @@ export function PropertyDetail({ property, images }: Props) {
               </Link>
               <Link
                 href={`tel:${PHONE}`}
-                className="mt-3 inline-flex w-full items-center justify-center gap-2 border border-white/20 text-white font-semibold text-[0.78rem] tracking-[0.08em] uppercase py-3.5 rounded-full hover:bg-white/5 transition-colors"
+                className="mt-3 inline-flex w-full items-center justify-center gap-2 border border-white/20 text-white font-semibold text-[0.78rem] tracking-[0.08em] uppercase py-3.5 rounded-full hover:bg-paper dark:bg-navy-deep/5 transition-colors"
               >
                 Call {PHONE_DISPLAY}
               </Link>
@@ -473,7 +473,7 @@ export function PropertyDetail({ property, images }: Props) {
           </Link>
           <Link
             href={`tel:${PHONE}`}
-            className="inline-flex items-center justify-center gap-1.5 bg-white text-navy-deep font-bold text-[0.68rem] tracking-[0.06em] uppercase py-3 rounded-xl"
+            className="inline-flex items-center justify-center gap-1.5 bg-paper dark:bg-navy-deep text-navy-deep font-bold text-[0.68rem] tracking-[0.06em] uppercase py-3 rounded-xl"
           >
             <Phone size={14} /> Call
           </Link>
@@ -494,7 +494,7 @@ export function PropertyDetail({ property, images }: Props) {
             <button
               type="button"
               onClick={() => setLightbox(false)}
-              className="inline-flex items-center gap-2 rounded-full border border-white/20 px-3 py-2 text-sm hover:bg-white/10"
+              className="inline-flex items-center gap-2 rounded-full border border-white/20 px-3 py-2 text-sm hover:bg-paper dark:bg-navy-deep/10"
             >
               <X size={16} /> Close
             </button>
@@ -514,7 +514,7 @@ export function PropertyDetail({ property, images }: Props) {
                   type="button"
                   aria-label="Previous photo"
                   onClick={() => setActiveImage(i => (i - 1 + gallery.length) % gallery.length)}
-                  className="absolute left-3 top-1/2 -translate-y-1/2 w-11 h-11 rounded-full bg-white/90 text-navy-deep flex items-center justify-center hover:bg-white"
+                  className="absolute left-3 top-1/2 -translate-y-1/2 w-11 h-11 rounded-full bg-paper dark:bg-navy-deep/90 text-navy-deep flex items-center justify-center hover:bg-paper dark:bg-navy-deep"
                 >
                   <ChevronLeft size={22} />
                 </button>
@@ -522,7 +522,7 @@ export function PropertyDetail({ property, images }: Props) {
                   type="button"
                   aria-label="Next photo"
                   onClick={() => setActiveImage(i => (i + 1) % gallery.length)}
-                  className="absolute right-3 top-1/2 -translate-y-1/2 w-11 h-11 rounded-full bg-white/90 text-navy-deep flex items-center justify-center hover:bg-white"
+                  className="absolute right-3 top-1/2 -translate-y-1/2 w-11 h-11 rounded-full bg-paper dark:bg-navy-deep/90 text-navy-deep flex items-center justify-center hover:bg-paper dark:bg-navy-deep"
                 >
                   <ChevronRight size={22} />
                 </button>

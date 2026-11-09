@@ -28,6 +28,11 @@ const config: Config = {
           muted: '#527090',
           border:'rgba(229,169,60,0.18)',
         },
+        paper: {
+          DEFAULT: '#F7F3EB',
+          soft:    '#EFE8DC',
+          deep:    '#E6DDD0',
+        },
       },
       fontFamily: {
         display: ['var(--font-display)', 'serif'],

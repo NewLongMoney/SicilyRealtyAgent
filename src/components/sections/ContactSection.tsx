@@ -43,7 +43,7 @@ export function ContactSection() {
   const labelClass = "block text-[0.68rem] tracking-[0.14em] uppercase text-gold/85 font-semibold mb-2"
 
   return (
-    <section id="contact" className="py-16 md:py-20 bg-white border-t border-section-divider">
+    <section id="contact" className="py-16 md:py-20 bg-paper dark:bg-navy-deep border-t border-navy-deep/8 dark:border-white/8">
       <div className="max-w-[1280px] mx-auto px-4 md:px-6">
         <SectionHeading
           eyebrow="Get in Touch"
@@ -90,7 +90,7 @@ export function ContactSection() {
                   placeholder="Tell us more about your preferred area, budget, timeline, or unit type..."
                   className={`${inputClass} h-28 resize-none`} />
               </div>
-              <p className="text-[0.78rem] leading-[1.7] text-navy-deep/55">
+              <p className="text-[0.78rem] leading-[1.7] text-navy-deep/55 dark:text-white/50">
                 This sends your brief to {ADVISOR.name} at Sicily Realty through WhatsApp with your details prefilled.
               </p>
               <Button
@@ -121,7 +121,7 @@ export function ContactSection() {
                     <p className="text-navy-deep text-[0.95rem]">{item.value}</p>
                   )}
                   {item.label === 'Email' && (
-                    <p className="text-[0.72rem] text-navy-deep/45 mt-1">Official inbox for sicilyrealty.co.ke</p>
+                    <p className="text-[0.72rem] text-navy-deep/45 dark:text-white/40 mt-1">Official inbox for sicilyrealty.co.ke</p>
                   )}
                 </div>
               </div>
@@ -138,7 +138,7 @@ export function ContactSection() {
                 loading="lazy"
                 title="Sicily Realty — Westlands, Nairobi"
               />
-              <p className="px-3 py-2 text-[0.7rem] text-navy-deep/50 bg-white border-t border-gold/10">
+              <p className="px-3 py-2 text-[0.7rem] text-navy-deep/50 bg-paper dark:bg-navy-deep border-t border-gold/10">
                 Meetings in Westlands, Nairobi — exact pin shared when you book.
               </p>
             </div>

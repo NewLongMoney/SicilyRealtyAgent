@@ -117,7 +117,7 @@ function CarouselButton({
       disabled={disabled}
       aria-label={direction === 'left' ? 'Previous testimonial' : 'Next testimonial'}
       className={cn(
-        'w-10 h-10 rounded-full border border-[#eeebe5] bg-white shadow-sm',
+        'w-10 h-10 rounded-full border border-navy-deep/10 dark:border-white/10 bg-paper dark:bg-navy-deep shadow-sm',
         'flex items-center justify-center text-navy-deep/60',
         'hover:border-gold/40 hover:text-gold-mid transition-colors',
         disabled && 'opacity-30 cursor-not-allowed pointer-events-none'
@@ -130,7 +130,7 @@ function CarouselButton({
 
 function TestimonialCard({ testimonial: t }: { testimonial: Testimonial }) {
   return (
-    <div className="relative bg-white rounded-2xl border border-[#eeebe5] border-l-[3px] border-l-gold/60 p-7 h-full shadow-sm">
+    <div className="relative bg-paper dark:bg-navy-deep rounded-2xl border border-navy-deep/10 dark:border-white/10 border-l-[3px] border-l-gold/60 p-7 h-full shadow-sm">
       <span className="absolute top-3 right-5 font-display text-[5rem] leading-none text-gold/[0.06] pointer-events-none select-none">
         &ldquo;
       </span>
@@ -141,12 +141,12 @@ function TestimonialCard({ testimonial: t }: { testimonial: Testimonial }) {
 
       <div className="text-gold-mid text-[0.78rem] tracking-[2px] mb-3">★★★★★</div>
 
-      <p className="text-navy-deep/75 text-[0.88rem] leading-[1.82] italic mb-4">
+      <p className="text-navy-deep/75 dark:text-white/70 text-[0.88rem] leading-[1.82] italic mb-4">
         &ldquo;{t.quote}&rdquo;
       </p>
 
       <p className="text-[0.85rem] font-semibold text-navy-deep">{t.name}</p>
-      <p className="text-[0.7rem] tracking-[0.06em] text-navy-deep/45">{t.role}</p>
+      <p className="text-[0.7rem] tracking-[0.06em] text-navy-deep/45 dark:text-white/40">{t.role}</p>
     </div>
   )
 }

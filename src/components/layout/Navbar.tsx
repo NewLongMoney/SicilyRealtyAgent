@@ -1,222 +1,118 @@
 'use client'
 
-import { useState } from 'react'
+import { useState, useEffect } from 'react'
 import Link from 'next/link'
 import { Sheet, SheetContent, SheetTrigger } from '@/components/ui/sheet'
-import { Button } from '@/components/ui/button'
-import { Menu, Phone, MapPin, Home, Mail, ChevronDown, Building2, Users } from 'lucide-react'
+import { Menu, Phone } from 'lucide-react'
 import { PHONE, PHONE_DISPLAY, AREAS } from '@/lib/data'
 import { BrandMark } from '@/components/brand/BrandMark'
+import { ThemeToggle } from '@/components/theme/ThemeToggle'
 import { cn } from '@/lib/utils'
 
-type NavDropdown = {
-  label: string
-  icon: typeof Home
-  items: { href: string; label: string }[]
-}
-
-const NAV_DROPDOWNS: NavDropdown[] = [
-  {
-    label: 'For Sale',
-    icon: Building2,
-    items: [
-      { href: '/properties?intent=sale&type=apartment', label: 'Apartments' },
-      { href: '/properties?intent=sale&status=offplan', label: 'Off-plan' },
-      { href: '/properties?intent=sale', label: 'All for Sale' },
-    ],
-  },
-  {
-    label: 'Listings',
-    icon: MapPin,
-    items: [
-      { href: '/properties?type=apartment', label: 'Apartments' },
-      { href: '/properties?status=featured', label: 'Featured' },
-      { href: '/properties', label: 'All Listings' },
-    ],
-  },
+const NAV = [
+  { href: '/properties', label: 'Residences' },
+  { href: '/#about', label: 'Advisory' },
+  { href: '/#insights', label: 'Market' },
+  { href: '/#contact', label: 'Contact' },
 ]
-
-const NAV_LINKS = [
-  { href: '/', label: 'Home', icon: Home },
-  { href: '/#about', label: 'About', icon: Users },
-  { href: '/#contact', label: 'Contact', icon: Mail },
-]
-
-function NavDropdownMenu({ dropdown }: { dropdown: NavDropdown }) {
-  const [open, setOpen] = useState(false)
-
-  return (
-    <div
-      className="relative"
-      onMouseEnter={() => setOpen(true)}
-      onMouseLeave={() => setOpen(false)}
-    >
-      <button
-        type="button"
-        className={cn(
-          'text-[0.7rem] tracking-[0.06em] uppercase transition-colors duration-200',
-          'flex items-center gap-1 py-2 text-navy-deep/75 hover:text-gold-mid',
-          open && 'text-gold-mid'
-        )}
-      >
-        <dropdown.icon size={13} />
-        {dropdown.label}
-        <ChevronDown size={11} className={cn('transition-transform duration-200', open && 'rotate-180')} />
-      </button>
-
-      {open && (
-        <div className="absolute top-full left-0 pt-2 z-50">
-          <div className="min-w-[168px] rounded-xl border border-gray-200 bg-white shadow-lg py-2">
-            {dropdown.items.map(item => (
-              <Link
-                key={item.href}
-                href={item.href}
-                className="block px-4 py-2.5 text-[0.72rem] tracking-[0.04em] uppercase text-navy-deep/75 hover:text-gold-mid hover:bg-gray-50 transition-colors"
-              >
-                {item.label}
-              </Link>
-            ))}
-          </div>
-        </div>
-      )}
-    </div>
-  )
-}
 
 export function Navbar() {
   const [open, setOpen] = useState(false)
+  const [scrolled, setScrolled] = useState(false)
+
+  useEffect(() => {
+    const onScroll = () => setScrolled(window.scrollY > 24)
+    onScroll()
+    window.addEventListener('scroll', onScroll, { passive: true })
+    return () => window.removeEventListener('scroll', onScroll)
+  }, [])
 
   return (
-    <>
-      <header className="fixed top-0 left-0 right-0 z-50 bg-white/95 backdrop-blur-md border-b border-[#eeebe5]">
-        <div className="max-w-[1320px] mx-auto px-4 sm:px-6 lg:px-8 h-[72px] flex items-center justify-between gap-3">
-          <BrandMark variant="light" size="md" />
+    <header
+      className={cn(
+        'fixed top-0 left-0 right-0 z-50 transition-all duration-500',
+        scrolled
+          ? 'bg-paper/90 dark:bg-navy-deep/90 backdrop-blur-md border-b border-navy-deep/8 dark:border-white/8'
+          : 'bg-transparent border-b border-transparent'
+      )}
+    >
+      <div className="max-w-[1400px] mx-auto px-5 sm:px-8 h-[76px] flex items-center justify-between gap-4">
+        <BrandMark size="md" />
 
-          <nav className="hidden xl:flex items-center gap-6">
-            {NAV_LINKS.map(link => (
-              <Link
-                key={link.href}
-                href={link.href}
-                className="text-[0.7rem] tracking-[0.06em] uppercase flex items-center gap-1.5 py-2 text-navy-deep/75 hover:text-gold-mid transition-colors whitespace-nowrap"
-              >
-                <link.icon size={13} />
-                {link.label}
-              </Link>
-            ))}
-
-            {NAV_DROPDOWNS.map(dropdown => (
-              <NavDropdownMenu key={dropdown.label} dropdown={dropdown} />
-            ))}
-          </nav>
-
-          <div className="hidden lg:flex items-center gap-3 flex-shrink-0">
-            <a
-              href={`tel:${PHONE}`}
-              className="hidden lg:flex items-center gap-2.5 text-navy-deep hover:text-gold-mid transition-colors group flex-shrink-0"
-              aria-label={`Call ${PHONE_DISPLAY}`}
+        <nav className="hidden lg:flex items-center gap-9">
+          {NAV.map((link) => (
+            <Link
+              key={link.href}
+              href={link.href}
+              className="text-[0.68rem] tracking-[0.22em] uppercase text-navy-deep/70 dark:text-white/70 hover:text-gold-mid dark:hover:text-gold transition-colors"
             >
-              <span className="w-9 h-9 rounded-full bg-gold/10 flex items-center justify-center group-hover:bg-gold/15 transition-colors">
-                <Phone size={15} className="text-gold-mid" />
-              </span>
-              <span className="text-[0.95rem] font-semibold tracking-wide tabular-nums whitespace-nowrap">
-                {PHONE_DISPLAY}
-              </span>
-            </a>
-            <Button
-              asChild
-              className="bg-gold-gradient text-navy-deep font-bold text-[0.72rem] tracking-[0.14em] uppercase rounded-none px-5 h-10 shadow-sm hover:shadow-md transition-all border-0 whitespace-nowrap"
-            >
-              <Link href="/#contact">Book a Viewing</Link>
-            </Button>
-          </div>
+              {link.label}
+            </Link>
+          ))}
+        </nav>
+
+        <div className="flex items-center gap-2 sm:gap-3">
+          <ThemeToggle />
+          <a
+            href={`tel:${PHONE}`}
+            className="hidden md:inline-flex items-center gap-2 h-10 px-4 rounded-full border border-navy-deep/15 dark:border-white/15 text-[0.68rem] tracking-[0.14em] uppercase text-navy-deep dark:text-white hover:border-gold/60 hover:text-gold-mid dark:hover:text-gold transition-colors"
+          >
+            <Phone size={13} strokeWidth={1.6} />
+            {PHONE_DISPLAY}
+          </a>
+          <Link
+            href="/#contact"
+            className="hidden sm:inline-flex items-center h-10 px-5 rounded-full bg-navy-deep dark:bg-gold text-paper dark:text-navy-deep text-[0.68rem] tracking-[0.16em] uppercase font-semibold hover:bg-navy-mid dark:hover:bg-gold-bright transition-colors"
+          >
+            Enquire
+          </Link>
 
           <Sheet open={open} onOpenChange={setOpen}>
-            <SheetTrigger asChild className="xl:hidden">
+            <SheetTrigger asChild>
               <button
                 type="button"
-                className="w-10 h-10 flex items-center justify-center bg-gray-50 border border-gray-200 rounded-lg"
                 aria-label="Open menu"
+                className="lg:hidden inline-flex h-10 w-10 items-center justify-center rounded-full border border-navy-deep/15 dark:border-white/15 text-navy-deep dark:text-white"
               >
-                <Menu size={20} className="text-navy-deep" />
+                <Menu size={18} strokeWidth={1.5} />
               </button>
             </SheetTrigger>
-            <SheetContent side="right" className="bg-white border-l border-gray-200 w-[300px] p-6 overflow-y-auto">
-              <div className="flex flex-col gap-6 mt-6">
-                <div><BrandMark variant="light" size="sm" /></div>
-
-                <nav className="flex flex-col gap-4">
-                  {NAV_LINKS.map(link => (
+            <SheetContent
+              side="right"
+              className="w-[min(100%,360px)] bg-paper dark:bg-navy-deep border-l border-navy-deep/10 dark:border-white/10 p-0"
+            >
+              <div className="flex flex-col h-full pt-16 px-8 pb-10">
+                <BrandMark size="lg" href="" />
+                <nav className="mt-12 flex flex-col gap-1">
+                  {NAV.map((link) => (
                     <Link
                       key={link.href}
                       href={link.href}
                       onClick={() => setOpen(false)}
-                      className="text-[0.95rem] text-navy-deep hover:text-gold-mid flex items-center gap-2.5"
+                      className="font-display text-3xl text-navy-deep dark:text-white py-2 hover:text-gold-mid dark:hover:text-gold transition-colors"
                     >
-                      <link.icon size={17} />
                       {link.label}
                     </Link>
                   ))}
-
-                  {NAV_DROPDOWNS.map(dropdown => (
-                    <div key={dropdown.label}>
-                      <p className="text-[0.62rem] tracking-[0.12em] uppercase text-gold-mid font-semibold mb-2">
-                        {dropdown.label}
-                      </p>
-                      <div className="pl-3 flex flex-col gap-2">
-                        {dropdown.items.map(item => (
-                          <Link
-                            key={item.href}
-                            href={item.href}
-                            onClick={() => setOpen(false)}
-                            className="text-[0.88rem] text-navy-deep/75 hover:text-gold-mid"
-                          >
-                            {item.label}
-                          </Link>
-                        ))}
-                      </div>
-                    </div>
-                  ))}
                 </nav>
-
-                <div className="border-t border-gray-200 pt-5 space-y-4">
-                  <a
-                    href={`tel:${PHONE}`}
-                    className="flex items-center gap-3 text-navy-deep font-semibold tabular-nums"
-                  >
-                    <Phone size={18} className="text-gold-mid" />
-                    {PHONE_DISPLAY}
+                <div className="mt-auto space-y-4">
+                  <p className="text-[0.65rem] tracking-[0.28em] uppercase text-gold-mid">Areas</p>
+                  <div className="flex flex-wrap gap-x-3 gap-y-2 text-sm text-navy-deep/70 dark:text-white/60">
+                    {AREAS.map((a) => (
+                      <Link key={a} href={`/properties?area=${a.toLowerCase()}`} onClick={() => setOpen(false)} className="hover:text-gold-mid">
+                        {a}
+                      </Link>
+                    ))}
+                  </div>
+                  <a href={`tel:${PHONE}`} className="inline-flex items-center gap-2 text-navy-deep dark:text-white mt-6">
+                    <Phone size={14} /> {PHONE_DISPLAY}
                   </a>
-                  <Button asChild className="w-full bg-gold-gradient text-navy-deep font-bold rounded-full border-0">
-                    <Link href="/#contact" onClick={() => setOpen(false)}>
-                      Book a Viewing
-                    </Link>
-                  </Button>
                 </div>
               </div>
             </SheetContent>
           </Sheet>
         </div>
-      </header>
-
-      <div className="fixed top-[72px] left-0 right-0 z-40 hidden lg:block bg-[#faf9f7]/95 backdrop-blur border-b border-[#eeebe5]">
-        <div className="max-w-[1320px] mx-auto px-4 sm:px-6 lg:px-8 py-2 flex items-center gap-3 flex-wrap">
-          <span className="text-[0.56rem] tracking-[0.14em] uppercase text-gold-mid font-semibold flex items-center gap-1.5 flex-shrink-0">
-            <MapPin size={10} />
-            Areas
-          </span>
-          {AREAS.map((area, i) => (
-            <span key={area} className="flex items-center gap-3">
-              <Link
-                href={`/properties?area=${area.toLowerCase()}`}
-                className="text-[0.65rem] tracking-[0.06em] uppercase text-navy-deep/60 hover:text-gold-mid transition-colors whitespace-nowrap"
-              >
-                {area}
-              </Link>
-              {i < AREAS.length - 1 && <span className="text-gray-300">·</span>}
-            </span>
-          ))}
-        </div>
       </div>
-    </>
+    </header>
   )
 }

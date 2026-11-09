@@ -1,47 +1,34 @@
-# Sicily Realty — Brand Direction (2026-11-09 rebrand)
+# Sicily Realty — Brand & Art Direction (v5 redesign)
 
-**Palette locked:** navy `#071C2F` / `#0A2A47` / `#123E63` · gold `#F6C667` / `#E5A93C` / `#C8841F` / `#9F5A12` · warm paper `#faf9f7` / `#f5f0e8`  
-**Type locked:** display **Cormorant Garamond** · body **DM Sans**  
-**Positioning:** Nairobi private-client property advisory — selective, corridor-fluent, WhatsApp-first.
+**Palette locked:** navy `#071C2F` / `#0A2A47` / `#123E63` · gold `#F6C667` / `#E5A93C` / `#C8841F` / `#9F5A12`  
+**Surfaces:** light = ivory/paper `#F7F3EB` / `#EFE8DC` · dark = deep navy `#071C2F` / `#0B2238`  
+**Type locked:** display **Cormorant Garamond** · body/UI **DM Sans** — use them boldly (display up to ~clamp 3.5–7rem).
+
+**Positioning:** Nairobi private-client property advisory — selective, corridor-fluent, WhatsApp-first. Truth-locked: no invented ratings, closings, or aggregate stars.
 
 ---
 
-## Tone of voice
-- Precise, calm, and adult. No hype numbers, no invented ratings.
-- Speak like a trusted advisor: short sentences, concrete next steps, corridor names over jargon.
-- Prefer “verified shortlist” and “personally assessed” over portal volume language.
+## Art direction (v5)
+1. **Quiet editorial luxury.** Aman/Silver-Pinewood restraint: ivory paper or deep navy fields, gold as a hairline/CTA — never decoration soup. Type is the architecture.
+2. **Asymmetric magazine layout.** Corner gravity for headlines; full-bleed client photography with distinctive crops (Galaxy dusk corridor, Amethyst entrance). Kill centered-text-over-photo clichés and icon-chip feature rows.
+3. **Listings as a property magazine.** Large image-led cards, sparse metadata (name · area · from-price · status), hover that reveals a thin gold rule + “View residence” — not shadcn card chrome.
+4. **True brand mark.** A crafted **portal / keystone arch** symbol (threshold into a residence) + custom-spaced “Sicily” wordmark with “Realty · Property Advisory” as tracked companion — not initials in a box.
+5. **Light & dark as equals.** Toggle in header; system preference + `localStorage`; anti-flash script; both modes designed, not inverted as an afterthought.
+6. **Motion etiquette.** Soft rise/fade ≤500ms, optional custom cursor on desktop, image scale on hover; all gated by `prefers-reduced-motion`.
 
-## Logo system
-- **Monogram:** framed serif **SR** initials (Cormorant/Georgia) in a double museum square with a small keystone on the top edge — unmistakably Sicily Realty, architectural without ornament noise.
-- **Wordmark:** `SICILY REALTY` in Cormorant (tracked) + `PROPERTY ADVISORY` in DM Sans (wide tracking, gold).
-- **On light:** gold monogram on transparent/white; navy wordmark.
-- **On navy:** gold monogram on `#071C2F`; white wordmark + gold eyebrow.
-- Clear space: ≥ ½ monogram width on all sides. Minimum digital size: 16px favicon (SR still legible).
-- Rejected explorations: pilaster “H”, stroke ligatures that read as “2R”/ornament — see `/workspace/shots/sicily-logo-concepts.png`.
-
-## Art direction
-1. **Editorial luxury, not portal chrome.** Generous whitespace, museum-like grids, one primary decision per hero (Sotheby’s / Aman restraint).
-2. **Photography carries colour.** UI stays navy/gold/paper; images supply Nairobi concrete, glass, dusk light, and interior warmth. No coastal stock, no generic villa skylines.
-3. **Crops:** prefer architecture and threshold moments (entrance, lobby light, corridor dusk). Avoid busy mid-ground clutter; leave negative space for type.
-4. **Ornament:** use the monogram-derived hairline frames, double rules, and short gold rules — never clipart flourishes or Lottie sparkle.
-5. **Motion:** fade/rise ≤ 600ms, ease-luxury; no parallax overload, no autoplay audio.
-6. **Mobile first:** sticky CTAs, thumb-safe filters, truncated chips banned; hero type scales down gracefully.
-
-## Imagery rules (client assets)
-- Hero and editorial strips: client development photography only (e.g. Galaxy dusk corridor, Amethyst entrance).
-- Listing cards: true project photos; lead with the strongest exterior or primary living volume.
-- Advisor portrait: existing approved headshot; no stock “agent smiling with keys.”
+## Logo system (v5)
+- **Symbol:** gold architectural portal — twin piers + arched head + keystone. Reads at 16px as a clean arch glyph; large as a carved emblem.
+- **Wordmark:** outlined Cormorant “Sicily” (mixed case, optical tracking) + DM Sans “REALTY” / “PROPERTY ADVISORY”.
+- **Lockups:** horizontal · stacked · symbol-only; light (gold on ivory / navy type) · dark (gold on navy / white type).
 
 ## Do / Don’t
 | Do | Don’t |
 |----|-------|
-| Feature-based trust copy | Invented closings, KES volume, star ratings |
-| Area-level map honesty | Fake exact building pins |
-| Cormorant for titles, DM Sans for UI | New typefaces or script fonts |
-| Gold as accent / rule / CTA fill | Rainbow gradients, neon, glassmorphism overload |
+| Cornered headlines, big Cormorant | Centered hero cliché, Bootstrap type scale |
+| Client photography, dusk/threshold crops | Coastal stock, generic villa skylines |
+| Portal symbol + wordmark | Initials-in-a-box monogram |
+| Feature-based trust | Invented KES volume / star ratings |
+| Gold hairlines & CTA fills | Neon, glassmorphism, rainbow gradients |
 
-## File map
-- `/public/brand/monogram.svg` · `monogram-on-navy.svg`
-- `/public/brand/logo-light.svg` · `logo-dark.svg` (+ PNG lockups)
-- `/public/brand/og-image.jpg`
-- Favicons: `/public/images/favicon-96x96.png`, `apple-touch-icon.png`, `src/app/favicon.ico`
+## Research
+See `/workspace/research/sicily/` (Aman, Silver Pinewood, One57, OH Architecture, The Agency RE, Knight Frank, 220 CPS brochure, Belgrade Arbor, Elliman).
